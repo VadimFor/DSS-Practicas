@@ -1,4 +1,14 @@
+<<<<<<< HEAD
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+=======
+Desplegar base de datos y adminer con docker:
+sudo docker-compose up 
+
+
+#################################  CLONAR ########################################             
+git clone https://'token':x-oauth-basic@github.com/Fvadim2133/DSS.git  
+Token: el token de la cuenta 
+>>>>>>> 87b684701971cf99e5391c2474456ca956b01050
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
