@@ -12,14 +12,14 @@ class LoginController extends Controller
         if (Auth::check()){return redirect('/home');}
         return view('auth.login');}
 
-        
+
     public function login(LoginRequest $request){
 
         $credentials = $request->getCredentials();
 
         if(!Auth::validate($credentials)){ #no correcto (IMPORTANTE, Auth::validate necesia que la contraseña esté hasheada en la base de datos)
             error_log(json_encode($credentials) . ' ' .  'Login no correcto');
-            return redirect()->to('/login')->withErrors('auth.failed');
+            return redirect()->to('/login')->withErrors('Datos incorrectos');
         }
 
         $user = Auth::getProvider()->retrieveByCredentials($credentials);

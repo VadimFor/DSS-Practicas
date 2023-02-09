@@ -1,22 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
-    <form action="/login" method="POST">
-        @csrf
-        email
-        <input type="email" name="email">
-   
-        password
-        <input type="password" name="password">
+@extends('layouts.auth-master')
 
-        <input type="submit" value="Login">
+@section('content')
 
-    </form>
-</body>
-</html>
+<form action="/login" method="POST">
+    @csrf
+    <h1>Login</h1>
+    @include('layouts.partials.messages')
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" name ="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+    </div>
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Recordarme</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+    <div> </div>
+    <div class="">
+        <a style="font-size:12px;" href="/register">Crear cuenta</a>
+    </div>
+</form>
+
+@endsection
+
