@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('restaurante', function (Blueprint $table) {
+        Schema::create('menu', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('restaurante_id')->unsigned();
+            $table->foreignId('restaurante_id')->constrained();
             $table->string('nombre');
-            $table->string('direccion');
-            $table->integer('telefono');
             $table->string('descripcion');
+            $table->integer('precio');
+            $table->primary('id');
         });
     }
 
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('restaurante');
+        Schema::dropIfExists('menu');
     }
 };

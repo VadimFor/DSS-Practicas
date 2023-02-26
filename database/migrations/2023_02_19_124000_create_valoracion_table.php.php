@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignId('menu_id')->constrained();
             $table->integer('puntuacion');
             $table->string('comentario');
+            $table->primary('id');
         });
     }
 

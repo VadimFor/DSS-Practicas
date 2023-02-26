@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('menu_id')->constrained();
             $table->string('nombre');
             $table->string('descripcion');
+            $table->primary('id');
         });
     }
 
