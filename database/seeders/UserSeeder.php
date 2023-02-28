@@ -4,9 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Usuario;
+use App\Models\User;
 
-class UsuarioSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,11 +16,11 @@ class UsuarioSeeder extends Seeder
     public function run()
     {
         //
-        $usuario = new Usuario();
-        $usuario->name = 'Pepe';
-        $usuario->email = 'pepito@gmail.com';
-        $usuario->password = '1234';
-        $usuario->save();
+        $user = new User();
+        $user->name = 'Pepe';
+        $user->email = 'pepito@gmail.com';
+        $user->password = '1234';
+        $user->save();
         
     }
 }

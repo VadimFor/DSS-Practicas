@@ -13,16 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('valoracion', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('usuario_id')->unsigned();
-            $table->foreignId('usuario_id')->constrained();
-            $table->bigInteger('menu_id')->unsigned();
-            $table->foreignId('menu_id')->constrained();
-            $table->integer('puntuacion');
-            $table->string('comentario');
-            $table->primary('id');
-        });
+        Schema::dropIfExists('valoracion');
+        if (!Schema::hasTable('valoracion')) {
+            Schema::create('valoracion', function (Blueprint $table) {
+                $table->id();
+                $table->bigInteger('user_id')->unsigned();
+                $table->foreign('user_id')->references('id')->on('user');
+                $table->bigInteger('menu_id')->unsigned();
+                $table->foreign('menu_id')->references('id')->on('menu');
+                $table->integer('puntuacion');
+                $table->string('comentario')->nullable();
+            });
+
+        }
     }
 
     /**

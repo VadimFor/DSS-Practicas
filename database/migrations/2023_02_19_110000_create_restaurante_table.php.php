@@ -13,14 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('restaurante', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre');
-            $table->string('direccion');
-            $table->integer('telefono');
-            $table->string('descripcion');
-            $table->primary('id');
-        });
+        Schema::dropIfExists('restaurante');
+        if (!Schema::hasTable('restaurante')) {
+            Schema::create('restaurante', function (Blueprint $table) {
+                $table->id();
+                $table->string('nombre')->unique();
+                $table->string('direccion');
+                $table->integer('telefono')->nullable();
+                $table->string('descripcion')->nullable();
+            });
+        }
     }
 
     /**

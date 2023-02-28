@@ -12,7 +12,7 @@ class Valoracion extends Model
     public function menu(){
         return $this->belongsTo(Menu::class);
     }
-    public function usuario(){
-        return $this->belongsTo(Usuario::class);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

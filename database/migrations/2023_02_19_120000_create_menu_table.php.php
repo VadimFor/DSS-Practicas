@@ -13,15 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('menu', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('restaurante_id')->unsigned();
-            $table->foreignId('restaurante_id')->constrained();
-            $table->string('nombre');
-            $table->string('descripcion');
-            $table->integer('precio');
-            $table->primary('id');
-        });
+        Schema::dropIfExists('menu');
+        if (!Schema::hasTable('menu')) {
+            Schema::create('menu', function (Blueprint $table) {
+                $table->id();
+                $table->string('nombre')->unique();
+                $table->string('descripcion')->nullable();
+                $table->integer('precio');
+                $table->bigInteger('restaurante_id')->unsigned();
+                $table->foreign('restaurante_id')->references('id')->on('restaurante');
+            });
+        }
     }
 
     /**

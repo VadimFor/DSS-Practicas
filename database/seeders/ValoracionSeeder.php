@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Usuario;
+use App\Models\User;
 use App\Models\Menu;
 use App\Models\Valoracion;
 class ValoracionSeeder extends Seeder
@@ -18,10 +18,12 @@ class ValoracionSeeder extends Seeder
     {
         //
         $valoracion = new Valoracion();
-        //$valoracion->usuario_id =
-        //$valoracion->menu_id =            
         $valoracion->puntuacion = 5;
         $valoracion->comentario = 'Muy buen sabor';
+        $user = User::where('email','=','pepito@gmail.com');
+        $menu = Menu::where('nombre','=','Menu degustacion');
+        $valoracion->user()->associate($user->id);
+        $valoracion->menu()->associate($menu->id);
         $valoracion->save();
     }
 }

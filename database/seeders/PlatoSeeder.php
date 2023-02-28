@@ -14,12 +14,12 @@ class PlatoSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        //
+    {        
         $plato = new Plato();
-        //$plato->menu_id =
         $plato->nombre = 'Calamares fritos';
         $plato->descripcion = 'Calamares fritos en tempura';
+        $menu = Menu::where('nombre','=','Menu degustacion');
+        $plato->menu()->associate($menu->id);
         $plato->save();
     }
 }
