@@ -22,15 +22,22 @@ Route::get('/', function () {
 });
 
 #REGISTRO
-Route::get('/register', [RegisterController::class, 'show']);
-Route::post('/register', [RegisterController::class, 'register']);
+Route::get('/registro', [RegisterController::class, 'mostrar']);
+Route::post('/registro', [RegisterController::class, 'registro']);
 
 #LOGIN
-Route::get('/login', [LoginController::class, 'show']);
+Route::get('/login', [LoginController::class, 'mostrar']);
 Route::post('/login', [LoginController::class, 'login']);
 
 #LOGIN CORRECTO, HOME
-Route::get('/home', [HomeController::class, 'index']);
+Route::get('/panelusuario', [HomeController::class, 'mostrar']);
 
 #LOGOUT
 Route::get('/logout', [LogoutController::class, 'logout']);
+
+#HOME
+Route::post('/panelusuario-crearusuario', [HomeController::class, 'crearUsuario'])->name("home.crearuser");
+Route::post('/panelusuario-modusuario', [HomeController::class, 'modUsuario'])->name("home.moduser");
+Route::get('/panelusuario-delusuario-{email}', [HomeController::class, 'delUsuario'])->name("home.deluser");
+#PERFIL
+Route::post('/panelusuario-modperfil', [HomeController::class, 'modPerfil'])->name("home.modperfil");

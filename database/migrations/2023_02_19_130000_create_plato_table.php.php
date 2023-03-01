@@ -13,14 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('plato', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('menu_id')->unsigned();
-            $table->foreignId('menu_id')->constrained();
-            $table->string('nombre');
-            $table->string('descripcion');
-            $table->primary('id');
-        });
+        Schema::dropIfExists('plato');
+        if (!Schema::hasTable('plato')) {
+            Schema::create('plato', function (Blueprint $table) {
+                $table->id();
+                $table->bigInteger('menu_id')->unsigned();
+                $table->foreign('menu_id')->references('id')->on('menu');
+                $table->string('nombre');
+                $table->string('descripcion');
+            });
+        }
     }
 
     /**

@@ -13,13 +13,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('usuario', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->primary('id');
-        });
+        Schema::dropIfExists('users');
+        if (!Schema::hasTable('users')) {
+            Schema::create('users', function (Blueprint $table) {
+                $table->id();
+                $table->string('email')->unique();
+                $table->string('password');
+                $table->string('name')->nullable();
+                $table->string('apellido')->nullable();
+                $table->string('telefono')->nullable();
+                $table->string('direccion')->nullable();
+                $table->string('pais')->nullable();
+                $table->string('provincia')->nullable();
+                $table->string('poblacion')->nullable();
+                $table->string('cod_postal')->nullable();
+            });
+        }
     }
 
     /**
@@ -29,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('usuario');
+        Schema::dropIfExists('users');
     }
 };

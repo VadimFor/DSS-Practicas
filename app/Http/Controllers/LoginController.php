@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
 
-    public function show(){
-        if (Auth::check()){return redirect('/home');}
-        return view('auth.login');}
+    public function mostrar(){
+        if (Auth::check()){return redirect('/panelusuario');}
+        return view('login');}
 
 
     public function login(LoginRequest $request){
@@ -29,7 +29,7 @@ class LoginController extends Controller
 
 
     public function authenticated(Request $request, $user){
-        return redirect('/home');
+        return redirect('/panelusuario');
     }
 
 }
