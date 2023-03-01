@@ -24,7 +24,6 @@ class HomeController extends Controller
         return view('panelusuario')->with("users",$users)->with("users_cont",$users_cont)->with("menu",$menu)->with("plato",$plato)->with("restaurante",$restaurante)->with("valoracion",$valoracion);
     }
 
-
     public function modPerfil(Request $request){
 
         error_log("Modificando a " .$request->email);

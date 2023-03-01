@@ -21,8 +21,8 @@ return new class extends Migration
                 $table->foreign('usuario_id')->references('id')->on('users');
                 $table->bigInteger('menu_id')->unsigned();
                 $table->foreign('menu_id')->references('id')->on('menu');
-                $table->integer('puntuacion');
-                $table->string('comentario');
+                $table->integer('puntuacion')->default(0);
+                $table->string('comentario')->nullable();
             });
         }
     }

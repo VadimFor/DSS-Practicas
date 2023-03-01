@@ -1,25 +1,26 @@
 <?php
 
+// php artisan make:seeder DatabaseSeeder
+
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-        
+        //se ejecuta según este orden (por las claves ajenas)
+        $this->call(UsuarioSeeder::class);
+        $this->call(RestauranteSeeder::class);
+        $this->call(MenuSeeder::class);
+        $this->call(PlatoSeeder::class);
+        $this->call(ValoracionSeeder::class);
     }
 }

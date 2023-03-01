@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class UsuarioSeeder extends Seeder
 {
@@ -15,20 +16,20 @@ class UsuarioSeeder extends Seeder
      */
     public function run()
     {
-        $usuario2 = new User();
-        $usuario2->email = 'a@a.com';
-        $usuario2->password = '1234';
+        //error_log(">>Seeding users.");
 
-        $usuario2->name = 'vadim';
-        $usuario2->apellido = 'test';
-        $usuario2->telefono = 'test';
-        $usuario2->direccion = 'test';
-        $usuario2->pais = 'test';
-        $usuario2->provincia = 'test';
-        $usuario2->poblacion = 'test';
-        $usuario2->cod_postal = 'test';
-
-        $usuario2->save();
-
+        DB::table('users')->insertOrIgnore([
+            'name' => 'testname',
+            'email' => 'a@a.com',
+            'apellido' => "testapel",
+            'password' => bcrypt("1234"),
+            'telefono' => "999999999",
+            'direccion' => "sanvi",
+            'pais' => "españa",
+            'provincia' => "alicante",
+            'poblacion' => "sanvi",
+            'cod_postal' => "0457",
+            'is_admin' => false,
+        ]);
     }
 }

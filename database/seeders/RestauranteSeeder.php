@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Restaurante;
 use App\Models\Menu;
+use Illuminate\Support\Facades\DB;
 
 class RestauranteSeeder extends Seeder
 {
@@ -16,12 +17,14 @@ class RestauranteSeeder extends Seeder
      */
     public function run()
     {
-        $restaurante = new Restaurante();
-        $restaurante->nombre = 'La casa de paco';
-        $restaurante->direccion = 'Calle Peru, 1';
-        $restaurante->telefono = 998456763;
-        $restaurante->descripcion = 'La mejor comida mediterranea';
-        $restaurante->save();
+        //error_log(">>Seeding restaurante.");
+
+        DB::table('restaurante')->insertOrIgnore([
+            'nombre' => 'La casa de paco',
+            'direccion' => 'Calle Peru, 1',
+            'telefono' =>  998456763,
+            'descripcion' => 'La mejor comida mediterranea',
+        ]);
 
     }
 }
