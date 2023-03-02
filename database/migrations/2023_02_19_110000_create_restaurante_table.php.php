@@ -21,6 +21,7 @@ return new class extends Migration
                 $table->string('direccion');
                 $table->integer('telefono');
                 $table->string('descripcion');
+                $table->string('img')->nullable();
             });
         }
     }

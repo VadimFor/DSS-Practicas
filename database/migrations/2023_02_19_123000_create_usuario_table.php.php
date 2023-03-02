@@ -28,6 +28,7 @@ return new class extends Migration
                 $table->string('poblacion')->nullable();
                 $table->string('cod_postal')->nullable();
                 $table->boolean('is_admin')->unsigned()->nullable();
+                $table->string('img')->nullable();
             });
         }
     }

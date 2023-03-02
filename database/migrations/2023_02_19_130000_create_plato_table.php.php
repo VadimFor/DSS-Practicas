@@ -21,6 +21,7 @@ return new class extends Migration
                 $table->foreign('menu_id')->references('id')->on('menu');
                 $table->string('nombre');
                 $table->string('descripcion');
+                $table->string('img')->nullable();
             });
         }
     }

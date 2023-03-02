@@ -1,5 +1,6 @@
+<div class="p-5 table-responsive">
 <div class="row g-3 my-2">
-    <div class="col-md-3">
+    <div class="col-md-3" style="text-align:center;">
         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
             <div>
                 <h3 class="fs-2">{{$restaurante}}</h3>
@@ -9,7 +10,7 @@
         </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3" style="text-align:center;">
         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
             <div>
                 <h3 class="fs-2">{{$menu}}</h3>
@@ -20,7 +21,7 @@
         </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3" style="text-align:center;">
         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
             <div>
                 <h3 class="fs-2">{{$plato}}</h3>
@@ -30,7 +31,7 @@
         </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3" style="text-align:center;">
         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
             <div>
                 <h3 class="fs-2">{{$users_cont}}</h3>
@@ -40,10 +41,10 @@
         </div>
     </div>
 </div>
+</div>
 
 
 <div class="row my-5">
-    <h3 class="fs-4 mb-3">Usuarios</h3>
 
     @if (session("correcto"))
         <div class="aler alert-success">{{session("correcto")}}</div>
@@ -59,6 +60,7 @@
         }
     </script>
 
+    <h3 class="fs-4 mb-3">Usuarios</h3>
 
     <div class="p-5 table-responsive">
 

@@ -22,6 +22,7 @@ return new class extends Migration
                 $table->integer('precio');
                 $table->bigInteger('restaurante_id')->unsigned();
                 $table->foreign('restaurante_id')->references('id')->on('restaurante');
+                $table->string('img')->nullable();
             });
         }
     }

@@ -24,6 +24,7 @@ class RestauranteSeeder extends Seeder
             'direccion' => 'Calle Peru, 1',
             'telefono' =>  998456763,
             'descripcion' => 'La mejor comida mediterranea',
+            'img' => ""
         ]);
 
     }

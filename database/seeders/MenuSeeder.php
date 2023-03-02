@@ -23,7 +23,8 @@ class MenuSeeder extends Seeder
             'nombre' => "Menu degustacion",
             'descripcion' => "Para disfrutar",
             'precio' =>  25,
-            'restaurante_id' => Restaurante::where('nombre','=','La casa de paco')->first()->id
+            'restaurante_id' => Restaurante::where('nombre','=','La casa de paco')->first()->id,
+            'img' => ""
         ]);
     }
 }

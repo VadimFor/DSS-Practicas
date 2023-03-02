@@ -29,7 +29,7 @@ class UsuarioSeeder extends Seeder
             'provincia' => "alicante",
             'poblacion' => "sanvi",
             'cod_postal' => "0457",
-            'is_admin' => false,
+            'is_admin' => false
         ]);
     }
 }

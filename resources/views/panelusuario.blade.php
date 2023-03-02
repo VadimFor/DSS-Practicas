@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -65,9 +66,12 @@
     </style>
 
     <script src="https://kit.fontawesome.com/646ac4fad6.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
+
+
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
         <div class="bg-white" id="sidebar-wrapper">
@@ -75,13 +79,13 @@
                     class="fas fa-user-secret me-2"></i>FudRater</div>
             <div class="list-group list-group-flush my-3">
 
-                <a href="#" onclick="changeView('panel_perfil')" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                <a href="#" id="btn_perfil" onclick="switchContent('panel_perfil')" class="list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-tachometer-alt me-2"></i>Perfil</a>
 
-                <a href="#" onclick="changeView('panel_perfil')"   class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="#" id="btn_resenya" onclick="switchContent('panel_resenyas')"  class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Mis reseñas</a>
 
-                <a href="#" onclick="changeView('panel_admin')"  class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="#" id="btn_admin" onclick="switchContent('panel_admin')" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Admin</a>
 
 
@@ -122,24 +126,55 @@
                 </div>
             </nav>
 
-            <div class="container-fluid px-4">
+            <div id="_panel_perfil" style="display:block;">
+                @include('panel_perfil')
+            </div>
+            <div id="_panel_resenyas" style="display:none;">
+                @include('panel_resenyas')
+            </div>
 
-                <div id="vista"> @include("panel_perfil") </div>
+            <div id="_panel_admin" style="display:none;">
+                @include('panel_admin')
+            </div>
 
-           </div>
         </div>
     </div>
     <!-- /#page-content-wrapper -->
     </div>
 
     <script>
-        function changeView(viewName) {
-          var aux = "@inc";
-          var aux0 = aux + "lude('";
-          var aux1 = aux0 + viewName;
-          var aux2 = aux1 + "'";
-          var aux3 = aux2 + ")";
-          document.getElementById('vista').innerHTML= aux3;
+        function switchContent(msg) {
+
+            if(msg == "panel_perfil"){
+                console.log("perfil");
+                document.getElementById("_panel_perfil").style.display = "block";
+                document.getElementById("btn_perfil").classList = "list-group-item list-group-item-action bg-transparent second-text active";
+                document.getElementById("btn_resenya").classList = "list-group-item list-group-item-action bg-transparent second-text fw-bold";
+                document.getElementById("btn_admin").classList = "list-group-item list-group-item-action bg-transparent second-text fw-bold";
+
+                document.getElementById("_panel_resenyas").style.display = "none";
+                document.getElementById("_panel_admin").style.display = "none";
+
+            }else if(msg == "panel_admin"){
+                console.log("admin");
+                document.getElementById("_panel_admin").style.display = "block";
+                document.getElementById("btn_perfil").classList = "list-group-item list-group-item-action bg-transparent second-text fw-bold";
+                document.getElementById("btn_resenya").classList = "list-group-item list-group-item-action bg-transparent second-text fw-bold";
+                document.getElementById("btn_admin").classList = "list-group-item list-group-item-action bg-transparent second-text active";
+
+                document.getElementById("_panel_perfil").style.display = "none";
+                document.getElementById("_panel_resenyas").style.display = "none";
+            }else{
+                console.log("reseñas");
+                document.getElementById("_panel_resenyas").style.display = "block";
+                document.getElementById("btn_perfil").classList = "list-group-item list-group-item-action bg-transparent second-text fw-bold";
+                document.getElementById("btn_resenya").classList = "list-group-item list-group-item-action bg-transparent second-text active";
+                document.getElementById("btn_admin").classList = "list-group-item list-group-item-action bg-transparent second-text fw-bold";
+
+                document.getElementById("_panel_perfil").style.display = "none";
+                document.getElementById("_panel_admin").style.display = "none";
+
+            }
         }
     </script>
 
@@ -152,6 +187,8 @@
             el.classList.toggle("toggled");
         };
     </script>
+
+cripts
 </body>
 
 </html>

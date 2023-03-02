@@ -22,7 +22,8 @@ class PlatoSeeder extends Seeder
         DB::table('plato')->insertOrIgnore([
             'nombre' => 'Menu degustacion',
             'descripcion' => 'Para disfrutar',
-            'menu_id' =>  Menu::where('nombre','=','Menu degustacion')->first()->id
+            'menu_id' =>  Menu::where('nombre','=','Menu degustacion')->first()->id,
+            'img' => ""
         ]);
     }
 }
