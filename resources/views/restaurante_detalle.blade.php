@@ -4,10 +4,8 @@
     <title>@yield('title')</title>
 </head>
 <body>
-    <div class="header">
-        <h1>@yield('header_title','RESTAURANTE')</h1>
-        <h2>@yield('header_subtitle','FINE DINING EXPERIENCE')</h2>
-    </div>
+    @include('navbar')
+    
     <div class="image-grid">
         <h3>@yield('grid_title','MENU')</h3>
         <div class="images">
@@ -31,5 +29,8 @@
             </div>
         </div>
     </div>
+
+    @include('footer')
+
 </body>
 </html>

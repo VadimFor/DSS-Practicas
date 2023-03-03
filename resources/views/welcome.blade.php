@@ -20,7 +20,6 @@
 
         @include('navbar')
 
-
         IT WORKS
 
         @include('footer')
