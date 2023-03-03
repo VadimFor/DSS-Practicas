@@ -32,7 +32,7 @@
 
 
 <nav class="navbar navbar-expand-md bg" >
-    <a href="" class="navbar-brand fs-3 ms-3 text-success bx bx-bowl-hot" style="">FudRating</a>
+    <a href="" class="navbar-brand fs-3 ms-3 fw-bold  text-success bx bx-bowl-hot" style="">FudRater</a>
 
 
     <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#btn">
@@ -54,8 +54,18 @@
                 <a href="#" class="bx bxs-contact nav-link mx-3 text-dark fs-5">Contact</a>
             </li>
             <li class="nav-item">
-                <button class="btn btn-dark" id="myprofile" name="myprofile">Login</button>
-                <button class="btn btn-dark" id="myprofile" name="myprofile">Registro</button>
+
+                @guest
+                <a href="/login" class="btn btn-dark" id="myprofile" name="myprofile">Login</a>
+                <a href="/registro" class="btn btn-dark" id="myprofile" name="myprofile">Registro</a>
+                @endguest
+
+                  
+                @auth
+                <a href="/panelusuario" class="btn btn-dark" ><i class='bx bxs-user'></i> {{auth()->user()->email}}</a>
+                <a href="/logout" class="btn btn-dark" ><i class='bx bx-log-out'></i> Logout</a>
+                @endauth
+
             </li>
             &nbsp;&nbsp;&nbsp;
 

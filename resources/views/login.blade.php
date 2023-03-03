@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Aplicación de login</title>
     <link rel="stylesheet" href="{{ url('/assets/css/bootstrap.min.css')}}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <style>
         body{
@@ -25,6 +26,8 @@
 <body>
 
     <main class="form-container">
+        <a href="/" class="navbar-brand fs-3 ms-3 text-success bx bx-bowl-hot" style="text-align:center; widrh:100%;">FudRating</a>
+
         <form action="/login" method="POST">
             @csrf
             <h1>Login</h1>

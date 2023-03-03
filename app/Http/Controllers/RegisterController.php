@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class RegisterController extends Controller
 {
     public function mostrar(){
-        if (Auth::check()){return redirect('/home');}
+        if (Auth::check()){return redirect('/');}
         return view('registro');}
 
     public function registro(RegisterRequest $request){

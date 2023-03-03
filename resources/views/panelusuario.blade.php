@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <title>Panel de usuario</title>
 
     <style>
@@ -75,8 +77,8 @@
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
         <div class="bg-white" id="sidebar-wrapper">
-            <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
-                    class="fas fa-user-secret me-2"></i>FudRater</div>
+            <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold border-bottom"><i
+                    class="bx bx-bowl-hot"></i><a href="/"class=" text-success">FudRater</a></div>
             <div class="list-group list-group-flush my-3">
 
                 <a href="#" id="btn_perfil" onclick="switchContent('panel_perfil')" class="list-group-item list-group-item-action bg-transparent second-text active"><i
