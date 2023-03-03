@@ -20,7 +20,7 @@
 
         @include('navbar')
 
-        IT WORKS
+        @include('welcome_contenido')
 
         @include('footer')
 

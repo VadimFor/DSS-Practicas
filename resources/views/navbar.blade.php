@@ -51,7 +51,7 @@
                 <a href="#" class="bx bx-folder-plus bx bxs-user-voice nav-link mx-3 text-dark fs-5">Service</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="bx bxs-contact nav-link mx-3 text-dark fs-5">Contact</a>
+                <a href="#" class="bx bxs-contact nav-link mx-3 text-dark fs-5">Our team</a>
             </li>
             <li class="nav-item">
 
