@@ -187,8 +187,6 @@
             el.classList.toggle("toggled");
         };
     </script>
-
-cripts
 </body>
 
 </html>
