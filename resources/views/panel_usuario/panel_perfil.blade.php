@@ -75,19 +75,21 @@
 
 
     <div class="d-flex" id="wrapper">
+
         <!-- Sidebar -->
         <div class="bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold border-bottom"><i
                     class="bx bx-bowl-hot"></i><a href="/"class=" text-success">FudRater</a></div>
             <div class="list-group list-group-flush my-3">
 
-                <a href="#" id="btn_perfil" onclick="switchContent('panel_perfil')" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+
+                <a href="/panelusuario/perfil" id="btn_perfil" class="list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-tachometer-alt me-2"></i>Perfil</a>
 
-                <a href="#" id="btn_resenya" onclick="switchContent('panel_resenyas')"  class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="/panelusuario/resenyas" id="btn_resenya" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Mis reseñas</a>
 
-                <a href="#" id="btn_admin" onclick="switchContent('panel_admin')" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="/panelusuario/admin" id="btn_admin" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Admin</a>
 
 
@@ -95,10 +97,10 @@
                         class="fas fa-power-off me-2"></i>Logout</a>
             </div>
         </div>
-        <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
+
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
@@ -128,57 +130,68 @@
                 </div>
             </nav>
 
-            <div id="_panel_perfil" style="display:block;">
-                @include('panel_perfil')
+            
+
+<div class="container rounded bg-white mt-1 mb-1">
+
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                <span class="font-weight-bold">{{auth()->user()->name}} {{auth()->user()->apellido}}</span>
+                <span class="text-black-50">{{auth()->user()->email}}</span>
+                <span> </span>
             </div>
-            <div id="_panel_resenyas" style="display:none;">
-                @include('panel_resenyas')
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <form action="{{route("home.modperfil")}}" method="POST">
+                    @csrf
+                    <input name="email" value={{auth()->user()->email}} type="hidden">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Perfil</h4>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6"><label class="labels">Nombre</label><input type="text" name="name" class="form-control"  value={{auth()->user()->name}}></div>
+                        <div class="col-md-6"><label class="labels">Apellido</label><input type="text" class="form-control" name="apellido" value={{auth()->user()->apellido}} ></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12"><label class="labels">Teléfono</label><input type="text" class="form-control" name="telefono" value={{auth()->user()->telefono}}></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12"><label class="labels">Dirección</label><input type="text" class="form-control" name="direccion" value={{auth()->user()->direccion}}></div>
+                        <div class="col-md-6"><label class="labels">Pais</label><input type="text" class="form-control" name="pais" value={{auth()->user()->pais}}></div>
+                        <div class="col-md-6"><label class="labels">Provincia</label><input type="text" class="form-control" name="provincia" value={{auth()->user()->provincia}} ></div>
+                        <div class="col-md-6"><label class="labels">Población</label><input type="text" class="form-control" name="poblacion" value={{auth()->user()->poblacion}} ></div>
+                        <div class="col-md-6"><label class="labels">Código postal</label><input type="text" class="form-control" name="cod_postal" value={{auth()->user()->cod_postal}}></div>
+                    </div>
+                    <div class="mt-5 text-center">
+                        <button class="btn btn-primary profile-button" type="submit">Guardar</button>
+                    </div>
+                    @if (session("correcto"))
+                    <div class="aler alert-success text-center">{{session("correcto")}}</div>
+                    @endif
+                    @if (session("incorrecto"))
+                    <div class="aler alert-danger text-center">{{session("incorrecto")}}</div>
+                    @endif
+
+                </form>
             </div>
 
-            <div id="_panel_admin" style="display:none;">
-                @include('panel_admin')
-            </div>
+        </div>
+
+    </div>
+</div>
+
+<a href="/test" id="btn_resenya" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+    class="fas fa-project-diagram me-2"></i>test</a>
+    {{session("test")}}
+
 
         </div>
     </div>
     <!-- /#page-content-wrapper -->
     </div>
-
-    <script>
-        function switchContent(msg) {
-
-            if(msg == "panel_perfil"){
-                console.log("perfil");
-                document.getElementById("_panel_perfil").style.display = "block";
-                document.getElementById("btn_perfil").classList = "list-group-item list-group-item-action bg-transparent second-text active";
-                document.getElementById("btn_resenya").classList = "list-group-item list-group-item-action bg-transparent second-text fw-bold";
-                document.getElementById("btn_admin").classList = "list-group-item list-group-item-action bg-transparent second-text fw-bold";
-
-                document.getElementById("_panel_resenyas").style.display = "none";
-                document.getElementById("_panel_admin").style.display = "none";
-
-            }else if(msg == "panel_admin"){
-                console.log("admin");
-                document.getElementById("_panel_admin").style.display = "block";
-                document.getElementById("btn_perfil").classList = "list-group-item list-group-item-action bg-transparent second-text fw-bold";
-                document.getElementById("btn_resenya").classList = "list-group-item list-group-item-action bg-transparent second-text fw-bold";
-                document.getElementById("btn_admin").classList = "list-group-item list-group-item-action bg-transparent second-text active";
-
-                document.getElementById("_panel_perfil").style.display = "none";
-                document.getElementById("_panel_resenyas").style.display = "none";
-            }else{
-                console.log("reseñas");
-                document.getElementById("_panel_resenyas").style.display = "block";
-                document.getElementById("btn_perfil").classList = "list-group-item list-group-item-action bg-transparent second-text fw-bold";
-                document.getElementById("btn_resenya").classList = "list-group-item list-group-item-action bg-transparent second-text active";
-                document.getElementById("btn_admin").classList = "list-group-item list-group-item-action bg-transparent second-text fw-bold";
-
-                document.getElementById("_panel_perfil").style.display = "none";
-                document.getElementById("_panel_admin").style.display = "none";
-
-            }
-        }
-    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
     <script>

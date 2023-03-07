@@ -62,7 +62,7 @@
 
                   
                 @auth
-                <a href="/panelusuario" class="btn btn-dark" ><i class='bx bxs-user'></i> {{auth()->user()->email}}</a>
+                <a href="/panelusuario/perfil" class="btn btn-dark" ><i class='bx bxs-user'></i> {{auth()->user()->email}}</a>
                 <a href="/logout" class="btn btn-dark" ><i class='bx bx-log-out'></i> Logout</a>
                 @endauth
 

@@ -1,48 +1,36 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use SebastianBergmann\Type\NullType;
 
-class HomeController extends Controller
+
+class AdminController extends Controller
 {
     public function mostrar(){
 
-        error_log("Mostrando panel de usuario");
-        $users = DB::select('select * from users');
-        $users_cont = count($users);
-        $menu = count(DB::select('select * from menu'));
-        $plato = count(DB::select('select * from plato'));
-        $restaurante = count(DB::select('select * from restaurante'));
-        $valoracion = count(DB::select('select * from valoracion'));
-        error_log(json_encode($users));
+        if(Auth::check()){
 
-        return view('panelusuario')->with("users",$users)->with("users_cont",$users_cont)->with("menu",$menu)->with("plato",$plato)->with("restaurante",$restaurante)->with("valoracion",$valoracion);
-    }
+            error_log("Mostrando panel de usuario");
+            $users = DB::select('select * from users');
+            $restaurantes = DB::select('select * from restaurante');
+            $menus = DB::select('select * from menu');
+            $platos = DB::select('select * from plato');
 
-    public function modPerfil(Request $request){
+            $users_cont = count($users);
+            $menu_cont = count($menus);
+            $plato_cont = count($platos);
+            $restaurante_cont = count($restaurantes);
+            $valoracion_cont = count(DB::select('select * from valoracion'));
+            error_log(json_encode($users));
 
-        error_log("Modificando a " .$request->email);
-        try{
-
-            $sql=DB::update(
-            "Update users set name=?, apellido=?, telefono=?, direccion=?,pais=?,provincia=?,poblacion=?,cod_postal=? where email=?",
-            [$request->name,$request->apellido,$request->telefono,$request->direccion,$request->pais,$request->provincia, $request->poblacion,$request->cod_postal , $request->email]);
-
-            if($sql==0){  $sql=1;}
-
-        }catch(\Throwable $th){
-            $sql = 0;
-        }
-
-        if($sql == true){
-            return back()->with("correcto","Usuario modificado correctamente");
+        return view('panel_usuario/panel_admin')->with("users",$users)->with("users_cont",$users_cont)->with("menu_cont",$menu_cont)->with("plato_cont",$plato_cont)
+        ->with("restaurante_cont",$restaurante_cont)->with("valoracion_cont",$valoracion_cont)->with("restaurantes",$restaurantes)->with("menus",$menus)->with("platos",$platos);
         }else{
-            return back()->with("incorrecto","Error, usuario no modificado");
+            return redirect('/login');
         }
     }
 

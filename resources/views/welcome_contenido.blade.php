@@ -24,9 +24,6 @@ body{
   width: 100%;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
-  max-height: 250px;
-  min-height: 250px; 
-
  
  }
 
@@ -68,18 +65,19 @@ button:hover{
         color: #ffbf00;
     }
 
+
 </style>
 
 
 
-<div class="main">
+<div class="main card-deck">
 
     <!--cards -->
    
    <div class="card">
    
       <div class="image">
-         <img src="https://cdn.pixabay.com/photo/2017/09/16/19/21/salad-2756467_1280.jpg">
+         <img src="https://cdn.pixabay.com/photo/2017/09/16/19/21/salad-2756467_1280.jpg"width="240" height="240">
       </div>
       <div class="title">
          <h1> Menu 1</h1>
@@ -103,7 +101,7 @@ button:hover{
    <div class="card">
    
       <div class="image">
-         <img src="https://cdn.pixabay.com/photo/2010/12/13/10/05/berries-2277_1280.jpg">
+         <img src="https://cdn.pixabay.com/photo/2010/12/13/10/05/berries-2277_1280.jpg"width="240" height="240">
       </div>
       <div class="title">
          <h1> Menu 2</h1>
@@ -128,7 +126,7 @@ button:hover{
    <div class="card">
    
       <div class="image">
-         <img src="https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_1280.jpg">
+         <img src="https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_1280.jpg" width="240" height="240">
       </div>
       <div class="title">
          <h1>Menu 3</h1>
@@ -152,7 +150,7 @@ button:hover{
    <div class="card">
    
       <div class="image">
-         <img src="https://cdn.pixabay.com/photo/2017/01/16/17/45/pancake-1984716_640.jpg">
+         <img src="https://cdn.pixabay.com/photo/2017/01/16/17/45/pancake-1984716_640.jpg"width="240" height="240">
       </div>
       <div class="title">
          <h1>Menu 4</h1>
@@ -177,7 +175,7 @@ button:hover{
    <div class="card">
    
       <div class="image">
-         <img src="https://cdn.pixabay.com/photo/2017/01/16/17/45/pancake-1984716_640.jpg">
+         <img src="https://cdn.pixabay.com/photo/2017/01/16/17/45/pancake-1984716_640.jpg"width="240" height="240">
       </div>
       <div class="title">
          <h1>Menu 5</h1>
@@ -201,7 +199,7 @@ button:hover{
    <div class="card">
    
       <div class="image">
-         <img src="https://cdn.pixabay.com/photo/2017/01/26/02/06/platter-2009590_1280.jpg">
+         <img src="https://cdn.pixabay.com/photo/2017/01/26/02/06/platter-2009590_1280.jpg"width="240" height="240">
       </div>
       <div class="title">
          <h1>Menu 6</h1>
@@ -225,7 +223,7 @@ button:hover{
    <div class="card">
    
       <div class="image">
-         <img src="https://cdn.pixabay.com/photo/2014/10/19/20/59/hamburger-494706_1280.jpg">
+         <img src="https://cdn.pixabay.com/photo/2014/10/19/20/59/hamburger-494706_1280.jpg"width="240" height="240">
       </div>
       <div class="title">
          <h1>Menu 7</h1>
@@ -251,7 +249,7 @@ button:hover{
    <div class="card">
    
       <div class="image">
-         <img src="https://cdn.pixabay.com/photo/2017/12/10/14/47/pizza-3010062_1280.jpg">
+         <img src="https://cdn.pixabay.com/photo/2017/12/10/14/47/pizza-3010062_1280.jpg"width="240" height="240">
       </div>
       <div class="title">
          <h1>Menu 8</h1>

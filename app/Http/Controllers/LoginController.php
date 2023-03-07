@@ -9,7 +9,7 @@ class LoginController extends Controller
 {
 
     public function mostrar(){
-        if (Auth::check()){return redirect('/panelusuario');}
+        if (Auth::check()){return redirect('/panelusuario/perfil');}
         return view('login');}
 
 
@@ -29,7 +29,7 @@ class LoginController extends Controller
 
 
     public function authenticated(Request $request, $user){
-        return redirect('/panelusuario');
+        return redirect('/panelusuario/perfil');
     }
 
 }
