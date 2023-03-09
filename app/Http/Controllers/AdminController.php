@@ -165,20 +165,33 @@ class AdminController extends Controller
     //ＲＥＳＴＡＵＲＡＮＴＥＳ
     public function delRestaurante($id){
         error_log("Eliminando a " . $id);
-        
+
+        try{ $sql=DB::delete("delete from restaurante where id='$id'");
+        }catch(\Throwable $th){ $sql = 0;}
+
+        if($sql == true){ return back()->with("correcto","Restaurante $id eliminado correctamente");}
+        else{ return back()->with("incorrecto","Error, restaurante $id no eliminado");}
     }
    
     //ＭＥＮＵＳ
     public function delMenu($id){
         error_log("Eliminando a " . $id);
-        
+
+        try{ $sql=DB::delete("delete from menu where id='$id'");
+        }catch(\Throwable $th){ $sql = 0;}
+
+        if($sql == true){ return back()->with("correcto","Menu $id eliminado correctamente");}
+        else{ return back()->with("incorrecto","Error, menu $id no eliminado");}
     }
 
     //ＰＬＡＴＯＳ
     public function delPlato($id){
         error_log("Eliminando a " . $id);
+        try{ $sql=DB::delete("delete from plato where id='$id'");
+        }catch(\Throwable $th){ $sql = 0;}
 
-        
+        if($sql == true){ return back()->with("correcto","Plato $id eliminado correctamente");}
+        else{ return back()->with("incorrecto","Error, plato $id no eliminado");}
 
     } 
     
