@@ -31,24 +31,26 @@
                 </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route("home.crearuser")}}" method="POST">
+                    <form action="{{route("AdminController.crear")}}" method="POST">
                         @csrf
+                        <!--Para identificar la tabla -->
+                        <input type="text" name="tabla" value="users" style="display:none" readonly>
 
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Email</label>
-                            <input type="email" name="email" class="form-control" id="exampleInputPassword1" placeholder="" aria-describedby="emailHelp">
+                            <label for="exampleInputPassword1">Email (obligatorio)</label>
+                            <input type="email" name="email" class="form-control" id="exampleInputPassword1" placeholder="" aria-describedby="emailHelp" required>
                           </div>
                         <div class="form-group">
                           <label for="exampleInputEmail1">Nombre </label>
                           <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="">
                         </div>
                         <div class="form-group">
-                          <label for="exampleInputPassword1">Contraseña</label>
-                          <input type="text" name="password" class="form-control" id="exampleInputPassword1" placeholder="">
+                          <label for="exampleInputPassword1">Contraseña (obligatorio)</label>
+                          <input type="text" name="password" class="form-control" id="exampleInputPassword1" placeholder="" required>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Verificar contraseña</label>
-                            <input type="text" name="password_confirmation" class="form-control" id="exampleInputPassword1" placeholder="">
+                            <label for="exampleInputPassword1">Verificar contraseña (obligatorio)</label>
+                            <input type="text" name="password_confirmation" class="form-control" id="exampleInputPassword1" placeholder="" required>
                           </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -95,7 +97,7 @@
                     <td>{{$item->cod_postal}}</td>
                     <td>
                         <a href=""  data-bs-toggle="modal" data-bs-target="#modalEditar{{$item->id}}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="{{route("home.deluser",$item->email)}}" onclick="res('{{$item->email}}')"  class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
+                        <a href="{{route("AdminController.delUsuario",$item->email)}}" onclick="res('{{$item->email}}')"  class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
                     </td>
 
                     <!-- Modal de modificar datos de la tabla-->
@@ -110,8 +112,11 @@
                             </div>
                             <div class="modal-body">
 
-                                <form action="{{route("home.moduser")}}" method="POST">
+                                <form action="{{route("AdminController.mod")}}" method="POST">
                                     @csrf
+                                    <!--Para identificar la tabla -->
+                                    <input type="text" name="tabla" value="users" style="display:none" readonly>
+
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">id</label>
                                         <input type="email" name="id" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->id}} readonly>

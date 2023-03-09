@@ -50,10 +50,21 @@ Route::get('/panelusuario/resenyas', [ResenyasController::class, 'mostrar']);
 
 # ADMIN
 Route::get('/panelusuario/admin', [AdminController::class, 'mostrar']);
-Route::post('/panelusuario-crearusuario', [AdminController::class, 'crearUsuario'])->name("home.crearuser");
-Route::post('/panelusuario-modusuario', [AdminController::class, 'modUsuario'])->name("home.moduser");
-Route::get('/panelusuario-delusuario-{email}', [AdminController::class, 'delUsuario'])->name("home.deluser");
 
+    Route::post('/panelusuario-crear', [AdminController::class, 'crear'])->name("AdminController.crear");
+    Route::post('/panelusuario-mod', [AdminController::class, 'mod'])->name("AdminController.mod");
+
+    //USER
+    Route::get('/panelusuario-delusuario-{email}', [AdminController::class, 'delUsuario'])->name("AdminController.delUsuario");
+    
+    //RESTAURANTE
+    Route::get('/panelusuario-delrestaurante-{id}', [AdminController::class, 'delRestaurante'])->name("AdminController.delRestaurante");
+
+    //MENU
+    Route::get('/panelusuario-delmenu-{id}', [AdminController::class, 'delMenu'])->name("AdminController.delMenu");
+
+    //PLATO
+    Route::get('/panelusuario-delplato-{id}', [AdminController::class, 'delPlato'])->name("AdminController.delPlato");
 
 
 Route::get('/test', function () {

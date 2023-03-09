@@ -20,5 +20,4 @@ class ResenyasController extends Controller
         }
     }
 
-
 }

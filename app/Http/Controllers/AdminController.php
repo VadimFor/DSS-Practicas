@@ -34,59 +34,163 @@ class AdminController extends Controller
         }
     }
 
-    public function crearUsuario(Request $request){
-        //return $request->name;   coje el name de: <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="">
-        if($request->email == ""){
-            return back()->with("incorrecto","Error al crear usuario, el email no puede ser vacio.");
+
+
+    public function crear(Request $request){
+
+        if ($request->tabla == 'users'){
+            if($request->email == ""){ return back()->with("incorrecto","Error al crear usuario, el email no puede ser vacio.");}
+
+            try{
+                $sql=DB::insert("Insert into users(name,email,password) values(?,?,?)", [
+                    $request->name,
+                    $request->email,
+                    bcrypt($request->password)
+                ] );
+            }catch(\Throwable $th){
+                $sql = 0;
+            }
+        
+        }elseif($request->tabla == 'restaurante'){
+
+            try{
+                $sql=DB::insert("Insert into restaurante(nombre,direccion,telefono,descripcion,img) values(?,?,?,?,?)", [
+                    $request->nombre,
+                    $request->direccion,
+                    $request->telefono,
+                    $request->descripcion,
+                    $request->img
+                ] );
+            }catch(\Throwable $th){
+                $sql = 0;
+            }
+
+        }elseif($request->tabla == 'menu'){
+
+            try{
+                $sql=DB::insert("Insert into menu(nombre,descripcion,precio,restaurante_id,img) values(?,?,?,?,?)", [
+                    $request->nombre,
+                    $request->descripcion,
+                    $request->precio,
+                    $request->restaurante_id,
+                    $request->img
+                ] );
+            }catch(\Throwable $th){
+                $sql = 0;
+            }
+
+        }elseif($request->tabla == 'plato'){
+
+            try{
+                $sql=DB::insert("Insert into plato(nombre,descripcion,menu_id,img) values(?,?,?,?)", [
+                    $request->nombre,
+                    $request->descripcion,
+                    $request->menu_id,
+                    $request->img
+                ] );
+            }catch(\Throwable $th){
+                $sql = 0;
+            }
         }
 
-        try{
-            $sql=DB::insert("Insert into users(name,email,password) values(?,?,?)", [
-                $request->name,
-                $request->email,
-                bcrypt($request->password)
-            ] );
-        }catch(\Throwable $th){
-            $sql = 0;
-        }
+        if($sql == true){ return back()->with("correcto","$request->tabla creado correctamente");}
+        else{ return back()->with("incorrecto","Error, $request->tabla no creado");}
 
-        if($sql == true){
-            return back()->with("correcto","Usuario creado correctamente");
-        }else{
-            return back()->with("incorrecto","Error, usuario no creado");
-        }
     }
 
+    public function mod(Request $request){
 
-    public function modUsuario(Request $request){
+        if ($request->tabla == 'users'){
+        
+            try{
 
-        try{
+                $sql=DB::update(
+                "Update users set password=?, name=?, apellido=?, telefono=?, direccion=?,pais=?,provincia=?,poblacion=?,cod_postal=? where email=?",
+                [bcrypt($request->password), $request->name,$request->apellido,$request->telefono,$request->direccion,$request->pais,$request->provincia, $request->poblacion,$request->cod_postal , $request->email]);
 
-            $sql=DB::update(
-            "Update users set password=?, name=?, apellido=?, telefono=?, direccion=?,pais=?,provincia=?,poblacion=?,cod_postal=? where email=?",
-            [bcrypt($request->password), $request->name,$request->apellido,$request->telefono,$request->direccion,$request->pais,$request->provincia, $request->poblacion,$request->cod_postal , $request->email]);
+                if($sql==0){  $sql=1;}
 
-            if($sql==0){  $sql=1;}
+            }catch(\Throwable $th){
+                $sql = 0;
+            }
 
-        }catch(\Throwable $th){
-            $sql = 0;
+        }elseif($request->tabla == 'restaurante'){
+
+            try{
+
+                $sql=DB::update(
+                "Update restaurante set nombre=?, direccion=?, telefono=?, descripcion=?, img=? where id=?",
+                [$request->nombre,$request->direccion,$request->telefono,$request->descripcion,$request->img, $request->id]);
+
+                if($sql==0){  $sql=1;}
+
+            }catch(\Throwable $th){
+                $sql = 0;
+            }
+
+        }elseif($request->tabla == 'menu'){
+
+            try{
+
+                $sql=DB::update(
+                "Update users set nombre=?, descripcion=?, precio=?, restaurante_id=?, img=? where id=?",
+                [$request->nombre,$request->descripcion,$request->precio,$request->restaurante_id,$request->img, $request->id]);
+
+                if($sql==0){  $sql=1;}
+
+            }catch(\Throwable $th){
+                $sql = 0;
+            }
+
+        }elseif($request->tabla == 'plato'){
+
+            try{
+
+                $sql=DB::update(
+                "Update users set nombre=?, descripcion=?, img=?, menu_id=? where id=?",
+                [$request->nombre,$request->descripcion,$request->img , $request->id]);
+
+                if($sql==0){  $sql=1;}
+
+            }catch(\Throwable $th){
+                $sql = 0;
+            }
         }
 
+        if($sql == true){ return back()->with("correcto","$request->tabla modificado correctamente");}
+        else{ return back()->with("incorrecto","Error, $request->tabla no modificado");}
 
-        if($sql == true){ return back()->with("correcto","Usuario modificado correctamente");}
-        else{ return back()->with("incorrecto","Error, usuario no modificado");}
     }
 
+    //ＲＥＳＴＡＵＲＡＮＴＥＳ
+    public function delRestaurante($id){
+        error_log("Eliminando a " . $id);
+        
+    }
+   
+    //ＭＥＮＵＳ
+    public function delMenu($id){
+        error_log("Eliminando a " . $id);
+        
+    }
 
+    //ＰＬＡＴＯＳ
+    public function delPlato($id){
+        error_log("Eliminando a " . $id);
+
+        
+
+    } 
+    
+    //ＵＳＥＲＳ
     public function delUsuario($email){
         error_log("Eliminando a " . $email);
-        try{
-            $sql=DB::delete("delete from users where email='$email'");
-        }catch(\Throwable $th){
-            $sql = 0;
-        }
+        try{ $sql=DB::delete("delete from users where email='$email'");
+        }catch(\Throwable $th){ $sql = 0;}
 
         if($sql == true){ return back()->with("correcto","Usuario $email eliminado correctamente");}
         else{ return back()->with("incorrecto","Error, usuario $email no eliminado");}
     }
+
+
 }
