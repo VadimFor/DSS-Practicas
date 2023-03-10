@@ -133,10 +133,13 @@
             @include('panel_usuario.admin.panel_admin_contador')
 
             @include('panel_usuario.admin.panel_admin_restaurante')
+
+            
             @include('panel_usuario.admin.panel_admin_menu')
             @include('panel_usuario.admin.panel_admin_plato')
 
             @include('panel_usuario.admin.panel_admin_users')
+            
 
         </div>
     </div>

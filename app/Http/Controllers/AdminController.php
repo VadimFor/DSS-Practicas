@@ -11,6 +11,7 @@ use App\Models\Restaurante;
 use App\Models\Menu;
 use App\Models\Plato;
 use App\Models\Users;
+use Illuminate\Pagination\Paginator;
 
 
 
@@ -21,15 +22,16 @@ class AdminController extends Controller
         if(Auth::check()){
 
             //error_log("Mostrando panel de usuario admin");
-            $users =  Users::all();//DB::select('select * from users');
-            $restaurantes = Restaurante::all(); //DB::select('select * from restaurante');
-            $menus = Menu::all();//DB::select('select * from menu');
-            $platos = Plato::all();//B::select('select * from plato');
 
-            $users_cont = count($users);
-            $menu_cont = count($menus);
-            $plato_cont = count($platos);
-            $restaurante_cont = count($restaurantes);
+            $users =  Users::paginate(5, ['*'], 'users');//DB::select('select * from users');
+            $restaurantes = Restaurante::paginate(5, ['*'], 'restaurantes'); //DB::select('select * from restaurante');
+            $menus = Menu::paginate(5, ['*'], 'menus');//DB::select('select * from menu');
+            $platos = Plato::paginate(5, ['*'], 'platos');//B::select('select * from plato');
+
+            $users_cont = count(Users::all());
+            $menu_cont = count(Menu::all());
+            $plato_cont = count(Plato::all());
+            $restaurante_cont = count(Restaurante::all());
             $valoracion_cont = count(DB::select('select * from valoracion'));
             //error_log(json_encode($users));
 

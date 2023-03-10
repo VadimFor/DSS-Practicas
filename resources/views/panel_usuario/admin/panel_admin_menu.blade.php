@@ -154,6 +154,10 @@
             </tbody>
         </table>
 
+        <div style="display: flex; justify-content: center;">
+            {{ $menus->links() }} <!-- Para mostrar el tab con las paginas del PAGINATION -->
+        </div>
+
 
     </div>
 </div>

@@ -15,12 +15,11 @@
     </script>
 
     <h3 class="fs-4 mb-3">Usuarios</h3>
-
+    
     <div class="p-5 table-responsive">
 
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearUsuario">Crear usuario</button>
-
-        <!-- Modal de crear usuario-->
+        <!-- ＭＯＤＡＬ ＣＲＥＡＲ ＵＳＵＡＲＩＯ -->
         <div class="modal fade" id="modalCrearUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -63,6 +62,12 @@
             </div>
         </div>
 
+        <!-- 
+        ▀▀█▀▀ ─█▀▀█ ░█▀▀█ ░█─── ─█▀▀█ 
+        ─░█── ░█▄▄█ ░█▀▀▄ ░█─── ░█▄▄█ 
+        ─░█── ░█─░█ ░█▄▄█ ░█▄▄█ ░█─░█
+        -->
+
         <table class="table bg-white rounded shadow-sm table-bordered table-hover">
             <thead>
                 <tr>
@@ -100,7 +105,7 @@
                         <a href="{{route("AdminController.delUsuario",$item->email)}}" onclick="res('{{$item->email}}')"  class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
                     </td>
 
-                    <!-- Modal de modificar datos de la tabla-->
+                    <!-- ＭＯＤＡＬ ＥＤＩＴＡＲ ＵＳＵＡＲＩＯ -->
                     <div class="modal fade" id="modalEditar{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -161,7 +166,12 @@
                 @endforeach
 
             </tbody>
+
         </table>
+
+        <div style="display: flex; justify-content: center;">
+            {{ $users->links() }} <!-- Para mostrar el tab con las paginas del PAGINATION -->
+        </div>
 
 
     </div>
