@@ -10,6 +10,8 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+    protected $table = 'valoracion';
+    
     use HasApiTokens, HasFactory, Notifiable;
     public $timestamps = false;
 

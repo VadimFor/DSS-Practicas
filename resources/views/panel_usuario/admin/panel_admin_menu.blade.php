@@ -114,11 +114,11 @@
 
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">id</label>
-                                        <input type="email" name="id" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->id}} readonly>
+                                        <input type="text" name="id" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->id}} readonly>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">nombre</label>
-                                        <input type="email" name="nombre" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->nombre}} required>
+                                        <input type="text" name="nombre" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->nombre}} required>
                                     </div>
                                     <div class="form-group">
                                       <label for="exampleInputEmail1">descripcion</label>

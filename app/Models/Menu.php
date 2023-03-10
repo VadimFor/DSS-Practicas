@@ -9,6 +9,15 @@ class Menu extends Model
 {
     use HasFactory;
     protected $table = 'menu';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'nombre',
+        'descripcion',
+        'precio',
+        'restaurante_id',
+        'img'
+    ];
 
     public function restaurante(){
         return $this->belongsTo(Restaurante::class);

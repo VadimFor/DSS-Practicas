@@ -9,6 +9,14 @@ class Plato extends Model
 {
     use HasFactory;
     protected $table = 'plato';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'nombre',
+        'descripcion',
+        'menu_id',
+        'img'
+    ];
 
     public function menu(){
         return $this->belongsTo(Menu::class);

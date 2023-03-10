@@ -14,10 +14,19 @@ class ResenyasController extends Controller
     public function mostrar(){
 
         if(Auth::check()){
+
+            
+
+
+
+
+
+
             return view('panel_usuario/panel_resenyas');
         }else{
             return redirect('/login');
         }
     }
+
 
 }
