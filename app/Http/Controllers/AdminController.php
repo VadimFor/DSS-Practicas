@@ -17,6 +17,9 @@ use Illuminate\Pagination\Paginator;
 
 class AdminController extends Controller
 {
+
+
+
     public function mostrar(){
 
         if(Auth::check()){
@@ -193,4 +196,104 @@ class AdminController extends Controller
     }
 
 
+
+
+    public function buscar(Request $request){
+
+        /* 1 PALABRA
+        $busqueda = $request->input('busqueda');
+
+        $search = Users::where('name', 'LIKE', "%$busqueda%")
+                    ->orWhere('email', 'LIKE', "%$busqueda%")
+                    ->orWhere('apellido', 'LIKE', "%$busqueda%")
+                    ->orWhere('telefono', 'LIKE', "%$busqueda%")
+                    ->orWhere('direccion', 'LIKE', "%$busqueda%")
+                    ->orWhere('pais', 'LIKE', "%$busqueda%")
+                    ->orWhere('provincia', 'LIKE', "%$busqueda%")
+                    ->orWhere('poblacion', 'LIKE', "%$busqueda%")
+                    ->orWhere('cod_postal', 'LIKE', "%$busqueda%")
+                    ->get();
+
+
+        return back()->with("search",$search); */
+
+
+        // 2 PALABRAS
+
+         if ($request->tabla == 'users'){
+
+            $keywords = explode(' ', request('busqueda-users'));
+
+            $search = Users::where(function ($query) use ($keywords) {
+                foreach ($keywords as $keyword) {
+                    $query->orWhere('name', 'LIKE', "%$keyword%")
+                        ->orWhere('email', 'LIKE', "%$keyword%")
+                        ->orWhere('apellido', 'LIKE', "%$keyword%")
+                        ->orWhere('telefono', 'LIKE', "%$keyword%")
+                        ->orWhere('direccion', 'LIKE', "%$keyword%")
+                        ->orWhere('pais', 'LIKE', "%$keyword%")
+                        ->orWhere('provincia', 'LIKE', "%$keyword%")
+                        ->orWhere('poblacion', 'LIKE', "%$keyword%")
+                        ->orWhere('cod_postal', 'LIKE', "%$keyword%");
+                }
+            })
+            ->get();
+
+            // Pasar los resultados a la vista
+            return back()->with("search-users", $search);
+
+        }elseif($request->tabla == 'restaurante'){
+
+            $keywords = explode(' ', request('busqueda-restaurante'));
+
+            $search = DB::table('restaurante')
+            ->where(function ($query) use ($keywords) {
+                foreach ($keywords as $keyword) {
+                    $query->orWhere('id', 'LIKE', "%$keyword%")
+                        ->orWhere('nombre', 'LIKE', "%$keyword%")
+                        ->orWhere('direccion', 'LIKE', "%$keyword%")
+                        ->orWhere('telefono', 'LIKE', "%$keyword%")
+                        ->orWhere('descripcion', 'LIKE', "%$keyword%")
+                        ->orWhere('img', 'LIKE', "%$keyword%");
+                }
+            })
+            ->get();
+
+            return back()->with("search-restaurante", $search);
+
+        }elseif($request->tabla == 'menu'){
+
+            $keywords = explode(' ', request('busqueda-menu'));
+
+            $search = DB::table('menu')->where(function ($query) use ($keywords) {
+                foreach ($keywords as $keyword) {
+                    $query->orWhere('nombre', 'LIKE', "%$keyword%")
+                        ->orWhere('descripcion', 'LIKE', "%$keyword%")
+                        ->orWhere('precio', 'LIKE', "%$keyword%")
+                        ->orWhere('restaurante_id', 'LIKE', "%$keyword%")
+                        ->orWhere('img', 'LIKE', "%$keyword%");
+                }
+            })->get();
+        
+            return back()->with("search-menu", $search);
+
+        }elseif($request->tabla == 'plato'){
+
+            $keywords = explode(' ', request('busqueda-plato'));
+
+            $search = DB::table('plato')->where(function ($query) use ($keywords) {
+                foreach ($keywords as $keyword) {
+                    $query->orWhere('nombre', 'LIKE', "%$keyword%")
+                        ->orWhere('descripcion', 'LIKE', "%$keyword%")
+                        ->orWhere('menu_id', 'LIKE', "%$keyword%")
+                        ->orWhere('img', 'LIKE', "%$keyword%");
+                }
+            })->get();
+        
+            return back()->with("search-plato", $search);
+    
+        }
+
+    }
+    
 }

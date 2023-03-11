@@ -67,6 +67,10 @@ Route::get('/panelusuario/admin', [AdminController::class, 'mostrar']);
     Route::get('/panelusuario-delplato-{id}', [AdminController::class, 'delPlato'])->name("AdminController.delPlato");
 
 
+Route::post('/panelusuario-buscar', [AdminController::class, 'buscar'])->name("AdminController.buscar");
+
+
+
 Route::get('/test', function () {
     $test = "__test__";
     return back()->with("test",$test);

@@ -63,85 +63,126 @@
             </div>
         </div>
 
-        <table class="table bg-white rounded shadow-sm table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th scope="col" width="50">#</th>
-                    <th scope="col">nombre</th>
-                    <th scope="col">descripcion</th>
-                    <th scope="col">menu_id</th>
-                    <th scope="col">img</th>
-                </tr>
-            </thead>
-            <tbody class="table-group-divider">
+        <!-- 
+        ▀▀█▀▀ ─█▀▀█ ░█▀▀█ ░█─── ─█▀▀█ 
+        ─░█── ░█▄▄█ ░█▀▀▄ ░█─── ░█▄▄█ 
+        ─░█── ░█─░█ ░█▄▄█ ░█▄▄█ ░█─░█
+        -->
 
-                @foreach ($platos as $item)
+        <form action="{{ route('AdminController.buscar') }}" method="POST">
+            @csrf
+            <div class="input-group mb-3">
+                <input type="text" name="tabla" value="plato" style="display:none" readonly><!--Para identificar la tabla -->
+                <input type="text" name="busqueda-plato" class="form-control" placeholder="Buscar platos" aria-label="Buscar platos">
+                <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+            </div>
+        </form>
 
-                <tr>
-                    <th>{{$item->id}}</th>
-                    <td>{{$item->nombre}}</td>
-                    <td>{{$item->descripcion}}</td>
-                    <td>{{$item->menu_id}}</td>
-                    <td>{{$item->img}}</td>
-                    <td>
-                        <a href=""  data-bs-toggle="modal" data-bs-target="#modalEditarPlato{{$item->id}}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="{{route("AdminController.delPlato",$item->id)}}" onclick="res('{{$item->nombre}}')"  class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
-                    </td>
+        <!-- La idea del if-else y luego sacar la tabla en el array es que los resultados de la búsuqeda se muestren
+        en una tabla arriba de la tabla de todos los usuarios-->
+        @if(session('search-plato') && session('search-plato') != NULL)
+            <p>Resultados de la búsqueda:</p>
+            @php
+                $arr = [session('search-plato'), $platos];
+            @endphp
+        @else
+            @php 
+                $arr = [$platos];
+            @endphp
+        @endif
 
-                    <!-- Modal de modificar datos de la tabla-->
-                    <div class="modal fade" id="modalEditarPlato{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modificar plato</h5>
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+        @for ($i = 0; $i < count($arr); $i++)
+
+            <!-- CAMBIAR COLOR DE LA TABLA DE BÚSQUEDAS-->
+            @if(count($arr) == 2)
+                @if($i == 0) 
+                <table class="table bg-white rounded shadow-sm table-bordered table-hover table-info ">
+                @else
+                <table class="table bg-white rounded shadow-sm table-bordered table-hover">
+                @endif
+            @else
+                <table class="table bg-white rounded shadow-sm table-bordered table-hover">
+            @endif
+
+                <thead>
+                    <tr>
+                        <th scope="col" width="50">#</th>
+                        <th scope="col">nombre</th>
+                        <th scope="col">descripcion</th>
+                        <th scope="col">menu_id</th>
+                        <th scope="col">img</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+
+                    @foreach ($arr[$i] as $item)
+
+                    <tr>
+                        <th>{{$item->id}}</th>
+                        <td>{{$item->nombre}}</td>
+                        <td>{{$item->descripcion}}</td>
+                        <td>{{$item->menu_id}}</td>
+                        <td>{{$item->img}}</td>
+                        <td>
+                            <a href=""  data-bs-toggle="modal" data-bs-target="#modalEditarPlato{{$item->id}}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="{{route("AdminController.delPlato",$item->id)}}" onclick="res('{{$item->nombre}}')"  class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+
+                        <!-- Modal de modificar datos de la tabla-->
+                        <div class="modal fade" id="modalEditarPlato{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modificar plato</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <form action="{{route("AdminController.mod")}}" method="POST">
+                                        @csrf
+                                        <!--Para identificar la tabla -->
+                                        <input type="text" name="tabla" value="plato" style="display:none" readonly>
+
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">id</label>
+                                            <input type="text" name="id" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->id}} readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">nombre</label>
+                                            <input type="text" name="nombre" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->nombre}} required >
+                                        </div>
+                                        <div class="form-group">
+                                        <label for="exampleInputEmail1">descripcion</label>
+                                        <input type="text" name="descripcion" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->descripcion}} required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">menu_id</label>
+                                            <input type="text" name="menu_id" class="form-control" id="exampleInputPassword1" placeholder="" value={{$item->menu_id}} required>
+                                        </div>
+                                        <div class="form-group">
+                                        <label for="exampleInputPassword1">img</label>
+                                        <input type="text" name="img" class="form-control" id="exampleInputPassword1" placeholder=""  value={{$item->img}}>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                        </div>
+                                    </form>
+
+                                </div>
                             </div>
-                            <div class="modal-body">
-
-                                <form action="{{route("AdminController.mod")}}" method="POST">
-                                    @csrf
-                                    <!--Para identificar la tabla -->
-                                    <input type="text" name="tabla" value="plato" style="display:none" readonly>
-
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">id</label>
-                                        <input type="text" name="id" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->id}} readonly>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">nombre</label>
-                                        <input type="text" name="nombre" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->nombre}} required >
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="exampleInputEmail1">descripcion</label>
-                                      <input type="text" name="descripcion" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->descripcion}} required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">menu_id</label>
-                                        <input type="text" name="menu_id" class="form-control" id="exampleInputPassword1" placeholder="" value={{$item->menu_id}} required>
-                                      </div>
-                                    <div class="form-group">
-                                      <label for="exampleInputPassword1">img</label>
-                                      <input type="text" name="img" class="form-control" id="exampleInputPassword1" placeholder=""  value={{$item->img}}>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                        <button type="submit" class="btn btn-primary">Guardar</button>
-                                    </div>
-                                  </form>
-
                             </div>
                         </div>
-                        </div>
-                    </div>
 
-                </tr>
+                    </tr>
 
-                @endforeach
+                    @endforeach
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        @endfor
 
         <div style="display: flex; justify-content: center;">
             {{ $platos->links() }} <!-- Para mostrar el tab con las paginas del PAGINATION -->

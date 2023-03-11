@@ -68,111 +68,152 @@
         ─░█── ░█─░█ ░█▄▄█ ░█▄▄█ ░█─░█
         -->
 
-        <table class="table bg-white rounded shadow-sm table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th scope="col" width="50">#</th>
-                    <th scope="col">email</th>
-                    <th scope="col">password</th>
-                    <th scope="col">nombre</th>
-                    <th scope="col">apellido</th>
-                    <th scope="col">telefono</th>
-                    <th scope="col">direccion</th>
-                    <th scope="col">pais</th>
-                    <th scope="col">provincia</th>
-                    <th scope="col">poblacion</th>
-                    <th scope="col">cod_postal</th>
-                </tr>
-            </thead>
-            <tbody class="table-group-divider">
+        
+        <form action="{{ route('AdminController.buscar') }}" method="POST">
+            @csrf
+            <div class="input-group mb-3">
+                <input type="text" name="tabla" value="users" style="display:none" readonly><!--Para identificar la tabla -->
+                <input type="text" name="busqueda-users" class="form-control" placeholder="Buscar usuario" aria-label="Buscar usuario">
+                <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+            </div>
+        </form>
 
-                @foreach ($users as $item)
 
-                <tr>
-                    <th>{{$item->id}}</th>
-                    <td>{{$item->email}}</td>
-                    <td>{{$item->password}}</td>
-                    <td>{{$item->name}}</td>
-                    <td>{{$item->apellido}}</td>
-                    <td>{{$item->telefono}}</td>
-                    <td>{{$item->direccion}}</td>
-                    <td>{{$item->pais}}</td>
-                    <td>{{$item->provincia}}</td>
-                    <td>{{$item->poblacion}}</td>
-                    <td>{{$item->cod_postal}}</td>
-                    <td>
-                        <a href=""  data-bs-toggle="modal" data-bs-target="#modalEditar{{$item->id}}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="{{route("AdminController.delUsuario",$item->email)}}" onclick="res('{{$item->email}}')"  class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
-                    </td>
+        <!-- La idea del if-else y luego sacar la tabla en el array es que los resultados de la búsuqeda se muestren
+        en una tabla arriba de la tabla de todos los usuarios-->
+        @if(session('search-users') && session('search-users') != NULL)
+            <p>Resultados de la búsqueda:</p>
+            @php
+                $arr = [session('search-users'), $users];
+            @endphp
+        @else
+            @php 
+                $arr = [$users];
+            @endphp
+        @endif
 
-                    <!-- ＭＯＤＡＬ ＥＤＩＴＡＲ ＵＳＵＡＲＩＯ -->
-                    <div class="modal fade" id="modalEditar{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modificar usuario</h5>
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+        @for ($i = 0; $i < count($arr); $i++)
+            
+            <!-- CAMBIAR COLOR DE LA TABLA DE BÚSQUEDAS-->
+            @if(count($arr) == 2)
+                @if($i == 0) 
+                <table class="table bg-white rounded shadow-sm table-bordered table-hover table-info ">
+                @else
+                <table class="table bg-white rounded shadow-sm table-bordered table-hover">
+                @endif
+            @else
+                <table class="table bg-white rounded shadow-sm table-bordered table-hover">
+            @endif 
+
+            <!--FORMA ALTERNATIVA CAMBIAR COLOR
+                @php $tableClass = 'table bg-white rounded shadow-sm table-bordered table-hover' . (count($arr) == 2 && $i == 0 ? ' table-info' : ''); @endphp
+                <table class="{{ $tableClass }}"> 
+            -->
+
+                <thead>
+                    <tr>
+                        <th scope="col" width="50">#</th>
+                        <th scope="col">email</th>
+                        <th scope="col">password</th>
+                        <th scope="col">nombre</th>
+                        <th scope="col">apellido</th>
+                        <th scope="col">telefono</th>
+                        <th scope="col">direccion</th>
+                        <th scope="col">pais</th>
+                        <th scope="col">provincia</th>
+                        <th scope="col">poblacion</th>
+                        <th scope="col">cod_postal</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                   
+                    @foreach ($arr[$i] as $item)
+
+                        <tr>
+                            <th>{{$item->id}}</th>
+                            <td>{{$item->email}}</td>
+                            <td>{{$item->password}}</td>
+                            <td>{{$item->name}}</td>
+                            <td>{{$item->apellido}}</td>
+                            <td>{{$item->telefono}}</td>
+                            <td>{{$item->direccion}}</td>
+                            <td>{{$item->pais}}</td>
+                            <td>{{$item->provincia}}</td>
+                            <td>{{$item->poblacion}}</td>
+                            <td>{{$item->cod_postal}}</td>
+                            <td>
+                                <a href=""  data-bs-toggle="modal" data-bs-target="#modalEditar{{$item->id}}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="{{route("AdminController.delUsuario",$item->email)}}" onclick="res('{{$item->email}}')"  class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+
+                            <!-- ＭＯＤＡＬ ＥＤＩＴＡＲ ＵＳＵＡＲＩＯ -->
+                            <div class="modal fade" id="modalEditar{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modificar usuario</h5>
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <form action="{{route("AdminController.mod")}}" method="POST">
+                                            @csrf
+                                            <!--Para identificar la tabla -->
+                                            <input type="text" name="tabla" value="users" style="display:none" readonly>
+
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">id</label>
+                                                <input type="email" name="id" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->id}} readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Email</label>
+                                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->email}} readonly>
+                                            </div>
+                                            <div class="form-group">
+                                            <label for="exampleInputEmail1">Nombre</label>
+                                            <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->name}}>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">Apellido</label>
+                                                <input type="text" name="apellido" class="form-control" id="exampleInputPassword1" placeholder="" value={{$item->apellido}} >
+                                            </div>
+                                            <div class="form-group">
+                                            <label for="exampleInputPassword1">Contraseña</label>
+                                            <input type="text" name="password" class="form-control" id="exampleInputPassword1" placeholder="" >
+                                            </div>
+                                            <div class="row mt-3">
+                                                <div class="col-md-6"><label class="labels">Telefono</label><input type="text" class="form-control" name="telefono" value={{$item->telefono}}></div>
+                                                <div class="col-md-6"><label class="labels">Dirección</label><input type="text" class="form-control" name="direccion" value={{$item->direccion}}></div>
+                                                <div class="col-md-6"><label class="labels">Pais</label><input type="text" class="form-control" name="pais" value={{$item->pais}}></div>
+                                                <div class="col-md-6"><label class="labels">Provincia</label><input type="text" class="form-control" name="provincia" value={{$item->provincia}} ></div>
+                                                <div class="col-md-6"><label class="labels">Población</label><input type="text" class="form-control" name="poblacion" value={{$item->poblacion}} ></div>
+                                                <div class="col-md-6"><label class="labels">Código postal</label><input type="text" class="form-control" name="cod_postal" value={{$item->cod_postal}}></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                                </div>
                             </div>
-                            <div class="modal-body">
 
-                                <form action="{{route("AdminController.mod")}}" method="POST">
-                                    @csrf
-                                    <!--Para identificar la tabla -->
-                                    <input type="text" name="tabla" value="users" style="display:none" readonly>
+                        </tr>
 
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">id</label>
-                                        <input type="email" name="id" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->id}} readonly>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Email</label>
-                                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->email}} readonly>
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="exampleInputEmail1">Nombre</label>
-                                      <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->name}}>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Apellido</label>
-                                        <input type="text" name="apellido" class="form-control" id="exampleInputPassword1" placeholder="" value={{$item->apellido}} >
-                                      </div>
-                                    <div class="form-group">
-                                      <label for="exampleInputPassword1">Contraseña</label>
-                                      <input type="text" name="password" class="form-control" id="exampleInputPassword1" placeholder="" >
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col-md-6"><label class="labels">Telefono</label><input type="text" class="form-control" name="telefono" value={{$item->telefono}}></div>
-                                        <div class="col-md-6"><label class="labels">Dirección</label><input type="text" class="form-control" name="direccion" value={{$item->direccion}}></div>
-                                        <div class="col-md-6"><label class="labels">Pais</label><input type="text" class="form-control" name="pais" value={{$item->pais}}></div>
-                                        <div class="col-md-6"><label class="labels">Provincia</label><input type="text" class="form-control" name="provincia" value={{$item->provincia}} ></div>
-                                        <div class="col-md-6"><label class="labels">Población</label><input type="text" class="form-control" name="poblacion" value={{$item->poblacion}} ></div>
-                                        <div class="col-md-6"><label class="labels">Código postal</label><input type="text" class="form-control" name="cod_postal" value={{$item->cod_postal}}></div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                        <button type="submit" class="btn btn-primary">Guardar</button>
-                                    </div>
-                                  </form>
+                    @endforeach
+                
+                </tbody>
 
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-
-                </tr>
-
-                @endforeach
-
-            </tbody>
-
-        </table>
+            </table>
+        @endfor
 
         <div style="display: flex; justify-content: center;">
-            {{ $users->links() }} <!-- Para mostrar el tab con las paginas del PAGINATION -->
+            {{ $users->links() }}  <!-- Para mostrar el tab con las paginas del PAGINATION -->
         </div>
-
 
     </div>
 </div>
