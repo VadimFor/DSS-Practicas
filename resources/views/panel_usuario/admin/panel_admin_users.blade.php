@@ -163,6 +163,9 @@
                                     </div>
                                     <div class="modal-body">
 
+                                        <!-- 
+                                        █▀▄▀█ █▀█ █▀▄ █ █▀▀ █ █▀▀ ▄▀█ █▀█   █░█ █▀ █░█ ▄▀█ █▀█ █ █▀█
+                                        █░▀░█ █▄█ █▄▀ █ █▀░ █ █▄▄ █▀█ █▀▄   █▄█ ▄█ █▄█ █▀█ █▀▄ █ █▄█  -->                                      
                                         <form action="{{route("AdminController.mod")}}" method="POST">
                                             @csrf
                                             <!--Para identificar la tabla -->
@@ -170,19 +173,19 @@
 
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">id</label>
-                                                <input type="email" name="id" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->id}} readonly>
+                                                <input type="email" name="id" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$item->id}}" readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Email</label>
-                                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->email}} readonly>
+                                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$item->email}}" readonly>
                                             </div>
                                             <div class="form-group">
                                             <label for="exampleInputEmail1">Nombre</label>
-                                            <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->name}}>
+                                            <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$item->name}}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Apellido</label>
-                                                <input type="text" name="apellido" class="form-control" id="exampleInputPassword1" placeholder="" value={{$item->apellido}} >
+                                                <input type="text" name="apellido" class="form-control" id="exampleInputPassword1" placeholder="" value="{{$item->apellido}}" >
                                             </div>
                                             <div class="form-group">
                                             <label for="exampleInputPassword1">Contraseña</label>

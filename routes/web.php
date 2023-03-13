@@ -48,6 +48,11 @@ Route::post('/panelusuario-modperfil', [PerfilController::class, 'modPerfil'])->
 
 # RESTAURANTES
 Route::get('/panelusuario/restaurantes-{id}', [MisRestaurantesController::class, 'mostrar'])->name("MisRestaurantesController.mostrar");
+Route::post('/panelusuario-crear-restaurante', [MisRestaurantesController::class, 'crear'])->name("MisRestaurantesController.crear");
+Route::post('/panelusuario-mod-restaurante', [MisRestaurantesController::class, 'mod'])->name("MisRestaurantesController.mod");
+Route::get('/panelusuario-del_mi_restaurante-{id}', [MisRestaurantesController::class, 'delRestaurante'])->name("MisRestaurantesController.delRestaurante");
+Route::get('/panelusuario-sort_restaurante-{columna}', [MisRestaurantesController::class, 'sort'])->name("MisRestaurantesController.sort");
+Route::post('/panelusuario-buscar_restaurante', [MisRestaurantesController::class, 'buscar'])->name("MisRestaurantesController.buscar");
 
 # RESEÑAS
 Route::get('/panelusuario/resenyas', [ResenyasController::class, 'mostrar']);
@@ -74,7 +79,6 @@ Route::get('/panelusuario/admin', [AdminController::class, 'mostrar']);
 Route::post('/panelusuario-buscar', [AdminController::class, 'buscar'])->name("AdminController.buscar");
 
 Route::get('/panelusuario-sort-{column}', [AdminController::class, 'sort'])->name("AdminController.sort");
-
 
 Route::get('/test', function () {
     $test = "__test__";

@@ -151,7 +151,9 @@
                                 </button>
                                 </div>
                                 <div class="modal-body">
-
+                                    <!--
+                                        █▀▄▀█ █▀█ █▀▄ █ █▀▀ █ █▀▀ ▄▀█ █▀█   █▀▄▀█ █▀▀ █▄░█ █░█
+                                        █░▀░█ █▄█ █▄▀ █ █▀░ █ █▄▄ █▀█ █▀▄   █░▀░█ ██▄ █░▀█ █▄█-->
                                     <form action="{{route("AdminController.mod")}}" method="POST">
                                         @csrf
                                         <!--Para identificar la tabla -->
@@ -159,27 +161,27 @@
 
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">id</label>
-                                            <input type="text" name="id" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->id}} readonly>
+                                            <input type="text" name="id" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$item->id}}" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">nombre</label>
-                                            <input type="text" name="nombre" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->nombre}} required>
+                                            <input type="text" name="nombre" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$item->nombre}}" required>
                                         </div>
                                         <div class="form-group">
                                         <label for="exampleInputEmail1">descripcion</label>
-                                        <input type="text" name="descripcion" class="form-control" id="exampleInputEmail1" placeholder="" value={{$item->descripcion}}>
+                                        <input type="text" name="descripcion" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$item->descripcion}}">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">precio</label>
-                                            <input type="text" name="precio" class="form-control" id="exampleInputPassword1" placeholder="" value={{$item->precio}} required>
+                                            <input type="text" name="precio" class="form-control" id="exampleInputPassword1" placeholder="" value="{{$item->precio}}" required>
                                         </div>
                                         <div class="form-group">
                                         <label for="exampleInputPassword1">restaurante_id</label>
-                                        <input type="text" name="restaurante_id" class="form-control" id="exampleInputPassword1" placeholder=""  value={{$item->restaurante_id}} required>
+                                        <input type="text" name="restaurante_id" class="form-control" id="exampleInputPassword1" placeholder=""  value="{{$item->restaurante_id}}" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">img</label>
-                                            <input type="text" name="img" class="form-control" id="exampleInputPassword1" placeholder=""  value={{$item->img}}>
+                                            <input type="text" name="img" class="form-control" id="exampleInputPassword1" placeholder=""  value="{{$item->img}}">
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
