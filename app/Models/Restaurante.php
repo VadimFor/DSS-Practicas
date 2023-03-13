@@ -16,7 +16,8 @@ class Restaurante extends Model
         'direccion',
         'telefono',
         'descripcion',
-        'img'
+        'img',
+        'id_user'
     ];
 
     public function menu() {

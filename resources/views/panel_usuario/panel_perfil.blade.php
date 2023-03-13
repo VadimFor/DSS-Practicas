@@ -86,6 +86,9 @@
                 <a href="/panelusuario/perfil" id="btn_perfil" class="list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-tachometer-alt me-2"></i>Perfil</a>
 
+                <a href="{{route("MisRestaurantesController.mostrar",auth()->user()->id)}}" id="btn_restaurantes" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-project-diagram me-2"></i>Mis restaurantes</a>
+
                 <a href="/panelusuario/resenyas" id="btn_resenya" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Mis reseñas</a>
 

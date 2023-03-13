@@ -8,6 +8,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\ResenyasController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MisRestaurantesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +45,9 @@ Route::get('/logout', [LogoutController::class, 'logout']);
 # PERFIL
 Route::get('/panelusuario/perfil', [PerfilController::class, 'mostrar']);
 Route::post('/panelusuario-modperfil', [PerfilController::class, 'modPerfil'])->name("home.modperfil");
+
+# RESTAURANTES
+Route::get('/panelusuario/restaurantes-{id}', [MisRestaurantesController::class, 'mostrar'])->name("MisRestaurantesController.mostrar");
 
 # RESEÑAS
 Route::get('/panelusuario/resenyas', [ResenyasController::class, 'mostrar']);

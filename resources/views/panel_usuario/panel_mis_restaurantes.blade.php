@@ -100,14 +100,16 @@
             <a href="/panelusuario/perfil" id="btn_perfil" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                     class="fas fa-tachometer-alt me-2"></i>Perfil</a>
 
-            <a href="{{route("MisRestaurantesController.mostrar",auth()->user()->id)}}" id="btn_restaurantes" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+            <a href="{{route("MisRestaurantesController.mostrar",auth()->user()->id)}}" id="btn_restaurantes" class="list-group-item list-group-item-action bg-transparent second-text active"><i
                     class="fas fa-project-diagram me-2"></i>Mis restaurantes</a>
 
-            <a href="/panelusuario/resenyas" id="btn_resenya" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+            <a href="/panelusuario/resenyas" id="btn_resenya" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                     class="fas fa-project-diagram me-2"></i>Mis reseñas</a>
 
             <a href="/panelusuario/admin" id="btn_admin" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                     class="fas fa-project-diagram me-2"></i>Admin</a>
+
+
             <a href="/logout" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                     class="fas fa-power-off me-2"></i>Logout</a>
         </div>
@@ -149,8 +151,8 @@
 <div class="col-md-3 " style="margin: 0 auto; text-align:center;">
     <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
         <div>
-            <h3 class="fs-2">6</h3>
-            <p class="fs-5">Reseñas</p>
+            <h3 class="fs-2">{{$mis_restaurantes_cont}}</h3>
+            <p class="fs-5">Restaurantes</p>
         </div>
         <i class="fas fa-gift fs-1 primary-text border rounded-full secondary-bg p-3"></i>
     </div>
@@ -161,8 +163,6 @@
 <div class="p-5 table-responsive">
 
 <div class="container">
-
-
 
     <div class="row">
 

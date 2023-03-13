@@ -32,7 +32,8 @@ class RestauranteSeeder extends Seeder
                 'direccion' => $direcciones[$i],
                 'telefono' =>  $telefonos[$i],
                 'descripcion' => $descripciones[$i],
-                'img' => ""
+                'img' => "",
+                'id_user' => 1
             ]);
         }
 

@@ -22,6 +22,8 @@ return new class extends Migration
                 $table->integer('telefono');
                 $table->string('descripcion');
                 $table->string('img')->nullable();
+                $table->bigInteger('id_user')->unsigned();
+                $table->foreign('id_user')->references('id')->on('users');
             });
         }
     }
