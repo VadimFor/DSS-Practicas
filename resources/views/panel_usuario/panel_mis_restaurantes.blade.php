@@ -113,7 +113,7 @@
             <a href="{{route("MisRestaurantesController.mostrar",auth()->user()->id)}}" id="btn_restaurantes" class="list-group-item list-group-item-action bg-transparent second-text active"><i
                     class="fas fa-project-diagram me-2"></i>Mis restaurantes</a>
 
-            <a href="/panelusuario/resenyas" id="btn_resenya" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+            <a href="{{route("ResenyasController.mostrar",auth()->user()->id)}}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                     class="fas fa-project-diagram me-2"></i>Mis reseñas</a>
 
             <a href="/panelusuario/admin" id="btn_admin" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
@@ -160,7 +160,8 @@
         <div class="col-md-3 " style="margin: 0 auto; text-align:center;">
 
 
-        <!-- ＣＯＮＴＡＤＯＲ ＤＥ ＭＩＳ ＲＥＳＴＡＵＲＡＮＴＥＳ -->
+        <!-- █▀▀ █▀█ █▄░█ ▀█▀ ▄▀█ █▀▄ █▀█ █▀█   █▀█ █▀▀ █▀ ▀█▀ ▄▀█ █░█ █▀█ ▄▀█ █▄░█ ▀█▀ █▀▀ █▀
+             █▄▄ █▄█ █░▀█ ░█░ █▀█ █▄▀ █▄█ █▀▄   █▀▄ ██▄ ▄█ ░█░ █▀█ █▄█ █▀▄ █▀█ █░▀█ ░█░ ██▄ ▄█ -->
         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
             <div>
                 <h3 class="fs-2">{{$mis_restaurantes_cont}}</h3>

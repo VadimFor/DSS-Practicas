@@ -32,35 +32,35 @@ class ValoracionSeeder extends Seeder
             'puntuacion' => 4,
             'comentario' => ' Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem commodi laborum, aliquam sed natus labore repudiandae fugit dignissimos totam esse sunt nemo corrupti, modi magnam quasi aspernatur nihil. Ipsum, exercitationem?',
             'usuario_id' => Users::where('email','=','a@a.com')->first()->id,
-            'menu_id' => Menu::where('nombre','=','Menu degustacion')->first()->id
+            'menu_id' => Menu::where('nombre','=','Menú del día')->first()->id
         ]);
 
         DB::table('valoracion')->insertOrIgnore([
             'puntuacion' => 3,
             'comentario' => ' Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem commodi laborum, aliquam sed natus labore repudiandae fugit dignissimos totam esse sunt nemo corrupti, modi magnam quasi aspernatur nihil. Ipsum, exercitationem?',
             'usuario_id' => Users::where('email','=','a@a.com')->first()->id,
-            'menu_id' => Menu::where('nombre','=','Menu degustacion')->first()->id
+            'menu_id' => Menu::where('nombre','=','Menú vegetariano')->first()->id
         ]);
 
         DB::table('valoracion')->insertOrIgnore([
             'puntuacion' => 2,
             'comentario' => ' Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem commodi laborum, aliquam sed natus labore repudiandae fugit dignissimos totam esse sunt nemo corrupti, modi magnam quasi aspernatur nihil. Ipsum, exercitationem?',
             'usuario_id' => Users::where('email','=','a@a.com')->first()->id,
-            'menu_id' => Menu::where('nombre','=','Menu degustacion')->first()->id
+            'menu_id' => Menu::where('nombre','=','Menú para eventos')->first()->id
         ]);
 
         DB::table('valoracion')->insertOrIgnore([
             'puntuacion' => 1,
             'comentario' => ' Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem commodi laborum, aliquam sed natus labore repudiandae fugit dignissimos totam esse sunt nemo corrupti, modi magnam quasi aspernatur nihil. Ipsum, exercitationem?',
             'usuario_id' => Users::where('email','=','a@a.com')->first()->id,
-            'menu_id' => Menu::where('nombre','=','Menu degustacion')->first()->id
+            'menu_id' => Menu::where('nombre','=','Menú de mariscos')->first()->id
         ]);
 
         DB::table('valoracion')->insertOrIgnore([
             'puntuacion' => 1,
             'comentario' => ' Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem commodi laborum, aliquam sed natus labore repudiandae fugit dignissimos totam esse sunt nemo corrupti, modi magnam quasi aspernatur nihil. Ipsum, exercitationem?',
             'usuario_id' => Users::where('email','=','a@a.com')->first()->id,
-            'menu_id' => Menu::where('nombre','=','Menu degustacion')->first()->id
+            'menu_id' => Menu::where('nombre','=','Menú de carnes')->first()->id
         ]);
 
     }

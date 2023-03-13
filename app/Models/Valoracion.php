@@ -9,6 +9,9 @@ class Valoracion extends Model
 {
     use HasFactory;
     protected $table = 'valoracion';
+
+    public $timestamps = false;
+    
     public function menu(){
         return $this->belongsTo(Menu::class);
     }
