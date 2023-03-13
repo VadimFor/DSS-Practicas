@@ -69,6 +69,7 @@ Route::get('/panelusuario/admin', [AdminController::class, 'mostrar']);
 
 Route::post('/panelusuario-buscar', [AdminController::class, 'buscar'])->name("AdminController.buscar");
 
+Route::get('/panelusuario-sort-{column}', [AdminController::class, 'sort'])->name("AdminController.sort");
 
 
 Route::get('/test', function () {

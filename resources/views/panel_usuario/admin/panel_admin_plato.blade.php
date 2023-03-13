@@ -86,9 +86,13 @@
                 $arr = [session('search-plato'), $platos];
             @endphp
         @else
-            @php 
-                $arr = [$platos];
-            @endphp
+            <!--Para el ordenado según columna-->
+            @if (session('sort-platos') && session('sort-platos') != NULL)
+                <p>Resultado de la ordenación por la columna seleccionada:</p>
+                @php $arr = [session('sort-platos')]; @endphp
+            @else
+                @php $arr = [$platos];@endphp    
+            @endif
         @endif
 
         @for ($i = 0; $i < count($arr); $i++)
@@ -105,12 +109,12 @@
             @endif
 
                 <thead>
-                    <tr>
-                        <th scope="col" width="50">#</th>
-                        <th scope="col">nombre</th>
-                        <th scope="col">descripcion</th>
-                        <th scope="col">menu_id</th>
-                        <th scope="col">img</th>
+                    <tr>                       
+                        <th scope="col" width="50"><a href="{{route("AdminController.sort", 'platos-id')}}">#</a></th>
+                        <th scope="col"><a href="{{route("AdminController.sort", 'platos-nombre')}}">nombre</a></th>
+                        <th scope="col"><a href="{{route("AdminController.sort", 'platos-descripcion')}}">descripcion</a></th>
+                        <th scope="col"><a href="{{route("AdminController.sort", 'platos-menu_id')}}">menu_id</a></th>
+                        <th scope="col"><a href="{{route("AdminController.sort", 'platos-img')}}">img</a></th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">

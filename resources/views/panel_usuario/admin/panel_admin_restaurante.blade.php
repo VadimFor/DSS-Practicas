@@ -90,9 +90,13 @@
                 $arr = [session('search-restaurante'), $restaurantes];
             @endphp
         @else
-            @php 
-                $arr = [$restaurantes];
-            @endphp
+            <!--Para el ordenado según columna-->
+            @if (session('sort-restaurantes') && session('sort-restaurantes') != NULL)
+                <p>Resultado de la ordenación por la columna seleccionada:</p>
+                @php $arr = [session('sort-restaurantes')]; @endphp
+            @else
+                @php $arr = [$restaurantes];@endphp    
+            @endif
         @endif
 
         @for ($i = 0; $i < count($arr); $i++)
@@ -110,12 +114,12 @@
 
                 <thead>
                     <tr>
-                        <th scope="col" width="50">#</th>
-                        <th scope="col">nombre</th>
-                        <th scope="col">direccion</th>
-                        <th scope="col">telefono</th>
-                        <th scope="col">descripcion</th>
-                        <th scope="col">img</th>
+                        <th scope="col" width="50"><a href="{{route("AdminController.sort", 'restaurantes-id')}}">#</a></th>
+                        <th scope="col"><a href="{{route("AdminController.sort", 'restaurantes-nombre')}}">nombre</a></th>
+                        <th scope="col"><a href="{{route("AdminController.sort", 'restaurantes-direccion')}}">direccion</a></th>
+                        <th scope="col"><a href="{{route("AdminController.sort", 'restaurantes-telefono')}}">telefono</a></th>
+                        <th scope="col"><a href="{{route("AdminController.sort", 'restaurantes-descripcion')}}">descripcion</a></th>
+                        <th scope="col"><a href="{{route("AdminController.sort", 'restaurantes-img')}}">img</a></th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">

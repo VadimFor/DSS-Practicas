@@ -200,26 +200,6 @@ class AdminController extends Controller
 
     public function buscar(Request $request){
 
-        /* 1 PALABRA
-        $busqueda = $request->input('busqueda');
-
-        $search = Users::where('name', 'LIKE', "%$busqueda%")
-                    ->orWhere('email', 'LIKE', "%$busqueda%")
-                    ->orWhere('apellido', 'LIKE', "%$busqueda%")
-                    ->orWhere('telefono', 'LIKE', "%$busqueda%")
-                    ->orWhere('direccion', 'LIKE', "%$busqueda%")
-                    ->orWhere('pais', 'LIKE', "%$busqueda%")
-                    ->orWhere('provincia', 'LIKE', "%$busqueda%")
-                    ->orWhere('poblacion', 'LIKE', "%$busqueda%")
-                    ->orWhere('cod_postal', 'LIKE', "%$busqueda%")
-                    ->get();
-
-
-        return back()->with("search",$search); */
-
-
-        // 2 PALABRAS
-
          if ($request->tabla == 'users'){
 
             $keywords = explode(' ', request('busqueda-users'));
@@ -293,7 +273,38 @@ class AdminController extends Controller
             return back()->with("search-plato", $search);
     
         }
+    }
 
+
+    public function sort($tablacolumna){
+
+        if (strpos($tablacolumna, 'users') !== false){
+            $aux = str_replace('users-', "", $tablacolumna);
+            $columna_ordenada = DB::table('users')->orderBy($aux)->get();
+
+            return back()->with("sort-users", $columna_ordenada);
+
+        }elseif(strpos($tablacolumna, 'restaurantes') !== false){
+
+            $aux = str_replace('restaurantes-', "", $tablacolumna);
+            $columna_ordenada = DB::table('restaurante')->orderBy($aux)->get();
+
+            return back()->with("sort-restaurantes", $columna_ordenada);
+
+        }elseif(strpos($tablacolumna, 'menus') !== false){
+
+            $aux = str_replace('menus-', "", $tablacolumna);
+            $columna_ordenada = DB::table('menu')->orderBy($aux)->get();
+
+            return back()->with("sort-menus", $columna_ordenada);
+
+        }elseif(strpos($tablacolumna, 'platos') !== false){
+
+            $aux = str_replace('platos-', "", $tablacolumna);
+            $columna_ordenada = DB::table('plato')->orderBy($aux)->get();
+
+            return back()->with("sort-platos", $columna_ordenada);
+        }
     }
     
 }

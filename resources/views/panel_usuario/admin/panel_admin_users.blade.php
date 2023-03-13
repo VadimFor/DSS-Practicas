@@ -73,7 +73,7 @@
             @csrf
             <div class="input-group mb-3">
                 <input type="text" name="tabla" value="users" style="display:none" readonly><!--Para identificar la tabla -->
-                <input type="text" name="busqueda-users" class="form-control" placeholder="Buscar usuario" aria-label="Buscar usuario">
+                <input type="text" name="busqueda-users" class="form-control" placeholder="Buscar usuarios" aria-label="Buscar usuarios">
                 <button class="btn btn-outline-secondary" type="submit">Buscar</button>
             </div>
         </form>
@@ -87,21 +87,26 @@
                 $arr = [session('search-users'), $users];
             @endphp
         @else
-            @php 
-                $arr = [$users];
-            @endphp
+
+            <!--Para el ordenado según columna-->
+            @if (session('sort-users') && session('sort-users') != NULL)
+                <p>Resultado de la ordenación por la columna seleccionada:</p>
+                @php $arr = [session('sort-users')]; @endphp
+            @else
+                @php $arr = [$users];@endphp    
+            @endif
+
         @endif
 
         @for ($i = 0; $i < count($arr); $i++)
             
-            <!-- CAMBIAR COLOR DE LA TABLA DE BÚSQUEDAS-->
-            @if(count($arr) == 2)
+            @if(count($arr) == 2) <!--Si hay 2 tablas, 1 de ella de la búsqueda -->
                 @if($i == 0) 
                 <table class="table bg-white rounded shadow-sm table-bordered table-hover table-info ">
                 @else
                 <table class="table bg-white rounded shadow-sm table-bordered table-hover">
                 @endif
-            @else
+            @else <!--Si no hay tabla de búsqueda -->
                 <table class="table bg-white rounded shadow-sm table-bordered table-hover">
             @endif 
 
@@ -112,17 +117,17 @@
 
                 <thead>
                     <tr>
-                        <th scope="col" width="50">#</th>
-                        <th scope="col">email</th>
-                        <th scope="col">password</th>
-                        <th scope="col">nombre</th>
-                        <th scope="col">apellido</th>
-                        <th scope="col">telefono</th>
-                        <th scope="col">direccion</th>
-                        <th scope="col">pais</th>
-                        <th scope="col">provincia</th>
-                        <th scope="col">poblacion</th>
-                        <th scope="col">cod_postal</th>
+                        <th scope="col" width="50"><a href="{{route("AdminController.sort", 'users-id')}}">#</a></th>
+                        <th scope="col"><a href="{{route("AdminController.sort", 'users-email')}}">email</a></th>
+                        <th scope="col"><a href="{{route("AdminController.sort", 'users-password')}}">password</a></th>
+                        <th scope="col"><a href="{{route("AdminController.sort", 'users-name')}}">nombre</a></th>
+                        <th scope="col"><a href="{{route("AdminController.sort", 'users-apellido')}}">apellido</a></th>
+                        <th scope="col"><a href="{{route("AdminController.sort", 'users-telefono')}}">telefono</a></th>
+                        <th scope="col"><a href="{{route("AdminController.sort", 'users-direccion')}}">direccion</a></th>
+                        <th scope="col"><a href="{{route("AdminController.sort", 'users-pais')}}">pais</a></th>
+                        <th scope="col"><a href="{{route("AdminController.sort", 'users-provincia')}}">provincia</a></th>
+                        <th scope="col"><a href="{{route("AdminController.sort", 'users-poblacion')}}">poblacion</a></th>
+                        <th scope="col"><a href="{{route("AdminController.sort", 'users-cod_postal')}}">cod_postal</a></th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
