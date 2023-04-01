@@ -17,11 +17,16 @@ class Restaurante extends Model
         'telefono',
         'descripcion',
         'img',
-        'id_user'
+        'users_id'
     ];
 
     public function menu() {
-        return $this->hasOne(Menu::class);
+        return $this->hasMany(Menu::class);
+    }
+
+    public function usuario()
+    {
+        return $this->belongsTo(Users::class,'users_id');
     }
     
 }

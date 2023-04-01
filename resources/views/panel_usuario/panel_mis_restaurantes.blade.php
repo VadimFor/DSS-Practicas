@@ -79,6 +79,51 @@
             font-size: 1rem;
         }
 
+        .iconos {
+            display: inline-block;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-size:75% 75%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-clip: padding-box;
+            text-align:center;
+            background-position-x: center;
+            background-position-y: center;   
+        }
+
+        .stylemain{
+            background-size: 75% 75%;
+            text-align:center;
+            background-position-x: center;
+            background-position-y: center;
+            background-repeat: no-repeat;
+            width: 30px;
+            height: 30px;
+            padding: 16px;
+        }
+
+        .icon-cuchillotenedor{background-image: url('/icons/icon-fork.svg');}
+
+
+        .styleiconos{
+            width: 30px;
+            height: 30px;
+            background-size: 75% 75%;
+            background-repeat: no-repeat;
+            color: white;
+            text-align:center;
+            background-position-x: center;
+            background-position-y: center;
+        }
+
+       .icon-basura{background-image: url('/icons/icon-basura.svg');}
+       .icon-editar{background-image: url('/icons/icon-editar.svg');}
+       .icon-main{background-image: url('/icons/icon-main.svg');}
+
+        
+
     </style>
 
     <script src="https://kit.fontawesome.com/646ac4fad6.js" crossorigin="anonymous"></script>
@@ -103,7 +148,7 @@
         ░█▄▄▄█ ▀▀▀ ▀▀▀─ ▀▀▀ ░█▄▄█ ▀  ▀ ▀ ▀▀-->
     <div class="bg-white" id="sidebar-wrapper">
         <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold border-bottom"><i
-                class="bx bx-bowl-hot"></i><a href="/"class=" text-success">FudRater</a></div>
+                class="stylemain icon-main"></i><a href="/"class=" text-success">FudRater</a></div>
         <div class="list-group list-group-flush my-3">
 
 
@@ -167,7 +212,7 @@
                 <h3 class="fs-2">{{$mis_restaurantes_cont}}</h3>
                 <p class="fs-5">Restaurantes</p>
             </div>
-            <i class="fas fa-gift fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+            <div class="primary-text secondary-bg iconos icon-cuchillotenedor" ></div>
         </div>
     </div>
 
@@ -300,9 +345,11 @@
                     <td>{{$item->telefono}}</td>
                     <td>{{$item->descripcion}}</td>
                     <td>{{$item->img}}</td>
-                    <td>
-                        <a href=""  data-bs-toggle="modal" data-bs-target="#modalEditarRestaurante{{$item->id}}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="{{route("MisRestaurantesController.delRestaurante",$item->id)}}" onclick="res('{{$item->nombre}}')"  class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
+                    <td> <!--
+                        █▀▀ █░░ █ █▀▄▀█ █ █▄░█ ▄▀█ █▀█   █▀█ █▀▀ █▀ ▀█▀ ▄▀█ █░█ █▀█ ▄▀█ █▄░█ ▀█▀ █▀▀ █▀
+                        ██▄ █▄▄ █ █░▀░█ █ █░▀█ █▀█ █▀▄   █▀▄ ██▄ ▄█ ░█░ █▀█ █▄█ █▀▄ █▀█ █░▀█ ░█░ ██▄ ▄█-->
+                        <a href=""  data-bs-toggle="modal" data-bs-target="#modalEditarRestaurante{{$item->id}}" class="btn btn-warning btn-sm styleiconos icon-editar"></a>
+                        <a href="{{route("MisRestaurantesController.delRestaurante",$item->id)}}" onclick="res('{{$item->nombre}}')"  class="btn btn-danger btn-sm styleiconos icon-basura"></a>
                     </td>
 
                     <!-- Modal de modificar datos de la tabla-->

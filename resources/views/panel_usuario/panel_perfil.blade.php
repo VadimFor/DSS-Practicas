@@ -65,9 +65,20 @@
             #wrapper.toggled #sidebar-wrapper {margin-left: -15rem;}
         }
 
-    </style>
+        .stylemain{
+            background-size: 75% 75%;
+            text-align:center;
+            background-position-x: center;
+            background-position-y: center;
+            background-repeat: no-repeat;
+            width: 30px;
+            height: 30px;
+            padding: 16px;
+        }
 
-    <script src="https://kit.fontawesome.com/646ac4fad6.js" crossorigin="anonymous"></script>
+        .icon-main{background-image: url('/icons/icon-main.svg');}
+
+    </style>
 
 </head>
 
@@ -76,10 +87,12 @@
 
     <div class="d-flex" id="wrapper">
 
-        <!-- Sidebar -->
+    <!--░█▀▀▀█ ─▀─ █▀▀▄ █▀▀ ░█▀▀█ █▀▀█ █▀▀█ 
+        ─▀▀▀▄▄ ▀█▀ █──█ █▀▀ ░█▀▀▄ █▄▄█ █▄▄▀ 
+        ░█▄▄▄█ ▀▀▀ ▀▀▀─ ▀▀▀ ░█▄▄█ ▀  ▀ ▀ ▀▀-->
         <div class="bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold border-bottom"><i
-                    class="bx bx-bowl-hot"></i><a href="/"class=" text-success">FudRater</a></div>
+                    class="stylemain icon-main"></i><a href="/"class=" text-success">FudRater</a></div>
             <div class="list-group list-group-flush my-3">
 
 
@@ -140,7 +153,7 @@
     <div class="row">
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                <img class="rounded-circle mt-5" width="150px" src="{{'/img/perfil.png'}}">
                 <span class="font-weight-bold">{{auth()->user()->name}} {{auth()->user()->apellido}}</span>
                 <span class="text-black-50">{{auth()->user()->email}}</span>
                 <span> </span>

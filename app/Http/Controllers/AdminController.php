@@ -11,6 +11,7 @@ use App\Models\Restaurante;
 use App\Models\Menu;
 use App\Models\Plato;
 use App\Models\Users;
+use App\Models\Valoracion;
 use Illuminate\Pagination\Paginator;
 
 
@@ -18,7 +19,26 @@ use Illuminate\Pagination\Paginator;
 class AdminController extends Controller
 {
 
+    //METODO PARA MOSTRAR LAS TABLAS DE ADMIN EL LA HOME PAGE DE LA WEB (requerido entrega_2)
+    public function mostrar_entrega2(){
 
+        $users =  Users::paginate(5, ['*'], 'users');//DB::select('select * from users');
+        $restaurantes = Restaurante::paginate(5, ['*'], 'restaurantes'); //DB::select('select * from restaurante');
+        $menus = Menu::paginate(5, ['*'], 'menus');//DB::select('select * from menu');
+        $platos = Plato::paginate(5, ['*'], 'platos');//B::select('select * from plato');
+        $valoraciones = Valoracion::paginate(5, ['*'], 'valoraciones');//B::select('select * from plato');
+
+        $users_cont = count(Users::all());
+        $menu_cont = count(Menu::all());
+        $plato_cont = count(Plato::all());
+        $restaurante_cont = count(Restaurante::all());
+        $valoracion_cont = count(DB::select('select * from valoracion'));
+
+        return view('entrega2')->with("users",$users)->with("users_cont",$users_cont)->with("menu_cont",$menu_cont)->with("plato_cont",$plato_cont)
+        ->with("restaurante_cont",$restaurante_cont)->with("valoracion_cont",$valoracion_cont)->with("restaurantes",$restaurantes)->with("menus",$menus)->with("platos",$platos)
+        ->with("valoraciones",$valoraciones);
+
+    }
 
     public function mostrar(){
 
@@ -30,6 +50,7 @@ class AdminController extends Controller
             $restaurantes = Restaurante::paginate(5, ['*'], 'restaurantes'); //DB::select('select * from restaurante');
             $menus = Menu::paginate(5, ['*'], 'menus');//DB::select('select * from menu');
             $platos = Plato::paginate(5, ['*'], 'platos');//B::select('select * from plato');
+            $valoraciones = Valoracion::paginate(5, ['*'], 'valoraciones');//B::select('select * from plato');
 
             $users_cont = count(Users::all());
             $menu_cont = count(Menu::all());
@@ -39,7 +60,8 @@ class AdminController extends Controller
             //error_log(json_encode($users));
 
         return view('panel_usuario/panel_admin')->with("users",$users)->with("users_cont",$users_cont)->with("menu_cont",$menu_cont)->with("plato_cont",$plato_cont)
-        ->with("restaurante_cont",$restaurante_cont)->with("valoracion_cont",$valoracion_cont)->with("restaurantes",$restaurantes)->with("menus",$menus)->with("platos",$platos);
+        ->with("restaurante_cont",$restaurante_cont)->with("valoracion_cont",$valoracion_cont)->with("restaurantes",$restaurantes)->with("menus",$menus)->with("platos",$platos)
+        ->with("valoraciones",$valoraciones);
         }else{
             return redirect('/login');
         }
@@ -47,41 +69,65 @@ class AdminController extends Controller
 
     public function crear(Request $request){
 
+        $validatedData = [];
         try{
             if ($request->tabla == 'users'){
                 if($request->email == ""){ return back()->with("incorrecto","Error al crear usuario, el email no puede ser vacio.");}
-                //FORMA ALTERNATIVA: $sql=DB::insert("Insert into users(name,email,password) values(?,?,?)", [$request->name,$request->email,bcrypt($request->password)] );
+
+                $validatedData = $request->validate([
+                    'name' => 'string|max:255',
+                    'email' => 'required|string|email|min:5|max:30|unique:users',
+                    'password' => 'required|string|min:4|max:50',
+                    'password_confirmation' => 'required|string|min:4|max:50|same:password'
+                ]);
+                $validatedData['password'] = bcrypt($validatedData['password']);
+
+                /*
                 Users::create([
                     'name' => $request->name,
                     'email' => $request->email,
                     'password' => bcrypt($request->password),
-                ]);
+                ]);*/
+                Users::create($validatedData);
+
             }elseif($request->tabla == 'restaurante'){
-                //$sql=DB::insert("Insert into restaurante(nombre,direccion,telefono,descripcion,img) values(?,?,?,?,?)", [$request->nombre,$request->direccion,$request->telefono,$request->descripcion,$request->img] );
-                Restaurante::create([
-                    'nombre' => $request->nombre,
-                    'direccion' => $request->direccion,
-                    'telefono' => $request->telefono,
-                    'descripcion' => $request->descripcion,
-                    'img' => $request->img
+                $validatedData = $request->validate([
+                    'nombre' => 'required|string|max:50',
+                    'direccion' => 'required|string|max:100',
+                    'telefono' => 'required|string|min:9|max:9',
+                    'descripcion' => 'required|string|max:500',
+                    'users_id' => 'required|integer|exists:users,id',
+                    'img' => 'nullable|image',
                 ]);
+                Restaurante::create($validatedData);
+
             }elseif($request->tabla == 'menu'){
-                //$sql=DB::insert("Insert into menu(nombre,descripcion,precio,restaurante_id,img) values(?,?,?,?,?)", [$request->nombre,$request->descripcion,$request->precio,$request->restaurante_id,$request->img] );
-                Menu::create([
-                    'nombre' => $request->nombre,
-                    'descripcion' => $request->descripcion,
-                    'precio' => $request->precio,
-                    'restaurante_id' => $request->restaurante_id,
-                    'img' => $request->img
+                $validatedData = $request->validate([
+                    'nombre' => 'required|string|max:30',
+                    'descripcion' => 'string|max:500',
+                    'precio' => 'required|numeric',
+                    'restaurante_id' => 'required|integer|exists:restaurante,id',
+                    'img' => 'nullable|image',
                 ]);
+                Menu::create($validatedData);
+
             }elseif($request->tabla == 'plato'){
-                //$sql=DB::insert("Insert into plato(nombre,descripcion,menu_id,img) values(?,?,?,?)", [$request->nombre,$request->descripcion,$request->menu_id,$request->img]);  
-                Plato::create([
-                    'nombre' => $request->nombre,
-                    'descripcion' => $request->descripcion,
-                    'menu_id' => $request->menu_id,
-                    'img' => $request->img
-                ]);     
+                $validatedData = $request->validate([
+                    'nombre' => 'required|string|max:50',
+                    'descripcion' => 'required|string|max:500',
+                    'menu_id' => 'required|integer|exists:menu,id',
+                    'img' => 'nullable|image',
+                ]);  
+                Plato::create($validatedData);
+ 
+            }elseif($request->tabla == 'valoracion'){
+                $validatedData = $request->validate([
+                    'puntuacion' => 'required|integer|between:1,5',
+                    'comentario' => 'string|max:500',
+                    'menu_id' => 'required|integer|exists:menu,id',
+                    'users_id' => 'required|integer|exists:users,id',
+                ]);   
+                Valoracion::create($validatedData);
             }
 
             $sql=1;
@@ -95,36 +141,65 @@ class AdminController extends Controller
 
     public function mod(Request $request){
 
+        $validatedData = [];
         try{
 
             if ($request->tabla == 'users'){
-                //FORMA ALTERNATIVA: $sql=DB::update("Update users set password=?, name=?, apellido=?, telefono=?, direccion=?,pais=?,provincia=?,poblacion=?,cod_postal=? where email=?",[bcrypt($request->password), $request->name,$request->apellido,$request->telefono,$request->direccion,$request->pais,$request->provincia, $request->poblacion,$request->cod_postal , $request->email]);
-                Users::where('email', $request->email)
-                    ->update([
-                        'password' => bcrypt($request->password),
-                        'name' => $request->name,
-                        'apellido' => $request->apellido,
-                        'telefono' => $request->telefono,
-                        'direccion' => $request->direccion,
-                        'pais' => $request->pais,
-                        'provincia' => $request->provincia,
-                        'poblacion' => $request->poblacion,
-                        'cod_postal' => $request->cod_postal
-                    ]);
+
   
+                $request->validate([
+                    'name' => 'max:255',
+                    'password' => 'required|string|min:4|max:50',
+                    'apellido' => 'string|max:50',
+                    'telefono' =>'string|between:9,9',
+                    'direccion' => 'string|max:50',
+                    'pais' => 'string|max:50',
+                    'provincia' => 'string|max:50',
+                    'poblacion' =>'string|max:50',
+                    'cod_postal' => 'string|max:50'
+                ]);
+
+                Users::where('email', $request->email)
+                ->update([
+                    'password' => bcrypt($request->password),
+                    'name' => $request->name,
+                    'apellido' => $request->apellido,
+                    'telefono' => $request->telefono,
+                    'direccion' => $request->direccion,
+                    'pais' => $request->pais,
+                    'provincia' => $request->provincia,
+                    'poblacion' => $request->poblacion,
+                    'cod_postal' => $request->cod_postal
+                ]);
+
             }elseif($request->tabla == 'restaurante'){
-                //$sql=DB::update("Update restaurante set nombre=?, direccion=?, telefono=?, descripcion=?, img=? where id=?",[$request->nombre,$request->direccion,$request->telefono,$request->descripcion,$request->img, $request->id]);
+
+                $request->validate([
+                    'nombre' => 'required|string|max:50',
+                    'direccion' => 'required|string|max:100',
+                    'telefono' => 'required|string|min:9|max:9',
+                    'descripcion' => 'required|string|max:500',
+                    'users_id' => 'required|integer|exists:users,id',
+                    'img' => 'nullable|image',
+                ]);
                 Restaurante::where('id', $request->id)
                    ->update([
                         'nombre' => $request->nombre,
                         'direccion' => $request->direccion,
                         'telefono' => $request->telefono,
                         'descripcion' => $request->descripcion,
+                        'users_id' => $request->users_id,
                         'img' => $request->img
                     ]);
 
             }elseif($request->tabla == 'menu'){
-                //$sql=DB::update("Update users set nombre=?, descripcion=?, precio=?, restaurante_id=?, img=? where id=?",[$request->nombre,$request->descripcion,$request->precio,$request->restaurante_id,$request->img, $request->id]);
+                $request->validate([
+                    'nombre' => 'required|string|max:30',
+                    'descripcion' => 'string|max:500',
+                    'precio' => 'required|numeric',
+                    'restaurante_id' => 'required|integer|exists:restaurante,id',
+                    'img' => 'nullable|image',
+                ]);
                 Menu::where('id', $request->id)
                     ->update([
                         'nombre' => $request->nombre,
@@ -134,7 +209,12 @@ class AdminController extends Controller
                         'img' => $request->img
                     ]);
             }elseif($request->tabla == 'plato'){
-                //$sql=DB::update("Update users set nombre=?, descripcion=?, img=?, menu_id=? where id=?",[$request->nombre,$request->descripcion,$request->img , $request->id]);
+                $request->validate([
+                    'nombre' => 'required|string|max:50',
+                    'descripcion' => 'required|string|max:500',
+                    'menu_id' => 'required|integer|exists:menu,id',
+                    'img' => 'nullable|image',
+                ]);  
                 Plato::where('id', $request->id)
                     ->update([
                         'nombre' => $request->nombre,
@@ -142,6 +222,20 @@ class AdminController extends Controller
                         'img' => $request->img,
                         'menu_id' => $request->menu_id
                     ]);
+            }elseif($request->tabla == 'valoracion'){
+                $request->validate([
+                    'puntuacion' => 'required|integer|between:1,5',
+                    'comentario' => 'string|max:500',
+                    'menu_id' => 'required|integer|exists:menu,id',
+                    'users_id' => 'required|integer|exists:users,id',
+                ]);  
+                Valoracion::where('id', $request->id)
+                ->update([
+                    'puntuacion' => $request->puntuacion,
+                    'comentario' => $request->comentario,
+                    'menu_id' => $request->menu_id,
+                    'users_id' => $request->users_id
+                ]);
             }
             $sql = 1;
 
@@ -160,7 +254,7 @@ class AdminController extends Controller
         }catch(\Throwable $th){ $sql = 0;}
 
         if($sql == true){ return back()->with("correcto","Restaurante $id eliminado correctamente");}
-        else{ return back()->with("incorrecto","Error, restaurante $id no eliminado");}
+        else{ return back()->with("incorrecto","Error, restaurante $id no eliminado (revisa las dependencias con otras tablas)");}
     }
    
     //ＭＥＮＵＳ
@@ -171,7 +265,7 @@ class AdminController extends Controller
         }catch(\Throwable $th){ $sql = 0;}
 
         if($sql == true){ return back()->with("correcto","Menu $id eliminado correctamente");}
-        else{ return back()->with("incorrecto","Error, menu $id no eliminado");}
+        else{ return back()->with("incorrecto","Error, menu $id no eliminado (revisa las dependencias con otras tablas)");}
     }
 
     //ＰＬＡＴＯＳ
@@ -181,7 +275,7 @@ class AdminController extends Controller
         }catch(\Throwable $th){ $sql = 0;}
 
         if($sql == true){ return back()->with("correcto","Plato $id eliminado correctamente");}
-        else{ return back()->with("incorrecto","Error, plato $id no eliminado");}
+        else{ return back()->with("incorrecto","Error, plato $id no eliminado (revisa las dependencias con otras tablas)");}
 
     } 
     
@@ -192,10 +286,19 @@ class AdminController extends Controller
         }catch(\Throwable $th){ $sql = 0;}
 
         if($sql == true){ return back()->with("correcto","Usuario $email eliminado correctamente");}
-        else{ return back()->with("incorrecto","Error, usuario $email no eliminado");}
+        else{ return back()->with("incorrecto","Error, usuario $email no eliminado (revisa las dependencias con otras tablas)");}
     }
 
 
+    //ＶＡＬＯＲＡＣＩＯＮＥＳ
+    public function delValoracion($id){
+        error_log("Eliminando a valoración " . $id);
+        try{ $sql=DB::delete("delete from valoracion where id='$id'");
+        }catch(\Throwable $th){ $sql = 0;}
+
+        if($sql == true){ return back()->with("correcto","Valoración $id eliminado correctamente");}
+        else{ return back()->with("incorrecto","Error, valoracion $id no eliminado (revisa las dependencias con otras tablas)");}
+    }
 
 
     public function buscar(Request $request){
@@ -271,7 +374,19 @@ class AdminController extends Controller
             })->get();
         
             return back()->with("search-plato", $search);
-    
+
+        }elseif($request->tabla == 'valoracion'){
+
+            $keywords = explode(' ', request('busqueda-valoracion'));
+
+            $search = DB::table('valoracion')->where(function ($query) use ($keywords) {
+                foreach ($keywords as $keyword) {
+                    $query->orWhere('puntuacion', 'LIKE', "%$keyword%")
+                        ->orWhere('comentario', 'LIKE', "%$keyword%");
+                }
+            })->get();
+        
+            return back()->with("search-valoracion", $search);
         }
     }
 
@@ -304,6 +419,13 @@ class AdminController extends Controller
             $columna_ordenada = DB::table('plato')->orderBy($aux)->get();
 
             return back()->with("sort-platos", $columna_ordenada);
+
+        }elseif(strpos($tablacolumna, 'valoraciones') !== false){
+
+            $aux = str_replace('valoraciones-', "", $tablacolumna);
+            $columna_ordenada = DB::table('valoracion')->orderBy($aux)->get();
+
+            return back()->with("sort-valoraciones", $columna_ordenada);
         }
     }
     

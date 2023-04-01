@@ -20,7 +20,7 @@ class Menu extends Model
     ];
 
     public function restaurante(){
-        return $this->belongsTo(Restaurante::class);
+        return $this->belongsTo(Restaurante::class,'restaurante_id');
     }
     public function valoracion() {
         return $this->hasMany(Valoracion::class);

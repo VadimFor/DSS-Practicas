@@ -17,12 +17,14 @@ return new class extends Migration
         if (!Schema::hasTable('valoracion')) {
             Schema::create('valoracion', function (Blueprint $table) {
                 $table->id();
-                $table->bigInteger('usuario_id')->unsigned();
-                $table->foreign('usuario_id')->references('id')->on('users');
+                $table->bigInteger('users_id')->unsigned();
+                $table->foreign('users_id')->references('id')->on('users');
                 $table->bigInteger('menu_id')->unsigned();
                 $table->foreign('menu_id')->references('id')->on('menu');
                 $table->integer('puntuacion')->default(0);
                 $table->string('comentario')->nullable();
+
+                $table->unique(['users_id', 'menu_id']); //para que no se pueda tener varios comentarios pal mismo menu
             });
         }
     }

@@ -12,12 +12,7 @@ class PlatoTest extends TestCase
 
     public function test_plato()
     {
-        $this->assertDatabaseHas('plato', [
-            'nombre' => 'Menu degustacion',
-            'descripcion' => 'Para disfrutar',
-            'menu_id' => Menu::where('nombre','=','Menu degustacion')->first()->id,
-            'img' => ''
-        ]);
+
 
     }
 

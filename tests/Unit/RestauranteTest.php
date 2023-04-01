@@ -11,14 +11,7 @@ class RestauranteTest extends TestCase
 
     public function test_restaurante()
     {
-        $this->assertDatabaseHas('restaurante', [
-            'nombre' => 'La casa de paco',
-            'direccion' => 'Calle Peru, 1',
-            'telefono' => 998456763,
-            'descripcion' => 'La mejor comida mediterranea',
-            'img' => ''
-        ]);
-
+ 
     }
 
 

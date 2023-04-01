@@ -19,6 +19,6 @@ class Plato extends Model
     ];
 
     public function menu(){
-        return $this->belongsTo(Menu::class);
+        return $this->hasMany(Menu::class);
     }
 }

@@ -22,9 +22,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+//ENTREGA_2
+Route::get('/', [AdminController::class, 'mostrar_entrega2']);
+
+//ENTREGA_3 (descomentar y borrar lo de la entrega 2)
+//Route::get('/', function () {return view('welcome');});
 
 
 # ＯＰＥＲＡＣＩＯＮＥＳ ＤＥ ＵＳＵＡＲＩＯ
@@ -77,6 +81,8 @@ Route::get('/panelusuario/admin', [AdminController::class, 'mostrar']);
     //PLATO
     Route::get('/panelusuario-delplato-{id}', [AdminController::class, 'delPlato'])->name("AdminController.delPlato");
 
+    //PLATO
+    Route::get('/panelusuario-delvaloracion-{id}', [AdminController::class, 'delValoracion'])->name("AdminController.delValoracion");
 
 Route::post('/panelusuario-buscar', [AdminController::class, 'buscar'])->name("AdminController.buscar");
 

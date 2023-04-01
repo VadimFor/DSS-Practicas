@@ -78,10 +78,36 @@
         .fa-quote-left{
             font-size: 1rem;
         }
+        .iconos {
+            display: inline-block;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-size:75% 75%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-clip: padding-box;
+            text-align:center;
+            background-position-x: center;
+            background-position-y: center;
+            
+            }
+
+        .stylemain{
+            background-size: 75% 75%;
+            text-align:center;
+            background-position-x: center;
+            background-position-y: center;
+            background-repeat: no-repeat;
+            width: 30px;
+            height: 30px;
+            padding: 16px;
+        }
+
+        .icon-main{background-image: url('/icons/icon-main.svg');}
+        .icon-comentarios{background-image: url('/icons/icon-comentarios.svg');}
 
     </style>
-
-    <script src="https://kit.fontawesome.com/646ac4fad6.js" crossorigin="anonymous"></script>
 
     <script>
         var res=function($nombre){
@@ -101,7 +127,7 @@
         ▄█ █ █▄▀ ██▄ █▄█ █▀█ █▀▄-->
     <div class="bg-white" id="sidebar-wrapper">
         <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold border-bottom"><i
-                class="bx bx-bowl-hot"></i><a href="/"class=" text-success">FudRater</a></div>
+                class="stylemain icon-main"></i><a href="/"class=" text-success">FudRater</a></div>
         <div class="list-group list-group-flush my-3">
 
 
@@ -163,7 +189,7 @@
                     <h3 class="fs-2">{{$mis_resenyas_cont}}</h3>
                     <p class="fs-5">Reseñas</p>
                 </div>
-                <i class="fas fa-gift fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                <div class="primary-text secondary-bg iconos icon-comentarios" ></div>
             </div>
         </div>
 
@@ -229,7 +255,7 @@
                                         </blockquote>
                                     </div>
                                     <a href=""  data-bs-toggle="modal" data-bs-target="#modalEditarReseña{{$item->id}}" class="btn btn-primary fw-bold"> Editar</a>
-                                    <a href="{{route("ResenyasController.delResenya",$item->id)}}" onclick="res('{{$item->menu_nombre}}')"  class="btn btn-danger btn-sm"> Eliminar</a>
+                                    <a href="{{route("ResenyasController.delResenya",$item->id)}}" onclick="return res('{{$item->menu_nombre}}')"  class="btn btn-danger btn-sm"> Eliminar</a>
 
                                     <!--█▀▄▀█ █▀█ █▀▄ █ █▀▀ █ █▀▀ ▄▀█ █▀█   █▀█ █▀▀ █▀ █▀▀ █▄░█ ▄▀█
                                         █░▀░█ █▄█ █▄▀ █ █▀░ █ █▄▄ █▀█ █▀▄   █▀▄ ██▄ ▄█ ██▄ █░▀█ █▀█-->

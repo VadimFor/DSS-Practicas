@@ -14,13 +14,16 @@
         }
     </script>
 
-    <h3 class="fs-4 mb-3">Platos</h3>
+    <div class="text-center">
+        <h3 class="fs-4 mb-3">Platos</h3>
+    </div>
 
     <div class="p-5 table-responsive">
 
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearPlato">Crear plato</button>
 
-        <!-- Modal de crear usuario-->
+        <!-- █▀▀ █▀█ █▀▀ ▄▀█ █▀█   █▀█ █░░ ▄▀█ ▀█▀ █▀█
+             █▄▄ █▀▄ ██▄ █▀█ █▀▄   █▀▀ █▄▄ █▀█ ░█░ █▄█-->
         <div class="modal fade" id="modalCrearPlato" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -68,7 +71,9 @@
         ─░█── ░█▄▄█ ░█▀▀▄ ░█─── ░█▄▄█ 
         ─░█── ░█─░█ ░█▄▄█ ░█▄▄█ ░█─░█
         -->
-
+        <!--
+        █▄▄ █░█ █▀ █▀▀ ▄▀█ █▀█   █▀█ █░░ ▄▀█ ▀█▀ █▀█
+        █▄█ █▄█ ▄█ █▄▄ █▀█ █▀▄   █▀▀ █▄▄ █▀█ ░█░ █▄█-->
         <form action="{{ route('AdminController.buscar') }}" method="POST">
             @csrf
             <div class="input-group mb-3">
@@ -127,11 +132,13 @@
                         <td>{{$item->descripcion}}</td>
                         <td>{{$item->menu_id}}</td>
                         <td>{{$item->img}}</td>
-                        <td>
-                            <a href=""  data-bs-toggle="modal" data-bs-target="#modalEditarPlato{{$item->id}}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="{{route("AdminController.delPlato",$item->id)}}" onclick="res('{{$item->nombre}}')"  class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
+                        <td> <!--
+                            █▀▀ █░░ █ █▀▄▀█ █ █▄░█ ▄▀█ █▀█   █▀█ █░░ ▄▀█ ▀█▀ █▀█
+                            ██▄ █▄▄ █ █░▀░█ █ █░▀█ █▀█ █▀▄   █▀▀ █▄▄ █▀█ ░█░ █▄█-->
+                            <a href=""  data-bs-toggle="modal" data-bs-target="#modalEditarPlato{{$item->id}}" class="btn btn-warning btn-sm styleiconos icon-editar"></a>
+                            <a href="{{route("AdminController.delPlato",$item->id)}}" onclick="return res('{{$item->nombre}}')"  class="btn btn-danger btn-sm styleiconos icon-basura"></a>
                         </td>
-
+                        
                         <!-- Modal de modificar datos de la tabla-->
                         <div class="modal fade" id="modalEditarPlato{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">

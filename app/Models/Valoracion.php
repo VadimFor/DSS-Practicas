@@ -11,11 +11,18 @@ class Valoracion extends Model
     protected $table = 'valoracion';
 
     public $timestamps = false;
+
+    protected $fillable = [
+        'users_id',
+        'menu_id',
+        'comentario',
+        'puntuacion'
+    ];
     
     public function menu(){
-        return $this->belongsTo(Menu::class);
+        return $this->belongsTo(Menu::class,'menu_id');
     }
     public function usuario(){
-        return $this->belongsTo(Usuario::class);
+        return $this->belongsTo(Users::class,'users_id');
     }
 }

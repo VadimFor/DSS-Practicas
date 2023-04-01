@@ -14,13 +14,17 @@
         }
     </script>
 
-    <h3 class="fs-4 mb-3">Menus</h3>
+
+    <div class="text-center">
+        <h3 class="fs-4 mb-3">Menus</h3>
+    </div>
 
     <div class="p-5 table-responsive">
 
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearMenu">Crear menu</button>
 
-        <!-- Modal de crear usuario-->
+        <!-- █▀▀ █▀█ █▀▀ ▄▀█ █▀█   █▀▄▀█ █▀▀ █▄░█ █░█
+             █▄▄ █▀▄ ██▄ █▀█ █▀▄   █░▀░█ ██▄ █░▀█ █▄█-->
         <div class="modal fade" id="modalCrearMenu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -73,13 +77,15 @@
         ─░█── ░█▄▄█ ░█▀▀▄ ░█─── ░█▄▄█ 
         ─░█── ░█─░█ ░█▄▄█ ░█▄▄█ ░█─░█
         -->
-
-        <form action="{{ route('AdminController.buscar') }}" method="POST">
+        <!--
+        █▄▄ █░█ █▀ █▀▀ ▄▀█ █▀█   █▀▄▀█ █▀▀ █▄░█ █░█
+        █▄█ █▄█ ▄█ █▄▄ █▀█ █▀▄   █░▀░█ ██▄ █░▀█ █▄█-->
+        <form  action="{{ route('AdminController.buscar') }}" method="POST">
             @csrf
             <div class="input-group mb-3">
                 <input type="text" name="tabla" value="menu" style="display:none" readonly><!--Para identificar la tabla -->
                 <input type="text" name="busqueda-menu" class="form-control" placeholder="Buscar menus" aria-label="Buscar menus">
-                <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+                <button class="btn btn-outline-secondary"  type="submit">Buscar</button>
             </div>
         </form>
 
@@ -135,12 +141,16 @@
                         <td>{{$item->restaurante_id}}</td>
                         <td>{{$item->img}}</td>
 
-                        <td>
-                            <a href=""  data-bs-toggle="modal" data-bs-target="#modalEditarMenu{{$item->id}}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="{{route("AdminController.delMenu",$item->id)}}" onclick="res('{{$item->nombre}}')"  class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
+                        <td><!--
+                            █▀▀ █░░ █ █▀▄▀█ █ █▄░█ ▄▀█ █▀█   █▀▄▀█ █▀▀ █▄░█ █░█
+                            ██▄ █▄▄ █ █░▀░█ █ █░▀█ █▀█ █▀▄   █░▀░█ ██▄ █░▀█ █▄█-->
+                            <a href=""  data-bs-toggle="modal" data-bs-target="#modalEditarMenu{{$item->id}}" class="btn btn-warning btn-sm styleiconos icon-editar"></a>
+                            <a href="{{route("AdminController.delMenu",$item->id)}}" onclick="return res('{{$item->nombre}}')"  class="btn btn-danger btn-sm styleiconos icon-basura"></a>
                         </td>
 
-                        <!-- Modal de modificar datos de la tabla-->
+                          <!--
+                        █▀▄▀█ █▀█ █▀▄ █ █▀▀ █ █▀▀ ▄▀█ █▀█   █▀▄▀█ █▀▀ █▄░█ █░█
+                        █░▀░█ █▄█ █▄▀ █ █▀░ █ █▄▄ █▀█ █▀▄   █░▀░█ ██▄ █░▀█ █▄█-->
                         <div class="modal fade" id="modalEditarMenu{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -151,9 +161,7 @@
                                 </button>
                                 </div>
                                 <div class="modal-body">
-                                    <!--
-                                        █▀▄▀█ █▀█ █▀▄ █ █▀▀ █ █▀▀ ▄▀█ █▀█   █▀▄▀█ █▀▀ █▄░█ █░█
-                                        █░▀░█ █▄█ █▄▀ █ █▀░ █ █▄▄ █▀█ █▀▄   █░▀░█ ██▄ █░▀█ █▄█-->
+          
                                     <form action="{{route("AdminController.mod")}}" method="POST">
                                         @csrf
                                         <!--Para identificar la tabla -->
@@ -209,3 +217,4 @@
 
     </div>
 </div>
+

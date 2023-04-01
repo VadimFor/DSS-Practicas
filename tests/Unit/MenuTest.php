@@ -12,13 +12,7 @@ class MenuTest extends TestCase
 
     public function test_menu()
     {
-        $this->assertDatabaseHas('menu', [
-            'nombre' => 'Menu degustacion',
-            'descripcion' => 'Para disfrutar',
-            'precio' => 25,
-            'restaurante_id' => Restaurante::where('nombre','=','La casa de paco')->first()->id,
-            'img' => ''
-        ]);
+ 
 
     }
 

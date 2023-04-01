@@ -14,51 +14,58 @@
         }
     </script>
 
-    <h3 class="fs-4 mb-3">Usuarios</h3>
+
+    <div class="text-center">
+        <h3 class="fs-4 mb-3">Usuarios</h3>
+    </div>
+
     
     <div class="p-5 table-responsive">
 
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearUsuario">Crear usuario</button>
-        <!-- ＭＯＤＡＬ ＣＲＥＡＲ ＵＳＵＡＲＩＯ -->
+
+        <!-- 
+        █▀▀ █▀█ █▀▀ ▄▀█ █▀█   █░█ █▀ █░█ ▄▀█ █▀█ █ █▀█
+        █▄▄ █▀▄ ██▄ █▀█ █▀▄   █▄█ ▄█ █▄█ █▀█ █▀▄ █ █▄█ -->
         <div class="modal fade" id="modalCrearUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Crear usuario</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{route("AdminController.crear")}}" method="POST">
-                        @csrf
-                        <!--Para identificar la tabla -->
-                        <input type="text" name="tabla" value="users" style="display:none" readonly>
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear usuario</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{route("AdminController.crear")}}" method="POST">
+                            @csrf
+                            <!--Para identificar la tabla -->
+                            <input type="text" name="tabla" value="users" style="display:none" readonly>
 
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Email (obligatorio)</label>
-                            <input type="email" name="email" class="form-control" id="exampleInputPassword1" placeholder="" aria-describedby="emailHelp" required>
-                          </div>
-                        <div class="form-group">
-                          <label for="exampleInputEmail1">Nombre </label>
-                          <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="">
-                        </div>
-                        <div class="form-group">
-                          <label for="exampleInputPassword1">Contraseña (obligatorio)</label>
-                          <input type="text" name="password" class="form-control" id="exampleInputPassword1" placeholder="" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Verificar contraseña (obligatorio)</label>
-                            <input type="text" name="password_confirmation" class="form-control" id="exampleInputPassword1" placeholder="" required>
-                          </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-primary">Guardar</button>
-                        </div>
-                      </form>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Email (obligatorio)</label>
+                                <input type="email" name="email" class="form-control" id="exampleInputPassword1" placeholder="" aria-describedby="emailHelp" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="exampleInputEmail1">Nombre </label>
+                            <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="">
+                            </div>
+                            <div class="form-group">
+                            <label for="exampleInputPassword1">Contraseña (obligatorio)</label>
+                            <input type="text" name="password" class="form-control" id="exampleInputPassword1" placeholder="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Verificar contraseña (obligatorio)</label>
+                                <input type="text" name="password_confirmation" class="form-control" id="exampleInputPassword1" placeholder="" required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </form>
 
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
 
@@ -67,8 +74,9 @@
         ─░█── ░█▄▄█ ░█▀▀▄ ░█─── ░█▄▄█ 
         ─░█── ░█─░█ ░█▄▄█ ░█▄▄█ ░█─░█
         -->
-
-        
+        <!--
+        █▄▄ █░█ █▀ █▀▀ ▄▀█ █▀█   █░█ █▀ █░█ ▄▀█ █▀█ █ █▀█
+        █▄█ █▄█ ▄█ █▄▄ █▀█ █▀▄   █▄█ ▄█ █▄█ █▀█ █▀▄ █ █▄█-->
         <form action="{{ route('AdminController.buscar') }}" method="POST">
             @csrf
             <div class="input-group mb-3">
@@ -147,11 +155,13 @@
                             <td>{{$item->poblacion}}</td>
                             <td>{{$item->cod_postal}}</td>
                             <td>
-                                <a href=""  data-bs-toggle="modal" data-bs-target="#modalEditar{{$item->id}}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="{{route("AdminController.delUsuario",$item->email)}}" onclick="res('{{$item->email}}')"  class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
+                                <!--
+                                █▀▀ █░░ █ █▀▄▀█ █ █▄░█ ▄▀█ █▀█   █░█ █▀ █░█ ▄▀█ █▀█ █ █▀█
+                                ██▄ █▄▄ █ █░▀░█ █ █░▀█ █▀█ █▀▄   █▄█ ▄█ █▄█ █▀█ █▀▄ █ █▄█-->
+                                <a href=""  data-bs-toggle="modal" data-bs-target="#modalEditar{{$item->id}}" class="btn btn-warning btn-sm styleiconos icon-editar"></a>
+                                <a href="{{route("AdminController.delUsuario",$item->email)}}" onclick="return res('{{$item->email}}')"  class="btn btn-danger btn-sm styleiconos icon-basura"></a>
                             </td>
 
-                            <!-- ＭＯＤＡＬ ＥＤＩＴＡＲ ＵＳＵＡＲＩＯ -->
                             <div class="modal fade" id="modalEditar{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -222,6 +232,5 @@
         <div style="display: flex; justify-content: center;">
             {{ $users->links() }}  <!-- Para mostrar el tab con las paginas del PAGINATION -->
         </div>
-
     </div>
 </div>

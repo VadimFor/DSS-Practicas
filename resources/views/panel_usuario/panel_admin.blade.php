@@ -6,20 +6,22 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <title>Panel de usuario</title>
 
     <style>
         :root {
-        --main-bg-color: #009d63;
+        --main-bg-color: #c1efde;
         --main-text-color: #009d63;
         --second-text-color: #bbbec5;
         --second-bg-color: #c1efde;
+        --icon-fill: #009d63;
         }
         .primary-text {color: var(--main-text-color);}
+        .icon-fill {color: var(--icon-fill);}
+
         .second-text {color: var(--second-text-color);}
         .primary-bg {background-color: var(--main-bg-color);}
         .secondary-bg {background-color: var(--second-bg-color);}
@@ -65,23 +67,49 @@
             #wrapper.toggled #sidebar-wrapper {margin-left: -15rem;}
         }
 
-    </style>
+        .styleiconos{
+            width: 30px;
+            height: 30px;
+            background-size: 75% 75%;
+            background-repeat: no-repeat;
+            color: white;
+            text-align:center;
+            background-position-x: center;
+            background-position-y: center;
+        }
 
-    <script src="https://kit.fontawesome.com/646ac4fad6.js" crossorigin="anonymous"></script>
+        .stylemain{
+            width: 30px;
+            height: 30px;
+            padding: 16px;
+            background-size: 75% 75%;
+            text-align:center;
+            background-position-x: center;
+            background-position-y: center;
+            background-repeat: no-repeat;
+        }     
+
+       .icon-basura{background-image: url('/icons/icon-basura.svg');}
+       .icon-editar{background-image: url('/icons/icon-editar.svg');}
+       .icon-main{background-image: url('/icons/icon-main.svg');}
+
+</style>
+
+  
 
 </head>
 
 <body>
 
-
     <div class="d-flex" id="wrapper">
-
-        <!-- Sidebar -->
+    <!--░█▀▀▀█ ─▀─ █▀▀▄ █▀▀ ░█▀▀█ █▀▀█ █▀▀█ 
+        ─▀▀▀▄▄ ▀█▀ █──█ █▀▀ ░█▀▀▄ █▄▄█ █▄▄▀ 
+        ░█▄▄▄█ ▀▀▀ ▀▀▀─ ▀▀▀ ░█▄▄█ ▀  ▀ ▀ ▀▀-->
         <div class="bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold border-bottom"><i
-                    class="bx bx-bowl-hot"></i><a href="/"class=" text-success">FudRater</a></div>
+                    class="stylemain icon-main"></i><a href="/"class=" text-success">FudRater</a></div>
             <div class="list-group list-group-flush my-3">
-
+                
 
                 <a href="/panelusuario/perfil" id="btn_perfil" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-tachometer-alt me-2"></i>Perfil</a>
@@ -99,7 +127,9 @@
             </div>
         </div>
 
-        <!-- Page Content -->
+
+        <!--█▄░█ ▄▀█ █░█ █▄▄ ▄▀█ █▀█
+            █░▀█ █▀█ ▀▄▀ █▄█ █▀█ █▀▄-->
         <div id="page-content-wrapper">
 
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
@@ -131,23 +161,39 @@
                 </div>
             </nav>
 
+            <!--
+            █ █▄░█ █▀▀ █░░ █░█ █▀▄ █▀▀ █▀
+            █ █░▀█ █▄▄ █▄▄ █▄█ █▄▀ ██▄ ▄█-->
+
+        
             @include('panel_usuario.admin.panel_admin_contador')
 
-            @include('panel_usuario.admin.panel_admin_restaurante')
+            @if (@isset($errors) && count($errors) > 0)
 
-            
+            <div class="alert alert-danger">
+                <ul class="list-unstyled mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li> {{$error}}</li>
+                    @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            @include('panel_usuario.admin.panel_admin_restaurante')
             @include('panel_usuario.admin.panel_admin_menu')
             @include('panel_usuario.admin.panel_admin_plato')
+            
+            @include('panel_usuario.admin.panel_admin_valoraciones')
 
             @include('panel_usuario.admin.panel_admin_users')
-            
+
 
         </div>
     </div>
     <!-- /#page-content-wrapper -->
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script>
         var el = document.getElementById("wrapper");
         var toggleButton = document.getElementById("menu-toggle");
