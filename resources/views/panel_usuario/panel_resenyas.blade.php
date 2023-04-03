@@ -197,28 +197,29 @@
             ██▄ ░█░ █ ▀▀█ █▄█ ██▄ ░█░ █▀█ ▄█ -->
         <div class="p-5 table-responsive">
 
+
+        @if (session("correcto"))
+        <div class="aler alert-success text-center">{{session("correcto")}}</div>
+        @endif
+        @if (session("incorrecto"))
+        <div class="aler alert-danger text-center">{{session("incorrecto")}}</div>
+        @endif
+        
             <!--█████ ＢＡＲＲＡ ＤＥ ＢＵＳＣＡＲ █████-->
-            <form action="{{ route('AdminController.buscar') }}" method="POST">
+            <form action="{{ route('ResenyasController.buscar') }}" method="POST">
                 @csrf
                 <div class="input-group mb-3">
-                    <input type="text" name="tabla" value="users" style="display:none" readonly><!--Para identificar la tabla -->
-                    <input type="text" name="busqueda-users" class="form-control" placeholder="Buscar reseñas" aria-label="Buscar reseñas">
+                    <input type="text" name="tabla" value="valoracion" style="display:none" readonly><!--Para identificar la tabla -->
+                    <input type="text" name="busqueda-valoracion" class="form-control" placeholder="Buscar valoración" aria-label="Buscar valoración">
                     <button class="btn btn-outline-secondary" type="submit">Buscar</button>
                 </div>
             </form>
 
-            @if (session("correcto"))
-            <div class="aler alert-success text-center">{{session("correcto")}}</div>
-            @endif
-            @if (session("incorrecto"))
-            <div class="aler alert-danger text-center">{{session("incorrecto")}}</div>
-            @endif
-
-            @if(session('search-resenyas') && session('search-resenyas') != NULL)
+            @if(session('search-valoracion') && session('search-valoracion') != NULL)
                 <p>Resultados de la búsqueda:</p>
-                @php $arr = [session('search-resenyas'), $mis_resenyas]; @endphp
+                @php $arr = [session('search-valoracion'), $mis_resenyas]; @endphp
             @else
-                @php $arr = [$mis_resenyas];@endphp    
+                @php $arr = [$mis_resenyas];@endphp
             @endif
 
             <!--█████ ＢＵＣＬＥ █████-->
@@ -228,8 +229,19 @@
                     <div class="row">
                         @foreach ($arr[$i] as $item)
 
-                            <div class="col-lg-4 mb-3">
-                                <div class="card border-danger">
+                            <div class="col-lg-4 mb-3 ">
+
+                                <!-- CAMBIAR COLOR DE LA TABLA DE BÚSQUEDAS-->
+                                @if(count($arr) == 2)
+                                    @if($i == 0) 
+                                    <div class="card border-danger" style="background-color: rgb(198, 243, 243)">
+                                    @else
+                                    <div class="card border-danger">
+                                    @endif
+                                @else
+                                    <div class="card border-danger">
+                                @endif
+
                                     <div class="d-flex p-3 just-content-start align-items-center">
                                         <img src="https://cdn.pixabay.com/photo/2016/11/18/14/05/brick-wall-1834784_960_720.jpg" alt="" class="mr-4">
 
@@ -242,7 +254,7 @@
                                                     @if ($i < $item->puntuacion)
                                                         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
                                                     @else
-                                                        <li class="list-inline-item"> <i class="fa-regular fa-star"></i></li>      
+                                                        <li class="list-inline-item"> <i class="far fa-star"></i></li>      
                                                     @endif
                                                 @endfor
                                              </ul>
@@ -278,8 +290,8 @@
                                                         <input type="text" name="nombre" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$item->menu_nombre}}" readonly>
                                                     </div>
                                                     <div class="form-group">
-                                                    <label for="exampleInputEmail1">Puntuación (1 a 5)</label>
-                                                    <input type="text" name="puntuacion" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$item->puntuacion}}" required>
+                                                    <label for="exampleInputEmail1">Puntuación (0 a 5)</label>
+                                                    <input type="number" name="puntuacion" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$item->puntuacion}}" min="0" max="5"  required>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">Comentario</label>
@@ -303,7 +315,11 @@
                     </div>
                 </div>
 
-            @endfor   
+            @endfor
+
+            <div style="display: flex; justify-content: center;">
+                {{ $mis_resenyas->links() }} <!-- Para mostrar el tab con las paginas del PAGINATION -->
+            </div>
 
         </div>
 

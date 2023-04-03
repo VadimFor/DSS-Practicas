@@ -19,7 +19,7 @@ class ResenyasController extends Controller
             $mis_resenyas = Valoracion::select('valoracion.*', 'menu.nombre AS menu_nombre' , 'menu.precio', 'menu.img', 'restaurante.direccion AS dir')
             ->join('menu', 'valoracion.menu_id', '=', 'menu.id')
             ->join('restaurante', 'menu.restaurante_id', '=', 'restaurante.id')
-            ->get();
+            ->paginate(6,['*']);
             //error_log($mis_resenyas);
 
             //$mis_resenyas = Valoracion::where('usuario_id', '=', $usuario_id)->paginate(5, ['*'], 'resenyas');
@@ -32,6 +32,25 @@ class ResenyasController extends Controller
         }
     }
 
+    public function buscar(Request $request){
+
+        $keywords = explode(' ', request('busqueda-valoracion'));
+
+        $search = Valoracion::select('valoracion.*', 'menu.nombre AS menu_nombre', 'menu.precio', 'menu.img', 'restaurante.direccion AS dir')
+        ->join('menu', 'valoracion.menu_id', '=', 'menu.id')
+        ->join('restaurante', 'menu.restaurante_id', '=', 'restaurante.id')
+        ->where(function ($query) use ($keywords) {
+            foreach ($keywords as $keyword) {
+                $query->orWhere('valoracion.puntuacion', 'LIKE', "%$keyword%")
+                    ->orWhere('valoracion.comentario', 'LIKE', "%$keyword%");
+            }
+        })
+        ->get();
+
+        error_log($search);
+    
+        return back()->with("search-valoracion", $search);
+    }
 
     public function delResenya($id){
         error_log("Eliminando a " . $id);
