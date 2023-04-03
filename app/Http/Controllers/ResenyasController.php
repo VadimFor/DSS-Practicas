@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class ResenyasController extends Controller
 {
-    public function mostrar($usuario_id){
+    public function mostrar($users_id){
 
         if(Auth::check()){
 
@@ -23,7 +23,7 @@ class ResenyasController extends Controller
             //error_log($mis_resenyas);
 
             //$mis_resenyas = Valoracion::where('usuario_id', '=', $usuario_id)->paginate(5, ['*'], 'resenyas');
-            $mis_resenyas_cont = Valoracion::where('usuario_id', '=', $usuario_id)->get()->count();
+            $mis_resenyas_cont = Valoracion::where('users_id', '=', $users_id)->get()->count();
 
             return view('panel_usuario/panel_resenyas')->with('mis_resenyas',$mis_resenyas)->with('mis_resenyas_cont', $mis_resenyas_cont);
 

@@ -10,14 +10,15 @@ use Illuminate\Http\Request;
 
 class MisRestaurantesController extends Controller
 { 
-    public function mostrar($user_id){
+    public function mostrar($users_id){
 
         if(Auth::check()){
             
-            $mis_restaurantes = Restaurante::where('id_user', '=', $user_id)->paginate(5, ['*'], 'restaurantes');
-            $mis_restaurantes_cont = Restaurante::where('id_user', '=', $user_id)->get()->count();
+            //saco los restaurantes SOLO del usuario logeado
+            $restaurantes = Restaurante::where('users_id', '=', $users_id)->paginate(5, ['*'], 'restaurantes');
+            $restaurantes_cont = Restaurante::where('users_id', '=', $users_id)->get()->count();
 
-            return view('panel_usuario/panel_mis_restaurantes')->with('mis_restaurantes',$mis_restaurantes)->with('mis_restaurantes_cont', $mis_restaurantes_cont);
+            return view('panel_usuario/panel_mis_restaurantes')->with('restaurantes',$restaurantes)->with('restaurantes_cont', $restaurantes_cont);
         }else{
             return redirect('/login');
         }
@@ -33,7 +34,7 @@ class MisRestaurantesController extends Controller
                 'telefono' => $request->telefono,
                 'descripcion' => $request->descripcion,
                 'img' => $request->img,
-                'id_user' => $request->id
+                'users_id' => $request->users_id
             ]);
 
             $sql=1;
@@ -53,7 +54,8 @@ class MisRestaurantesController extends Controller
                  'direccion' => $request->direccion,
                  'telefono' => $request->telefono,
                  'descripcion' => $request->descripcion,
-                 'img' => $request->img
+                 'img' => $request->img,
+                 'users_id' => $request->users_id
              ]);
 
              $sql=1;
@@ -79,12 +81,12 @@ class MisRestaurantesController extends Controller
 
     public function buscar(Request $request){
 
-        $id_user = $request->id;
+        $users_id = $request->users_id;
     
         $keywords = explode(' ', request('busqueda-restaurante'));
     
         $search = DB::table('restaurante')
-        ->where('id_user', '=', $id_user)
+        ->where('users_id', '=', $users_id)
         ->where(function ($query) use ($keywords) {
             foreach ($keywords as $keyword) {
                 $query->orWhere('id', 'LIKE', "%$keyword%")
