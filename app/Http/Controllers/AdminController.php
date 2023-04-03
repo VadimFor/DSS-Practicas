@@ -75,7 +75,7 @@ class AdminController extends Controller
                 if($request->email == ""){ return back()->with("incorrecto","Error al crear usuario, el email no puede ser vacio.");}
 
                 $validatedData = $request->validate([
-                    'name' => 'string|max:255',
+                    'name' => 'max:255',
                     'email' => 'required|string|email|min:5|max:30|unique:users',
                     'password' => 'required|string|min:4|max:50',
                     'password_confirmation' => 'required|string|min:4|max:50|same:password'
@@ -104,7 +104,7 @@ class AdminController extends Controller
             }elseif($request->tabla == 'menu'){
                 $validatedData = $request->validate([
                     'nombre' => 'required|string|max:30',
-                    'descripcion' => 'string|max:500',
+                    'descripcion' => 'max:500',
                     'precio' => 'required|numeric',
                     'restaurante_id' => 'required|integer|exists:restaurante,id',
                     'img' => 'nullable|image',
@@ -123,7 +123,7 @@ class AdminController extends Controller
             }elseif($request->tabla == 'valoracion'){
                 $validatedData = $request->validate([
                     'puntuacion' => 'required|integer|between:1,5',
-                    'comentario' => 'string|max:500',
+                    'comentario' => 'max:100',
                     'menu_id' => 'required|integer|exists:menu,id',
                     'users_id' => 'required|integer|exists:users,id',
                 ]);   
