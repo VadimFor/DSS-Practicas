@@ -10,11 +10,9 @@ use App\Models\Valoracion;
 class MenuController extends Controller
 {
     public function listaMenus($id)
-    {
-        // Obtener todos los menús desde el modelo de Eloquent
-        
+    {                
         $restaurante = Restaurante::where('id','=',$id)->get();
-        $menus = Menu::where('restaurante_id', '=', $id)->get(); // Suponiendo que tu modelo de menú se llama "Menu"
+        $menus = Menu::where('restaurante_id', '=', $id)->get();
         $valoracionesPorMenu = [];
 
         // Iterar por cada menú y obtener las valoraciones relacionadas
@@ -26,7 +24,6 @@ class MenuController extends Controller
             $valoracionesPorMenu[$menu->id] = $valoraciones;
         }
 
-        // Pasar los datos obtenidos a la vista y mostrarlos en la plantilla Blade
         return view('restaurante_detalle')->with('menus', $menus)->with('restaurante', $restaurante)->with('valoracionesPorMenu', $valoracionesPorMenu);
     }
 }
