@@ -63,5 +63,12 @@ class ValoracionSeeder extends Seeder
             'menu_id' => Menu::where('nombre','=','Menú de carnes')->first()->id
         ]);
 
+        DB::table('valoracion')->insertOrIgnore([
+            'puntuacion' => 5,
+            'comentario' => ' Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem commodi laborum, aliquam sed natus labore repudiandae fugit dignissimos totam esse sunt nemo corrupti, modi magnam quasi aspernatur nihil. Ipsum, exercitationem?',
+            'users_id' => Users::where('email','=','a@a.com')->first()->id,
+            'menu_id' => Menu::where('nombre','=','Menú infantil')->first()->id
+        ]);
+
     }
 }
