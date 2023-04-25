@@ -81,6 +81,12 @@
 
     </head>
 <body>
+<script>
+    // donde vamos a indicar la redireccion de la página
+function myFunction() {
+  document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
+}
+</script>
     @include('navbar')
      <div class="header">
         <h1>{{$restaurante->first()->nombre}}</h1>
@@ -109,8 +115,7 @@
                             @endif
                         @endfor
                     @endforeach
-                    </ul>
-                    
+                    </ul>                    
                 </div>
             @endforeach
 
