@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Menu;
 use App\Models\Valoracion;
 
-class MenuController extends Controller
+class RestauranteDetalleController extends Controller
 {
     public function listaMenus($id)
     {                
