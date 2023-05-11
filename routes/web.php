@@ -26,10 +26,10 @@ use Illuminate\Support\Facades\Route;
 
 
 //ENTREGA_2
-Route::get('/', [AdminController::class, 'mostrar_entrega2']);
+// Route::get('/', [AdminController::class, 'mostrar_entrega2']);
 
 //ENTREGA_3 (descomentar y borrar lo de la entrega 2)
-//Route::get('/', function () {return view('welcome');});
+Route::get('/', function () {return view('welcome');});
 
 
 # ＯＰＥＲＡＣＩＯＮＥＳ ＤＥ ＵＳＵＡＲＩＯ
@@ -92,6 +92,10 @@ Route::get('/panelusuario-sort-{column}', [AdminController::class, 'sort'])->nam
 
 //MENUS DE RESTAURANTE
 Route::get('/restaurante-detalle-{id}', [RestauranteDetalleController::class, 'listaMenus'])->name("RestauranteDetalleController.listaMenus"); 
+
+// Route::get('/platos-menu-{id}',function(){return [1, 2, 3];});
+
+Route::get('/platos-menu-{id}', [RestauranteDetalleController::class, 'listaPlatos']);
 
 Route::get('/test', function () {
     $test = "__test__";

@@ -26,4 +26,11 @@ class RestauranteDetalleController extends Controller
 
         return view('restaurante_detalle')->with('menus', $menus)->with('restaurante', $restaurante)->with('valoracionesPorMenu', $valoracionesPorMenu);
     }
+
+    public function listaPlatos($id)
+    {
+        $menu = Menu::where('id','=',$id)->get();
+        $platos = $menu[0]->plato;
+        return response()->json($platos);
+    }
 }
