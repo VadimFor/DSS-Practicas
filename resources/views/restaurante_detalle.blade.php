@@ -14,7 +14,7 @@
             }
 
             .card{
-                width: 20%;
+                width: 20%;img
                 display: inline-block;
                 box-shadow: 2px 2px 20px black;
                 border-radius: 5px; 
@@ -165,7 +165,7 @@ async function recuperarPlatosMenu(id, nombre, precio) {
             
             @foreach ($menus as $menu)
                 <div class="card des button">
-                    <img onclick="recuperarPlatosMenu({{$menu->id}}, '{{$menu->nombre}}', {{$menu->precio}})" src="{{$menu->img}}" data-toggle="modal" data-target="#menuModal" style="object-fit:contain;border-radius: 50%;max-width:90%;padding-bottom: inherit;">
+                    <img onclick="recuperarPlatosMenu({{$menu->id}}, '{{$menu->nombre}}', {{$menu->precio}})" src="{{url($menu->img)}}" alt="img" data-toggle="modal" data-target="#menuModal" style="object-fit:contain;border-radius: 50%;max-width:90%;padding-bottom: inherit;">
                     <h4 class="thick">{{$menu->nombre}}</h4>
                     <p>{{$menu->descripcion}}</p>
                     <p class="thick"> Precio: {{$menu->precio}}€</p>
