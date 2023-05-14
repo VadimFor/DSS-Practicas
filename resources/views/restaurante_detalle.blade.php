@@ -9,16 +9,16 @@
         <style>
 
             .main{
-
-            margin: 2%;
+              margin: 2%;
             }
 
             .card{
-                width: 20%;img
+                width: 20%;
                 display: inline-block;
                 box-shadow: 2px 2px 20px black;
                 border-radius: 5px; 
                 margin: 2%;
+                padding: 5%;
                 }
 
             .image img{
@@ -81,6 +81,12 @@
             .mostrar-modal{
                 display: block;
                 padding-right: 17px;
+            }
+            .flex-container {
+              display: flex;
+              flex-wrap: nowrap;
+              background-color: #b7dac6;
+              align-items: center;
             }
 
         </style>
@@ -153,10 +159,18 @@ async function recuperarPlatosMenu(id, nombre, precio) {
 }
 </script>
     @include('navbar')
-     <div class="header">
+     <div class="header flex-container">
+        <img src="{{url($restaurante->first()->img)}}" alt="resto-img" style="width: 30%;
+  height: 400px;
+  margin: 2%;border-radius: 8%;border: 8px solid #75a689;">
+      <div style="justify-content: center;padding:1%;font-weight:bold;font-variant:small-caps;text-shadow: 2px 1px green;">
         <h1>{{$restaurante->first()->nombre}}</h1>
         <h2>{{$restaurante->first()->descripcion}}</h2>
-    </div>    
+        <h4 style="padding-left:20px;">Dirección: {{$restaurante->first()->direccion}}</h4>
+        <h4 style="padding-left:20px;">Telefono: {{$restaurante->first()->telefono}}</h4>
+      </div>
+    </div>
+
     <div>        
         
         <div>
@@ -165,7 +179,7 @@ async function recuperarPlatosMenu(id, nombre, precio) {
             
             @foreach ($menus as $menu)
                 <div class="card des button">
-                    <img onclick="recuperarPlatosMenu({{$menu->id}}, '{{$menu->nombre}}', {{$menu->precio}})" src="{{url($menu->img)}}" alt="img" data-toggle="modal" data-target="#menuModal" style="object-fit:contain;border-radius: 50%;max-width:90%;padding-bottom: inherit;">
+                    <img onclick="recuperarPlatosMenu({{$menu->id}}, '{{$menu->nombre}}', {{$menu->precio}})" src="{{url($menu->img)}}" alt="img" data-toggle="modal" data-target="#menuModal" style="display:block;margin-left: auto;margin-right: auto;object-fit:contain;border-radius: 50%;max-width:90%;padding-bottom: inherit;">
                     <h4 class="thick">{{$menu->nombre}}</h4>
                     <p>{{$menu->descripcion}}</p>
                     <p class="thick"> Precio: {{$menu->precio}}€</p>
