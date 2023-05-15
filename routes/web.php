@@ -9,6 +9,7 @@ use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\ResenyasController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MisRestaurantesController;
+use App\Http\Controllers\RestauranteDetalleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -85,6 +86,13 @@ Route::get('/panelusuario/admin', [AdminController::class, 'mostrar']);
 Route::post('/panelusuario-buscar', [AdminController::class, 'buscar'])->name("AdminController.buscar");
 
 Route::get('/panelusuario-sort-{column}', [AdminController::class, 'sort'])->name("AdminController.sort");
+
+//MENUS DE RESTAURANTE
+Route::get('/restaurante-detalle-{id}', [RestauranteDetalleController::class, 'listaMenus'])->name("RestauranteDetalleController.listaMenus"); 
+
+// Route::get('/platos-menu-{id}',function(){return [1, 2, 3];});
+
+Route::get('/platos-menu-{id}', [RestauranteDetalleController::class, 'listaPlatos']);
 
 Route::get('/test', function () {
     $test = "__test__";
