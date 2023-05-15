@@ -24,14 +24,11 @@ use Illuminate\Support\Facades\Route;
 
 
 
-//ENTREGA_2
-Route::get('/', [AdminController::class, 'mostrar_entrega2']);
 
 //ENTREGA_3 (descomentar y borrar lo de la entrega 2)
-//Route::get('/', function () {return view('welcome');});
+Route::get('/', function () {return view('welcome');});
 
-
-# ＯＰＥＲＡＣＩＯＮＥＳ ＤＥ ＵＳＵＡＲＩＯ
+# ＯＰＥＲＡＣＩＯＮＥＳ ＤＥ ＵＳＵＡＲＩＯ 
 #REGISTRO
 Route::get('/registro', [RegisterController::class, 'mostrar']);
 Route::post('/registro', [RegisterController::class, 'registro']);
