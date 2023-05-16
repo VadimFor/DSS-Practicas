@@ -30,7 +30,8 @@ class User extends Authenticatable
         'pais',
         'provincia',
         'poblacion',
-        'cod_postal'
+        'cod_postal',
+        'img'
     ];
 
     /**

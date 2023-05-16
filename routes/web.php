@@ -47,6 +47,7 @@ Route::get('/logout', [LogoutController::class, 'logout']);
 # PERFIL
 Route::get('/panelusuario/perfil', [PerfilController::class, 'mostrar']);
 Route::post('/panelusuario-modperfil', [PerfilController::class, 'modPerfil'])->name("home.modperfil");
+Route::post('/panelusuario-modfotoperfil', [PerfilController::class, 'modfoto'])->name("home.modfoto");
 
 # RESTAURANTES
 Route::get('/panelusuario/restaurantes-{id}', [MisRestaurantesController::class, 'mostrar'])->name("MisRestaurantesController.mostrar");

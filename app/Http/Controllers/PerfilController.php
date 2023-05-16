@@ -40,4 +40,32 @@ class PerfilController extends Controller
             return back()->with("incorrecto","Error, usuario no modificado");
         }
     }
+
+
+    public function modfoto(Request $request){
+
+
+        $request->validate([
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+    
+        if ($request->file()) {
+            $imageoriginalName =  $request->file('img')->getClientOriginalName();
+            $extension = $request->file('img')->getClientOriginalExtension();
+            $imageName =  $request->email . "|" . "perfil." . $extension;
+            $filePath = $request->file('img')->storeAs('public/img/user/', $imageName);
+
+            error_log("Modificando foto perfil: " . $imageoriginalName);
+
+            DB::update(
+                "Update users set img=? where email=?",
+                [$imageName,$request->email]);
+
+            // Store $imageName to the database if needed
+    
+            return back()
+                ->with('successimg','Imagen subida correctamente.')
+                ->with('img', $imageName);
+        }
+    }
 }

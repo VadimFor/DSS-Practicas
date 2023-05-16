@@ -155,7 +155,13 @@
     <div class="row">
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img class="rounded-circle mt-5" width="150px" src="{{'/img/perfil.png'}}">
+
+                @if (!auth()->user()->img)
+                    <img class="rounded-circle mt-5" width="150px" src="{{'/img/perfil.png'}}">
+                @else
+                    <img class="rounded-circle mt-5" width="150px" src="{{asset('storage/img/user/'.auth()->user()->img)}}">
+                @endif
+
                 <span class="font-weight-bold">{{auth()->user()->name}} {{auth()->user()->apellido}}</span>
                 <span class="text-black-50">{{auth()->user()->email}}</span>
                 <span> </span>
@@ -183,9 +189,11 @@
                         <div class="col-md-6"><label class="labels">Población</label><input type="text" class="form-control" name="poblacion" value={{auth()->user()->poblacion}} ></div>
                         <div class="col-md-6"><label class="labels">Código postal</label><input type="text" class="form-control" name="cod_postal" value={{auth()->user()->cod_postal}}></div>
                     </div>
-                    <div class="mt-5 text-center">
+
+                    <div class="mt-5 text-center"> 
                         <button class="btn btn-primary profile-button" type="submit">Guardar</button>
                     </div>
+
                     @if (session("correcto"))
                     <div class="aler alert-success text-center">{{session("correcto")}}</div>
                     @endif
@@ -194,16 +202,29 @@
                     @endif
 
                 </form>
+
+
+                <!--█▀▀ █░█ ▄▀█ █▀█ █▀▄ ▄▀█ █▀█   █ █▀▄▀█ █▀▀
+                    █▄█ █▄█ █▀█ █▀▄ █▄▀ █▀█ █▀▄   █ █░▀░█ █▄█-->
+                <form action="{{route("home.modfoto")}}" method="post" class="mt-4" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <input name="email" value={{auth()->user()->email}} type="hidden"> 
+                        <label for="exampleFormControlFile1">Foto de perfil:</label>
+                        <input type="file" name="img" class="form-control">
+                    </div>
+                    <button class="btn btn-primary profile-button" type="submit">Guardar foto</button>
+                </form>
+                @if (session('successimg'))
+                    {{ session('successimg') }}
+                @endif
+
             </div>
 
         </div>
 
     </div>
 </div>
-
-<a href="/test" id="btn_resenya" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-    class="fas fa-project-diagram me-2"></i>test</a>
-    {{session("test")}}
 
 
         </div>
