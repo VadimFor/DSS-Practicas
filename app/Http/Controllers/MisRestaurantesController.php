@@ -130,24 +130,21 @@ class MisRestaurantesController extends Controller
 
     public function buscar(Request $request){
 
-        $users_id = $request->users_id;
-    
-        $keywords = explode(' ', request('busqueda-restaurante'));
-    
+        $keywords = explode(' ', request('busqueda-restaurante')); //el value del input q ha escrito el usuario
+        
+        
         $search = DB::table('restaurante')
-        ->where('users_id', '=', $users_id)
+        ->where('users_id', '=', auth()->user()->id)
         ->where(function ($query) use ($keywords) {
             foreach ($keywords as $keyword) {
-                $query->orWhere('id', 'LIKE', "%$keyword%")
-                    ->orWhere('nombre', 'LIKE', "%$keyword%")
+                $query->orWhere('nombre', 'LIKE', "%$keyword%")
                     ->orWhere('direccion', 'LIKE', "%$keyword%")
                     ->orWhere('telefono', 'LIKE', "%$keyword%")
-                    ->orWhere('descripcion', 'LIKE', "%$keyword%")
-                    ->orWhere('img', 'LIKE', "%$keyword%");
+                    ->orWhere('descripcion', 'LIKE', "%$keyword%");
             }
         })
         ->get();
-    
+
         return back()->with("search-restaurante", $search);   
     } 
 
