@@ -19,7 +19,7 @@
 
 
 .card{
-    height: 16vw;
+    height: 15vw;
 
 
   transition:0.5s;
@@ -30,9 +30,12 @@
     margin: 2%;
 }
 .card-title{  
-  font-size:25px;
+  font-size:20px;
   transition:1s;
   cursor:pointer;
+  box-shadow: 1px 1px 5px rgb(29, 139, 64);
+
+
 }
 .card-title i{  
     box-shadow: 2px 2px 20px rgb(0, 204, 255);
@@ -89,18 +92,45 @@
                                 <!--
                 █▄▄ █░█ █▀ █▀▀ ▄▀█ █▀█   █▀█ █▀▀ █▀ ▀█▀ ▄▀█ █░█ █▀█ ▄▀█ █▄░█ ▀█▀ █▀▀
                 █▄█ █▄█ ▄█ █▄▄ █▀█ █▀▄   █▀▄ ██▄ ▄█ ░█░ █▀█ █▄█ █▀▄ █▀█ █░▀█ ░█░ ██▄-->
-                <form action="{{ route('MisRestaurantesController.buscar') }}" method="POST">
+                <form action="{{ route('RestaurantesController.buscar') }}" method="POST">
                     @csrf
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 p-3">
                         <input type="text" name="tabla" value="restaurante" style="display:none" readonly><!--Para identificar la tabla -->
                         <input type="text" name="busqueda-restaurante" class="form-control" placeholder="Buscar restaurante" aria-label="Buscar restaurante">
                         <button class="btn btn-outline-success" type="submit">Buscar</button>
                     </div>
                 </form>
 
+
+                @if(session('search-restaurante') && session('search-restaurante') != NULL)
+                    <table class="table bg-white rounded shadow-sm table-bordered table-hover table-info ">
+
+                        <thead>
+                            <tr>
+                                <th scope="col" width="50">Nombre</th>
+                                <th scope="col">Direccción</th>
+                                <th scope="col">Teléfono</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+
+                            @foreach (session('search-restaurante') as $item)
+                                <tr>
+                                    <td>{{$item->nombre}}</td>
+                                    <td>{{$item->direccion}}</td>
+                                    <td>{{$item->telefono}}</td>
+                                    <td>
+                                        <a class="btn btn-info" href="{{route("RestauranteDetalleController.listaMenus",$item->id)}}" >Visitar</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                @endif  
+
+
                 @foreach ($restaurantes as $item)
-                
-                
                     <div class="col-md-3 col-sm-6" href="{{route("RestauranteDetalleController.listaMenus",$item->id)}}">
 
                             <div class="card card-block">
@@ -116,7 +146,6 @@
 
                             </div>
                     </div>
-
                 @endforeach
    
             </div>

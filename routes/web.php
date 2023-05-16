@@ -98,7 +98,7 @@ Route::get('/platos-menu-{id}', [RestauranteDetalleController::class, 'listaPlat
 █▀█ █▀▀ █▀ ▀█▀ ▄▀█ █▄░█ ▄▀█   █▀█ █▀▀ █▀ ▀█▀ ▄▀█ █░█ █▀█ ▄▀█ █▄░█ ▀█▀ █▀▀ █▀
 █▀▀ ██▄ ▄█ ░█░ █▀█ █░▀█ █▀█   █▀▄ ██▄ ▄█ ░█░ █▀█ █▄█ █▀▄ █▀█ █░▀█ ░█░ ██▄ ▄█*/
 Route::get('/restaurantes', [RestaurantesController::class, 'mostrar']);
-
+Route::post('/restaurantes_buscar', [RestaurantesController::class, 'buscar'])->name("RestaurantesController.buscar");
 
 
 
