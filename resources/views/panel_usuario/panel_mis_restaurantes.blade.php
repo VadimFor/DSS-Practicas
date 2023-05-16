@@ -345,6 +345,7 @@
                     @foreach ($arr[$i] as $item)
 
                     <tr>
+
                         <th>{{$item->id}}</th>
                         <td>{{$item->nombre}}</td>
                         <td>{{$item->direccion}}</td>
@@ -357,6 +358,9 @@
                             ██▄ █▄▄ █ █░▀░█ █ █░▀█ █▀█ █▀▄   █▀▄ ██▄ ▄█ ░█░ █▀█ █▄█ █▀▄ █▀█ █░▀█ ░█░ ██▄-->
                             <a href=""  data-bs-toggle="modal" data-bs-target="#modalEditarRestaurante{{$item->id}}" class="btn btn-warning btn-sm styleiconos icon-editar"></a>
                             <a href="{{route("MisRestaurantesController.delRestaurante",$item->id)}}" onclick="return res('{{$item->nombre}}')"  class="btn btn-danger btn-sm styleiconos icon-basura"></a>
+                        </td>
+                        <td>
+                            <a class="btn btn-info" href="{{route("RestauranteDetalleController.listaMenus",$item->id)}}" >Visitar</a>
                         </td>
 
                         <!-- Modal de modificar datos de la tabla-->
