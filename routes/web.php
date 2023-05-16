@@ -10,6 +10,7 @@ use App\Http\Controllers\ResenyasController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MisRestaurantesController;
 use App\Http\Controllers\RestauranteDetalleController;
+use App\Http\Controllers\RestaurantesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -91,6 +92,14 @@ Route::get('/restaurante-detalle-{id}', [RestauranteDetalleController::class, 'l
 // Route::get('/platos-menu-{id}',function(){return [1, 2, 3];});
 
 Route::get('/platos-menu-{id}', [RestauranteDetalleController::class, 'listaPlatos']);
+
+
+/*
+█▀█ █▀▀ █▀ ▀█▀ ▄▀█ █▄░█ ▄▀█   █▀█ █▀▀ █▀ ▀█▀ ▄▀█ █░█ █▀█ ▄▀█ █▄░█ ▀█▀ █▀▀ █▀
+█▀▀ ██▄ ▄█ ░█░ █▀█ █░▀█ █▀█   █▀▄ ██▄ ▄█ ░█░ █▀█ █▄█ █▀▄ █▀█ █░▀█ ░█░ ██▄ ▄█*/
+Route::get('/restaurantes', [RestaurantesController::class, 'mostrar']);
+
+
 
 
 /*

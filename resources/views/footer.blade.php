@@ -99,35 +99,35 @@ ul{
     <div class="container">
         <div class="row">
             <div class="footer-col">
-                <h4>company</h4>
+                <h4>Empresa</h4>
                 <ul>
-                    <li><a href="#">about us</a></li>
-                    <li><a href="#">our services</a></li>
-                    <li><a href="#">privacy policy</a></li>
-                    <li><a href="#">affiliate program</a></li>
+                    <li><a href="#">Sobre nosotros</a></li>
+                    <li><a href="#">Nuestros servicios</a></li>
+                    <li><a href="#">Política de privacidad</a></li>
+                    <li><a href="#">Programa de afiliados</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>get help</h4>
+                <h4>Obtener ayuda</h4>
                 <ul>
                     <li><a href="#">FAQ</a></li>
-                    <li><a href="#">shipping</a></li>
-                    <li><a href="#">returns</a></li>
-                    <li><a href="#">order status</a></li>
-                    <li><a href="#">payment options</a></li>
+                    <li><a href="#">Perfil</a></li>
+                    <li><a href="#">Compras</a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="#">Opciones de pago</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>online shop</h4>
+                <h4>Restaurantes</h4>
                 <ul>
-                    <li><a href="#">watch</a></li>
-                    <li><a href="#">bag</a></li>
-                    <li><a href="#">shoes</a></li>
-                    <li><a href="#">dress</a></li>
+                    <li><a href="#">Menus</a></li>
+                    <li><a href="#">Comidas</a></li>
+                    <li><a href="#">Precios</a></li>
+                    <li><a href="#">Más valorado</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>follow us</h4>
+                <h4>Siguenos</h4>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>

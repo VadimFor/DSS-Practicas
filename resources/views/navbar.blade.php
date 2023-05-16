@@ -27,12 +27,14 @@
     text-align: center;
     }
 
+    
+
 
 </style>
 
 
-<nav class="navbar navbar-expand-md bg" >
-    <a href="" class="navbar-brand fs-3 ms-3 fw-bold  text-success bx bx-bowl-hot" style="">FudRater</a>
+<nav class="navbar navbar-expand-md bg fs-3" >
+    <a href="/" class="navbar-brand fs-3 ms-3 fw-bold  text-success bx bx-bowl-hot" style="">FudRater</a>
 
 
     <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#btn">
@@ -42,16 +44,13 @@
    <div class="collapse navbar-collapse ul-bg" id="btn">
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-                <a href="#" class="bx bxs-home nav-link mx-3 text-dark fs-5">Home</a>
+                <a href="/" class="bx bxs-home nav-link mx-3 text-dark fs-5">Home</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="bx bx-folder-plus nav-link mx-3 text-dark fs-5">About</a>
+                <a href="/restaurantes" class="bx bx-folder-plus nav-link mx-3 text-dark fs-5">Restaurantes</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="bx bx-folder-plus bx bxs-user-voice nav-link mx-3 text-dark fs-5">Service</a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="bx bxs-contact nav-link mx-3 text-dark fs-5">Our team</a>
+                <a href="#" class="bx bx-folder-plus bx bxs-user-voice nav-link mx-3 text-dark fs-5">Contacto</a>
             </li>
             <li class="nav-item">
 
