@@ -41,7 +41,6 @@ class PerfilController extends Controller
         }
     }
 
-
     public function modfoto(Request $request){
 
 

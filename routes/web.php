@@ -13,37 +13,31 @@ use App\Http\Controllers\RestauranteDetalleController;
 use Illuminate\Support\Facades\Route;
 
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
-
-
-//ENTREGA_3 (descomentar y borrar lo de la entrega 2)
+█▀█ █▀█ █▀█ ▀█▀ ▄▀█ █▀▄ ▄▀█
+█▀▀ █▄█ █▀▄ ░█░ █▀█ █▄▀ █▀█*/
 Route::get('/', function () {return view('welcome');});
 
-# ＯＰＥＲＡＣＩＯＮＥＳ ＤＥ ＵＳＵＡＲＩＯ 
-#REGISTRO
+
+/* 
+█▀█ █▀▀ █▀▀ █ █▀ ▀█▀ █▀█ █▀█
+█▀▄ ██▄ █▄█ █ ▄█ ░█░ █▀▄ █▄█*/
 Route::get('/registro', [RegisterController::class, 'mostrar']);
 Route::post('/registro', [RegisterController::class, 'registro']);
 
-#LOGIN
+/*
+█░░ █▀█ █▀▀ █ █▄░█
+█▄▄ █▄█ █▄█ █ █░▀█*/
 Route::get('/login', [LoginController::class, 'mostrar']);
 Route::post('/login', [LoginController::class, 'login']);
 
-#LOGOUT
+/*
+█░░ █▀█ █▀▀ █▀█ █░█ ▀█▀
+█▄▄ █▄█ █▄█ █▄█ █▄█ ░█░ */
 Route::get('/logout', [LogoutController::class, 'logout']);
 
-
-
-# ＰＡＮＥＬ ＤＥ ＵＳＵＡＲＩＯ
+/*
+█▀█ ▄▀█ █▄░█ █▀▀ █░░   █▀▄ █▀▀   █░█ █▀ █░█ ▄▀█ █▀█ █ █▀█
+█▀▀ █▀█ █░▀█ ██▄ █▄▄   █▄▀ ██▄   █▄█ ▄█ █▄█ █▀█ █▀▄ █ █▄█*/
 # PERFIL
 Route::get('/panelusuario/perfil', [PerfilController::class, 'mostrar']);
 Route::post('/panelusuario-modperfil', [PerfilController::class, 'modPerfil'])->name("home.modperfil");
@@ -63,7 +57,6 @@ Route::post('/panelusuario-mod_mi_reseña', [ResenyasController::class, 'mod'])-
 Route::get('/panelusuario-del_mi_resenya-{id}', [ResenyasController::class, 'delResenya'])->name("ResenyasController.delResenya");
 Route::post('/panelusuario-buscar_mi_resenya', [ResenyasController::class, 'buscar'])->name("ResenyasController.buscar");
 
-# ADMIN
 Route::get('/panelusuario/admin', [AdminController::class, 'mostrar']);
 
     Route::post('/panelusuario-crear', [AdminController::class, 'crear'])->name("AdminController.crear");
@@ -88,6 +81,10 @@ Route::post('/panelusuario-buscar', [AdminController::class, 'buscar'])->name("A
 
 Route::get('/panelusuario-sort-{column}', [AdminController::class, 'sort'])->name("AdminController.sort");
 
+
+/*
+█▀█ ▄▀█ █▄░█ █▀▀ █░░   █▀▄ █▀▀   █▀█ █▀▀ █▀ ▀█▀ ▄▀█ █░█ █▀█ ▄▀█ █▄░█ ▀█▀ █▀▀
+█▀▀ █▀█ █░▀█ ██▄ █▄▄   █▄▀ ██▄   █▀▄ ██▄ ▄█ ░█░ █▀█ █▄█ █▀▄ █▀█ █░▀█ ░█░ ██▄*/
 //MENUS DE RESTAURANTE
 Route::get('/restaurante-detalle-{id}', [RestauranteDetalleController::class, 'listaMenus'])->name("RestauranteDetalleController.listaMenus"); 
 
@@ -95,6 +92,10 @@ Route::get('/restaurante-detalle-{id}', [RestauranteDetalleController::class, 'l
 
 Route::get('/platos-menu-{id}', [RestauranteDetalleController::class, 'listaPlatos']);
 
+
+/*
+▀█▀ █▀▀ █▀ ▀█▀
+░█░ ██▄ ▄█ ░█░*/
 Route::get('/test', function () {
     $test = "__test__";
     return back()->with("test",$test);

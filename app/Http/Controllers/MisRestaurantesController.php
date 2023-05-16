@@ -29,12 +29,34 @@ class MisRestaurantesController extends Controller
 
         try{
 
+            error_log("Creando foto restaurante: " . $request->img);
+
+            $img = $request->img;
+
+            if($request->img){
+                $request->validate([
+                    'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+                ]);
+
+                if ($request->file()) {
+                    $imageoriginalName =  $request->file('img')->getClientOriginalName();
+                    $extension = $request->file('img')->getClientOriginalExtension();
+                    $imageName =  $request->id . "|" . "restaurante." . $extension;
+                    $filePath = $request->file('img')->storeAs('public/img/restaurante/', $imageName);
+
+                    $img =  $imageName;
+        
+                    error_log("Modificando foto perfil: " . $imageoriginalName);
+                }
+                
+            }
+
             Restaurante::create([
                 'nombre' => $request->nombre,
                 'direccion' => $request->direccion,
                 'telefono' => $request->telefono,
                 'descripcion' => $request->descripcion,
-                'img' => $request->img,
+                'img' => $img,
                 'users_id' => $request->users_id
             ]);
 
@@ -47,11 +69,34 @@ class MisRestaurantesController extends Controller
         }
 
         if($sql == true){ return back()->with("correcto","Restaurante creado correctamente");}
-
     }
 
     public function mod(Request $request){
+
         try{
+
+            $img = $request->img;
+
+            if($request->img){
+
+                error_log("Modificando foto restaurante: " . $request->img);
+
+
+                $request->validate([
+                    'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+                ]);
+
+                if ($request->file()) {
+                    $imageoriginalName =  $request->file('img')->getClientOriginalName();
+                    $extension = $request->file('img')->getClientOriginalExtension();
+                    $imageName =  $request->id . "|" . "restaurante." . $extension;
+                    $filePath = $request->file('img')->storeAs('public/img/restaurante/', $imageName);
+
+                    $img =  $imageName;
+        
+                }  
+            }
+
             Restaurante::where('id', $request->id)
             ->update([
                  'nombre' => $request->nombre,
@@ -109,5 +154,32 @@ class MisRestaurantesController extends Controller
     public function sort($columna){
         $columna_ordenada = DB::table('restaurante')->orderBy($columna)->get();
         return back()->with("sort-restaurantes", $columna_ordenada);
+    }
+
+    public function modfoto(Request $request){
+
+
+        $request->validate([
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+    
+        if ($request->file()) {
+            $imageoriginalName =  $request->file('img')->getClientOriginalName();
+            $extension = $request->file('img')->getClientOriginalExtension();
+            $imageName =  $request->email . "|" . "perfil." . $extension;
+            $filePath = $request->file('img')->storeAs('public/img/user/', $imageName);
+
+            error_log("Modificando foto perfil: " . $imageoriginalName);
+
+            DB::update(
+                "Update users set img=? where email=?",
+                [$imageName,$request->email]);
+
+            // Store $imageName to the database if needed
+    
+            return back()
+                ->with('successimg','Imagen subida correctamente.')
+                ->with('img', $imageName);
+        }
     }
 }

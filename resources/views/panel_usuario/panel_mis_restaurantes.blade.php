@@ -243,7 +243,7 @@
                     </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{route("MisRestaurantesController.crear")}}" method="POST">
+                        <form action="{{route("MisRestaurantesController.crear")}}" method="POST" enctype="multipart/form-data">
                             @csrf
       
                             <input type="text" name="users_id" value={{auth()->user()->id}} style="display:none" readonly>
@@ -264,10 +264,13 @@
                                 <label for="exampleInputPassword1">descripcion (obligatorio)</label>
                                 <input type="text" name="descripcion" class="form-control" id="exampleInputPassword1" placeholder="" required>
                             </div>
+
+                            <!--ＩＭＡＧＥＮ -->
                             <div class="form-group">
                                 <label for="exampleInputPassword1">img</label>
-                                <input type="text" name="img" class="form-control" id="exampleInputPassword1" placeholder="">
+                                <input type="file" name="img" class="form-control">
                             </div>
+
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                 <button type="submit" class="btn btn-primary">Guardar</button>
@@ -370,7 +373,7 @@
                                     <!--
                                     █▀▄▀█ █▀█ █▀▄ █ █▀▀ █ █▀▀ ▄▀█ █▀█   █▀█ █▀▀ █▀ ▀█▀ ▄▀█ █░█ █▀█ ▄▀█ █▄░█ ▀█▀ █▀▀
                                     █░▀░█ █▄█ █▄▀ █ █▀░ █ █▄▄ █▀█ █▀▄   █▀▄ ██▄ ▄█ ░█░ █▀█ █▄█ █▀▄ █▀█ █░▀█ ░█░ ██▄ -->
-                                    <form action="{{route("MisRestaurantesController.mod")}}" method="POST">
+                                    <form action="{{route("MisRestaurantesController.mod")}}" method="POST"  enctype="multipart/form-data">
                                         @csrf
                                         <!--Para identificar la tabla -->
                                         <input type="text" name="tabla" value="restaurante" style="display:none" readonly>
@@ -395,9 +398,11 @@
                                         <label for="exampleInputPassword1">descripcion</label>
                                         <input type="text" name="descripcion" class="form-control" id="exampleInputPassword1" placeholder="" value="{{$item->descripcion}}" required>
                                         </div>
+
+                                        <!--ＩＭＡＧＥＮ -->
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">img</label>
-                                            <input type="text" name="password" class="form-control" id="exampleInputPassword1" placeholder="" value="{{$item->img}}">
+                                            <input type="file" name="img" class="form-control">
                                         </div>
 
                                         <div class="modal-footer">
