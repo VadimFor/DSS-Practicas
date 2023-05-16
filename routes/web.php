@@ -101,6 +101,11 @@ Route::get('/restaurantes', [RestaurantesController::class, 'mostrar']);
 Route::post('/restaurantes_buscar', [RestaurantesController::class, 'buscar'])->name("RestaurantesController.buscar");
 
 
+/*
+█▀█ █▀▀ █▀ ▀█▀ ▄▀█ █▄░█ ▄▀█   ▄▀█ █▄▄ █▀█ █░█ ▀█▀   █░█ █▀
+█▀▀ ██▄ ▄█ ░█░ █▀█ █░▀█ █▀█   █▀█ █▄█ █▄█ █▄█ ░█░   █▄█ ▄█*/
+Route::get('/aboutus', function () {return view('about_us');});
+
 
 /*
 ▀█▀ █▀▀ █▀ ▀█▀

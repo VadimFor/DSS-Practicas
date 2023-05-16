@@ -27,9 +27,6 @@
     text-align: center;
     }
 
-    
-
-
 </style>
 
 
@@ -50,7 +47,7 @@
                 <a href="/restaurantes" class="bx bx-folder-plus nav-link mx-3 text-dark fs-5">Restaurantes</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="bx bx-folder-plus bx bxs-user-voice nav-link mx-3 text-dark fs-5">Contacto</a>
+                <a href="/aboutus" class="bx bx-folder-plus bx bxs-user-voice nav-link mx-3 text-dark fs-5">About us</a>
             </li>
             <li class="nav-item">
 
