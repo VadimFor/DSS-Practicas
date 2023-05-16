@@ -122,33 +122,36 @@
 
     <div class="d-flex" id="wrapper">
 
-    <!--
-        █▀ █ █▀▄ █▀▀ █▄▄ ▄▀█ █▀█
-        ▄█ █ █▄▀ ██▄ █▄█ █▀█ █▀▄-->
-    <div class="bg-white" id="sidebar-wrapper">
-        <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold border-bottom"><i
-                class="stylemain icon-main"></i><a href="/"class=" text-success">FudRater</a></div>
-        <div class="list-group list-group-flush my-3">
+        <!--
+            █▀ █ █▀▄ █▀▀ █▄▄ ▄▀█ █▀█
+            ▄█ █ █▄▀ ██▄ █▄█ █▀█ █▀▄-->
+        <div class="bg-white" id="sidebar-wrapper">
+            <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold border-bottom"><i
+                    class="stylemain icon-main"></i><a href="/"class=" text-success">FudRater</a></div>
+            <div class="list-group list-group-flush my-3">
 
 
-            <a href="/panelusuario/perfil" id="btn_perfil" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                    class="fas fa-tachometer-alt me-2"></i>Perfil</a>
+                <a href="/panelusuario/perfil" id="btn_perfil" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-tachometer-alt me-2"></i>Perfil</a>
 
-            <a href="{{route("MisRestaurantesController.mostrar",auth()->user()->id)}}" id="btn_restaurantes" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                    class="fas fa-project-diagram me-2"></i>Mis restaurantes</a>
+                <a href="{{route("MisRestaurantesController.mostrar",auth()->user()->id)}}" id="btn_restaurantes" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-project-diagram me-2"></i>Mis restaurantes</a>
 
-            <a href="{{route("ResenyasController.mostrar",auth()->user()->id)}}" class="list-group-item list-group-item-action bg-transparent second-text active"><i
-                    class="fas fa-project-diagram me-2"></i>Mis reseñas</a>
+                <a href="{{route("ResenyasController.mostrar",auth()->user()->id)}}" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                        class="fas fa-project-diagram me-2"></i>Mis reseñas</a>
 
-            <a href="/panelusuario/admin" id="btn_admin" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                    class="fas fa-project-diagram me-2"></i>Admin</a>
-            <a href="/logout" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
-                    class="fas fa-power-off me-2"></i>Logout</a>
+                @if(auth()->user()->is_admin)
+                    <a href="/panelusuario/admin" id="btn_admin" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                            class="fas fa-project-diagram me-2"></i>Admin</a>
+                @endif
+
+                <a href="/logout" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
+                        class="fas fa-power-off me-2"></i>Logout</a>
+            </div>
         </div>
-    </div>
 
-        <!-- Page Content -->
-    <div id="page-content-wrapper">
+            <!-- Page Content -->
+        <div id="page-content-wrapper">
 
             <!--█▄░█ ▄▀█ █░█ █▄▄ ▄▀█ █▀█
                 █░▀█ █▀█ ▀▄▀ █▄█ █▀█ █▀▄-->
@@ -180,67 +183,146 @@
                     </ul>
                 </div>
             </nav>
-   
-        <!-- █▀▀ █▀█ █▄░█ ▀█▀ ▄▀█ █▀▄ █▀█ █▀█   █▀█ █▀▀ █▀ █▀▀ █▄░█ ▄▀█ █▀
-             █▄▄ █▄█ █░▀█ ░█░ █▀█ █▄▀ █▄█ █▀▄   █▀▄ ██▄ ▄█ ██▄ █░▀█ █▀█ ▄█ -->
-        <div class="col-md-3 " style="margin: 0 auto; text-align:center;">
-            <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                <div>
-                    <h3 class="fs-2">{{$mis_resenyas_cont}}</h3>
-                    <p class="fs-5">Reseñas</p>
+    
+            <!-- █▀▀ █▀█ █▄░█ ▀█▀ ▄▀█ █▀▄ █▀█ █▀█   █▀█ █▀▀ █▀ █▀▀ █▄░█ ▄▀█ █▀
+                 █▄▄ █▄█ █░▀█ ░█░ █▀█ █▄▀ █▄█ █▀▄   █▀▄ ██▄ ▄█ ██▄ █░▀█ █▀█ ▄█ -->
+            <div class="col-md-3 " style="margin: 0 auto; text-align:center;">
+                <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                    <div>
+                        <h3 class="fs-2">{{$mis_resenyas_cont}}</h3>
+                        <p class="fs-5">Reseñas</p>
+                    </div>
+                    <div class="primary-text secondary-bg iconos icon-comentarios" ></div>
                 </div>
-                <div class="primary-text secondary-bg iconos icon-comentarios" ></div>
             </div>
-        </div>
 
-        <!--█▀▀ ▀█▀ █ █▀█ █░█ █▀▀ ▀█▀ ▄▀█ █▀
-            ██▄ ░█░ █ ▀▀█ █▄█ ██▄ ░█░ █▀█ ▄█ -->
-        <div class="p-5 table-responsive">
+            <!--█▀▀ ▀█▀ █ █▀█ █░█ █▀▀ ▀█▀ ▄▀█ █▀
+                ██▄ ░█░ █ ▀▀█ █▄█ ██▄ ░█░ █▀█ ▄█ -->
+            <div class="p-5 table-responsive">
+
+                @if (session("correcto"))
+                <div class="aler alert-success text-center">{{session("correcto")}}</div>
+                @endif
+                @if (session("incorrecto"))
+                <div class="aler alert-danger text-center">{{session("incorrecto")}}</div>
+                @endif
+            
+                <!--█████ ＢＡＲＲＡ ＤＥ ＢＵＳＣＡＲ █████-->
+                <form action="{{ route('ResenyasController.buscar') }}" method="POST">
+                    @csrf
+                    <div class="input-group mb-3">
+                        <input type="text" name="tabla" value="valoracion" style="display:none" readonly><!--Para identificar la tabla -->
+                        <input type="text" name="busqueda-valoracion" class="form-control" placeholder="Buscar valoración" aria-label="Buscar valoración">
+                        <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+                    </div>
+                </form>
+
+ 
+                <!--
+                █▀▀ █▀█ █▄░█ ▀█▀ █▀▀ █▄░█ █▀▀ █▀▄ █▀█ █▀█   █▄▄ █░█ █▀ █▀█ █░█ █▀▀ █▀▄ ▄▀█ █▀
+                █▄▄ █▄█ █░▀█ ░█░ ██▄ █░▀█ ██▄ █▄▀ █▄█ █▀▄   █▄█ █▄█ ▄█ ▀▀█ █▄█ ██▄ █▄▀ █▀█ ▄█ -->
+
+                @if(session('search-valoracion') && session('search-valoracion') != NULL)
+                    <div class="container">
+
+                        <div class="row">
+
+                        <!--█████ ＢＵＣＬＥ █████-->
+                            @foreach (session('search-valoracion') as $item)
+                                <div class="col-lg-4 mb-3 ">
+
+                                    <div class="card border-danger" style="background-color: rgb(198, 243, 243)">
+
+                                        <div class="d-flex p-3 just-content-start align-items-center">
+                                            <img src="https://cdn.pixabay.com/photo/2016/11/18/14/05/brick-wall-1834784_960_720.jpg" alt="" class="mr-4">
+
+                                            <div class="name-job-review">
+                                                <p class="font-weight-bold mb-0"> {{$item->menu_nombre}}</p>
+                                                <p class="text-muted mb-0">{{$item->dir}}</p>
+
+                                                <ul class="list-inline text-center m-0">
+                                                    @for ($i = 0; $i < 5; $i++)
+                                                        @if ($i < $item->puntuacion)
+                                                            <li class="list-inline-item"> <i class="fas fa-star"></i></li>
+                                                        @else
+                                                            <li class="list-inline-item"> <i class="far fa-star"></i></li>      
+                                                        @endif
+                                                    @endfor
+                                                    </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-body">
+                                            <blockquote class="blockquote">
+                                                <p class="mb-0 " style="font-size: 17px"> <i class="fas fa-quote-left text-danger fw-bold"></i> {{$item->comentario}}</p>
+                                            </blockquote>
+                                        </div>
+                                        <a href=""  data-bs-toggle="modal" data-bs-target="#modalEditarReseña{{$item->id}}" class="btn btn-primary fw-bold"> Editar</a>
+                                        <a href="{{route("ResenyasController.delResenya",$item->id)}}" onclick="return res('{{$item->menu_nombre}}')"  class="btn btn-danger btn-sm"> Eliminar</a>
+
+                                        <!--█▀▄▀█ █▀█ █▀▄ █ █▀▀ █ █▀▀ ▄▀█ █▀█   █▀█ █▀▀ █▀ █▀▀ █▄░█ ▄▀█
+                                            █░▀░█ █▄█ █▄▀ █ █▀░ █ █▄▄ █▀█ █▀▄   █▀▄ ██▄ ▄█ ██▄ █░▀█ █▀█-->
+                                        <div class="modal fade" id="modalEditarReseña{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Modificar reseña</h5>
+                                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{{route("ResenyasController.mod")}}" method="POST">
+                                                        @csrf
+                                                        <input type="text" name="id" value="{{$item->id}}" style="display:none" readonly>
+
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Menu</label>
+                                                            <input type="text" name="nombre" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$item->menu_nombre}}" readonly>
+                                                        </div>
+                                                        <div class="form-group">
+                                                        <label for="exampleInputEmail1">Puntuación (0 a 5)</label>
+                                                        <input type="number" name="puntuacion" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$item->puntuacion}}" min="0" max="5"  required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1">Comentario</label>
+                                                            <input type="text" name="comentario" class="form-control" id="exampleInputPassword1" placeholder="" value="{{$item->comentario}}" required>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                                        </div>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+            
+                            @endforeach
+
+                        
+                        </div>
+
+                    </div>
+                @endif
 
 
-        @if (session("correcto"))
-        <div class="aler alert-success text-center">{{session("correcto")}}</div>
-        @endif
-        @if (session("incorrecto"))
-        <div class="aler alert-danger text-center">{{session("incorrecto")}}</div>
-        @endif
-        
-            <!--█████ ＢＡＲＲＡ ＤＥ ＢＵＳＣＡＲ █████-->
-            <form action="{{ route('ResenyasController.buscar') }}" method="POST">
-                @csrf
-                <div class="input-group mb-3">
-                    <input type="text" name="tabla" value="valoracion" style="display:none" readonly><!--Para identificar la tabla -->
-                    <input type="text" name="busqueda-valoracion" class="form-control" placeholder="Buscar valoración" aria-label="Buscar valoración">
-                    <button class="btn btn-outline-secondary" type="submit">Buscar</button>
-                </div>
-            </form>
-
-            @if(session('search-valoracion') && session('search-valoracion') != NULL)
-                <p>Resultados de la búsqueda:</p>
-                @php $arr = [session('search-valoracion'), $mis_resenyas]; @endphp
-            @else
-                @php $arr = [$mis_resenyas];@endphp
-            @endif
-
-            <!--█████ ＢＵＣＬＥ █████-->
-            @for ($i = 0; $i < count($arr); $i++)
-
+                <!--
+                █▀▀ █▀█ █▄░█ ▀█▀ █▀▀ █▄░█ █▀▀ █▀▄ █▀█ █▀█   █▄░█ █▀█ █▀█ █▀▄▀█ ▄▀█ █░░
+                █▄▄ █▄█ █░▀█ ░█░ ██▄ █░▀█ ██▄ █▄▀ █▄█ █▀▄   █░▀█ █▄█ █▀▄ █░▀░█ █▀█ █▄▄ -->
                 <div class="container">
-                    <div class="row">
-                        @foreach ($arr[$i] as $item)
+
+                    <div class="row">     
+
+                        @foreach ($mis_resenyas as $item)
 
                             <div class="col-lg-4 mb-3 ">
 
-                                <!-- CAMBIAR COLOR DE LA TABLA DE BÚSQUEDAS-->
-                                @if(count($arr) == 2)
-                                    @if($i == 0) 
-                                    <div class="card border-danger" style="background-color: rgb(198, 243, 243)">
-                                    @else
-                                    <div class="card border-danger">
-                                    @endif
-                                @else
-                                    <div class="card border-danger">
-                                @endif
+                                <div class="card border-danger">
 
                                     <div class="d-flex p-3 just-content-start align-items-center">
                                         <img src="https://cdn.pixabay.com/photo/2016/11/18/14/05/brick-wall-1834784_960_720.jpg" alt="" class="mr-4">
@@ -257,7 +339,7 @@
                                                         <li class="list-inline-item"> <i class="far fa-star"></i></li>      
                                                     @endif
                                                 @endfor
-                                             </ul>
+                                            </ul>
                                         </div>
                                     </div>
 
@@ -312,21 +394,20 @@
                             </div>
         
                         @endforeach
+                    
                     </div>
+
+                    <div style="display: flex; justify-content: center;">
+                        {{ $mis_resenyas->links() }} <!-- Para mostrar el tab con las paginas del PAGINATION -->
+                    </div>
+
                 </div>
 
-            @endfor
 
-            <div style="display: flex; justify-content: center;">
-                {{ $mis_resenyas->links() }} <!-- Para mostrar el tab con las paginas del PAGINATION -->
             </div>
-
+            
         </div>
 
-
-        </div>
-    </div>
-    <!-- /#page-content-wrapper -->
     </div>
 
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>

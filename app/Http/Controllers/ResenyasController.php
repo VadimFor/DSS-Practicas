@@ -42,12 +42,14 @@ class ResenyasController extends Controller
         ->where(function ($query) use ($keywords) {
             foreach ($keywords as $keyword) {
                 $query->orWhere('valoracion.puntuacion', 'LIKE', "%$keyword%")
-                    ->orWhere('valoracion.comentario', 'LIKE', "%$keyword%");
+                    ->orWhere('valoracion.comentario', 'LIKE', "%$keyword%")
+                    ->orWhere('menu.nombre', 'LIKE', "%$keyword%")
+                    ->orWhere('restaurante.direccion', 'LIKE', "%$keyword%");
             }
         })
         ->get();
 
-        error_log($search);
+        error_log("Mis valoraciones encontradas = " . count($search));
     
         return back()->with("search-valoracion", $search);
     }

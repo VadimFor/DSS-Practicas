@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Restaurante;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Exception;
 
 use Illuminate\Http\Request;
 
@@ -39,10 +40,13 @@ class MisRestaurantesController extends Controller
 
             $sql=1;
 
-        }catch(\Illuminate\Database\QueryException $th){error_log($th); $sql = 0;}
+        }catch(Exception $e){
+            error_log($e->getMessage()); 
+            $sql = 0;
+            return back()->with("incorrecto","Error, restaurante no creado: " . $e->getMessage());
+        }
 
         if($sql == true){ return back()->with("correcto","Restaurante creado correctamente");}
-        else{ return back()->with("incorrecto","Error, restaurante no creado");}
 
     }
 

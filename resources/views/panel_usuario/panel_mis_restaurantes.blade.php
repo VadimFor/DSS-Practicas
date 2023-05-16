@@ -161,9 +161,10 @@
             <a href="{{route("ResenyasController.mostrar",auth()->user()->id)}}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                     class="fas fa-project-diagram me-2"></i>Mis reseñas</a>
 
-            <a href="/panelusuario/admin" id="btn_admin" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                    class="fas fa-project-diagram me-2"></i>Admin</a>
-
+            @if(auth()->user()->is_admin)
+                <a href="/panelusuario/admin" id="btn_admin" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-project-diagram me-2"></i>Admin</a>
+            @endif
 
             <a href="/logout" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                     class="fas fa-power-off me-2"></i>Logout</a>
@@ -242,10 +243,10 @@
                     </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{route("AdminController.crear")}}" method="POST">
+                        <form action="{{route("MisRestaurantesController.crear")}}" method="POST">
                             @csrf
-                            <!--Para identificar la tabla -->
-                            <input type="text" name="tabla" value="restaurante" style="display:none" readonly>
+      
+                            <input type="text" name="users_id" value={{auth()->user()->id}} style="display:none" readonly>
     
                             <div class="form-group">
                                 <label for="exampleInputPassword1">nombre (obligatorio)</label>
@@ -287,7 +288,7 @@
         <!--
         █▄▄ █░█ █▀ █▀▀ ▄▀█ █▀█   █▀█ █▀▀ █▀ ▀█▀ ▄▀█ █░█ █▀█ ▄▀█ █▄░█ ▀█▀ █▀▀
         █▄█ █▄█ ▄█ █▄▄ █▀█ █▀▄   █▀▄ ██▄ ▄█ ░█░ █▀█ █▄█ █▀▄ █▀█ █░▀█ ░█░ ██▄-->
-        <form action="{{ route('AdminController.buscar') }}" method="POST">
+        <form action="{{ route('MisRestaurantesController.buscar') }}" method="POST">
             @csrf
             <div class="input-group mb-3">
                 <input type="text" name="tabla" value="restaurante" style="display:none" readonly><!--Para identificar la tabla -->
@@ -318,9 +319,9 @@
             <!-- CAMBIAR COLOR DE LA TABLA DE BÚSQUEDAS-->
             @if(count($arr) == 2)
                 @if($i == 0) 
-                <table class="table bg-white rounded shadow-sm table-bordered table-hover table-info ">
+                    <table class="table bg-white rounded shadow-sm table-bordered table-hover table-info ">
                 @else
-                <table class="table bg-white rounded shadow-sm table-bordered table-hover">
+                    <table class="table bg-white rounded shadow-sm table-bordered table-hover">
                 @endif
             @else
                 <table class="table bg-white rounded shadow-sm table-bordered table-hover">
@@ -328,12 +329,12 @@
 
                 <thead>
                     <tr>
-                        <th scope="col" width="50"><a href="{{route("AdminController.sort", 'restaurantes-id')}}">#</a></th>
-                        <th scope="col"><a href="{{route("AdminController.sort", 'restaurantes-nombre')}}">nombre</a></th>
-                        <th scope="col"><a href="{{route("AdminController.sort", 'restaurantes-direccion')}}">direccion</a></th>
-                        <th scope="col"><a href="{{route("AdminController.sort", 'restaurantes-telefono')}}">telefono</a></th>
-                        <th scope="col"><a href="{{route("AdminController.sort", 'restaurantes-descripcion')}}">descripcion</a></th>
-                        <th scope="col"><a href="{{route("AdminController.sort", 'restaurantes-img')}}">img</a></th>
+                        <th scope="col" width="50"><a href="{{route("MisRestaurantesController.sort", 'restaurantes-id')}}">#</a></th>
+                        <th scope="col"><a href="{{route("MisRestaurantesController.sort", 'restaurantes-nombre')}}">nombre</a></th>
+                        <th scope="col"><a href="{{route("MisRestaurantesController.sort", 'restaurantes-direccion')}}">direccion</a></th>
+                        <th scope="col"><a href="{{route("MisRestaurantesController.sort", 'restaurantes-telefono')}}">telefono</a></th>
+                        <th scope="col"><a href="{{route("MisRestaurantesController.sort", 'restaurantes-descripcion')}}">descripcion</a></th>
+                        <th scope="col"><a href="{{route("MisRestaurantesController.sort", 'restaurantes-img')}}">img</a></th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
@@ -352,7 +353,7 @@
                             █▀▀ █░░ █ █▀▄▀█ █ █▄░█ ▄▀█ █▀█   █▀█ █▀▀ █▀ ▀█▀ ▄▀█ █░█ █▀█ ▄▀█ █▄░█ ▀█▀ █▀▀
                             ██▄ █▄▄ █ █░▀░█ █ █░▀█ █▀█ █▀▄   █▀▄ ██▄ ▄█ ░█░ █▀█ █▄█ █▀▄ █▀█ █░▀█ ░█░ ██▄-->
                             <a href=""  data-bs-toggle="modal" data-bs-target="#modalEditarRestaurante{{$item->id}}" class="btn btn-warning btn-sm styleiconos icon-editar"></a>
-                            <a href="{{route("AdminController.delRestaurante",$item->id)}}" onclick="return res('{{$item->nombre}}')"  class="btn btn-danger btn-sm styleiconos icon-basura"></a>
+                            <a href="{{route("MisRestaurantesController.delRestaurante",$item->id)}}" onclick="return res('{{$item->nombre}}')"  class="btn btn-danger btn-sm styleiconos icon-basura"></a>
                         </td>
 
                         <!-- Modal de modificar datos de la tabla-->
@@ -369,7 +370,7 @@
                                     <!--
                                     █▀▄▀█ █▀█ █▀▄ █ █▀▀ █ █▀▀ ▄▀█ █▀█   █▀█ █▀▀ █▀ ▀█▀ ▄▀█ █░█ █▀█ ▄▀█ █▄░█ ▀█▀ █▀▀
                                     █░▀░█ █▄█ █▄▀ █ █▀░ █ █▄▄ █▀█ █▀▄   █▀▄ ██▄ ▄█ ░█░ █▀█ █▄█ █▀▄ █▀█ █░▀█ ░█░ ██▄ -->
-                                    <form action="{{route("AdminController.mod")}}" method="POST">
+                                    <form action="{{route("MisRestaurantesController.mod")}}" method="POST">
                                         @csrf
                                         <!--Para identificar la tabla -->
                                         <input type="text" name="tabla" value="restaurante" style="display:none" readonly>

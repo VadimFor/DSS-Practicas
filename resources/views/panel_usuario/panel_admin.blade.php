@@ -122,6 +122,7 @@
 
                 <a href="/panelusuario/admin" id="btn_admin" class="list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-project-diagram me-2"></i>Admin</a>
+
                 <a href="/logout" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
             </div>
@@ -161,33 +162,35 @@
                 </div>
             </nav>
 
-            <!--
-            █ █▄░█ █▀▀ █░░ █░█ █▀▄ █▀▀ █▀
-            █ █░▀█ █▄▄ █▄▄ █▄█ █▄▀ ██▄ ▄█-->
+            @if(auth()->user()->is_admin)
 
-        
-            @include('panel_usuario.admin.panel_admin_contador')
+                <!--
+                █ █▄░█ █▀▀ █░░ █░█ █▀▄ █▀▀ █▀
+                █ █░▀█ █▄▄ █▄▄ █▄█ █▄▀ ██▄ ▄█-->
 
-            @if (@isset($errors) && count($errors) > 0)
-
-            <div class="alert alert-danger">
-                <ul class="list-unstyled mb-0">
-                    @foreach ($errors->all() as $error)
-                        <li> {{$error}}</li>
-                    @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            @include('panel_usuario.admin.panel_admin_restaurante')
-            @include('panel_usuario.admin.panel_admin_menu')
-            @include('panel_usuario.admin.panel_admin_plato')
             
-            @include('panel_usuario.admin.panel_admin_valoraciones')
+                @include('panel_usuario.admin.panel_admin_contador')
 
-            @include('panel_usuario.admin.panel_admin_users')
+                @if (@isset($errors) && count($errors) > 0)
 
+                <div class="alert alert-danger">
+                    <ul class="list-unstyled mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li> {{$error}}</li>
+                        @endforeach
+                        </ul>
+                    </div>
+                @endif
 
+                @include('panel_usuario.admin.panel_admin_restaurante')
+                @include('panel_usuario.admin.panel_admin_menu')
+                @include('panel_usuario.admin.panel_admin_plato')
+                
+                @include('panel_usuario.admin.panel_admin_valoraciones')
+
+                @include('panel_usuario.admin.panel_admin_users')
+
+            @endif
         </div>
     </div>
     <!-- /#page-content-wrapper -->

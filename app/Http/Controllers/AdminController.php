@@ -18,7 +18,7 @@ use Illuminate\Pagination\Paginator;
 
 class AdminController extends Controller
 {
-
+    /*
     //METODO PARA MOSTRAR LAS TABLAS DE ADMIN EL LA HOME PAGE DE LA WEB (requerido entrega_2)
     public function mostrar_entrega2(){
 
@@ -38,7 +38,7 @@ class AdminController extends Controller
         ->with("restaurante_cont",$restaurante_cont)->with("valoracion_cont",$valoracion_cont)->with("restaurantes",$restaurantes)->with("menus",$menus)->with("platos",$platos)
         ->with("valoraciones",$valoraciones);
 
-    }
+    }*/
 
     public function mostrar(){
 
