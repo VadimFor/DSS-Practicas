@@ -184,12 +184,12 @@ async function recuperarPlatosMenu(id, nombre, precio) {
      <div class="header flex-container centro" > <!--CONTENEDOR VERDE -->
 
 
-        <img src="{{url($restaurante->first()->img)}}" alt="resto-img" style="width: 30%;height: 400px;margin: 2%;border-radius: 8%;border: 8px solid #75a689;">
+        <img src="{{url($restaurante->img)}}" alt="resto-img" style="width: 30%;height: 400px;margin: 2%;border-radius: 8%;border: 8px solid #75a689;">
       <div style="justify-content: center;padding:1%;font-weight:bold;font-variant:small-caps;text-shadow: 2px 1px green;">
-        <h1>{{$restaurante->first()->nombre}}</h1>
-        <h2>{{$restaurante->first()->descripcion}}</h2>
-        <h4 style="padding-left:20px;">Dirección: {{$restaurante->first()->direccion}}</h4>
-        <h4 style="padding-left:20px;">Telefono: {{$restaurante->first()->telefono}}</h4>
+        <h1>{{$restaurante->nombre}}</h1>
+        <h2>{{$restaurante->descripcion}}</h2>
+        <h4 style="padding-left:20px;">Dirección: {{$restaurante->direccion}}</h4>
+        <h4 style="padding-left:20px;">Telefono: {{$restaurante->telefono}}</h4>
 
         @auth <!--Solo usuario logueados -->
 
