@@ -13,15 +13,18 @@
             .main{
               margin: 2%;
             }
-
+            
             .card{
-                width: 20%;
+                width: 15%;
                 display: inline-block;
                 box-shadow: 2px 2px 20px black;
                 border-radius: 5px; 
                 margin: 2%;
                 padding: 5%;
+                display: center;
+                
                 }
+
 
             .image img{
             width: 100%;
@@ -49,27 +52,27 @@
             }
 
             .des{
-            padding: 3px;
-            text-align: center;
-            
-            padding-top: 10px;
-            padding-bottom: 15px;
-            border-bottom-right-radius: 5px;
-            border-bottom-left-radius: 5px;
+              padding: 3px;
+              text-align: center;
+              
+              padding-top: 10px;
+              padding-bottom: 15px;
+              border-bottom-right-radius: 5px;
+              border-bottom-left-radius: 5px;
             }
             button{
-            margin-top: 40px;
-            margin-bottom: 10px;
-            background-color: white;
-            border: 1px solid black;
-            border-radius: 5px;
-            padding:10px;
+              margin-top: 40px;
+              margin-bottom: 10px;
+              background-color: white;
+              border: 1px solid black;
+              border-radius: 5px;
+              padding:10px;
             }
             button:hover{
-            background-color: rgb(146, 198, 155);
-            color: white;
-            transition: .5s;
-            cursor: pointer;
+              background-color: rgb(146, 198, 155);
+              color: white;
+              transition: .5s;
+              cursor: pointer;
             }
 
             .fa-star, .fa-star-half-alt{
@@ -98,13 +101,10 @@
               align-items: center;
             }
 
-
         </style>
         <title>Detalle Menu</title>
 
     </head>
-
-
 
 <body>
 <script>
@@ -279,7 +279,7 @@ async function recuperarPlatosMenu(id, nombre, precio) {
   █░▀░█ ██▄ █░▀█ █▄█ ▄█-->
     <div>        
         <div>
-            <div class="main card-deck">
+            <div  class="main card-deck ">          
 
               @php
                   $j = 0;
@@ -287,7 +287,7 @@ async function recuperarPlatosMenu(id, nombre, precio) {
             
             @foreach ($menus as $menu)
 
-                <div class="card des button">
+                <div class="card des " style="min-block-size: 400px" >
 
                    <!--ＩＭＡＧＥＮ -->
                     @if ($menu->img == NULL || !$menu->img || $menu->img=="")
