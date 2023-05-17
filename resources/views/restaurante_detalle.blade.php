@@ -183,9 +183,16 @@ async function recuperarPlatosMenu(id, nombre, precio) {
     █▀▄ ██▄ ▄█ ░█░ █▀█ █▄█ █▀▄ █▀█ █░▀█ ░█░ ██▄-->
      <div class="header flex-container centro" > <!--CONTENEDOR VERDE -->
 
+      <!--ＩＭＡＧＥＮ -->
+      @if ($restaurante->img == NULL || !$restaurante->img || $restaurante->img=="")
+        <img src="{{'storage/img/restaurante/restaurante.jpg'}}" style="width: 30%;height: 400px;margin: 2%;border-radius: 8%;border: 8px solid #75a689;">
+      @else
+        <img src="{{asset('storage/img/restaurante/'.$restaurante->img)}}" style="width: 30%;height: 400px;margin: 2%;border-radius: 8%;border: 8px solid #75a689;"> 
+      @endif    
 
-        <img src="{{url($restaurante->img)}}" alt="resto-img" style="width: 30%;height: 400px;margin: 2%;border-radius: 8%;border: 8px solid #75a689;">
+
       <div style="justify-content: center;padding:1%;font-weight:bold;font-variant:small-caps;text-shadow: 2px 1px green;">
+
         <h1>{{$restaurante->nombre}}</h1>
         <h2>{{$restaurante->descripcion}}</h2>
         <h4 style="padding-left:20px;">Dirección: {{$restaurante->direccion}}</h4>
@@ -240,7 +247,7 @@ async function recuperarPlatosMenu(id, nombre, precio) {
 
                             <!--ＩＭＡＧＥＮ -->
                             <div class="form-group">
-                              <label for="exampleInputPassword1">img (solo .jgp)</label>
+                              <label for="exampleInputPassword1">img</label>
                               <input type="file" name="img" class="form-control">
                             </div>
 

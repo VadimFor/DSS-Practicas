@@ -47,7 +47,7 @@ class RestauranteDetalleController extends Controller
         $img = $request->img;
 
         if($request->img == NULL){
-            $img =  '/public/storage/img/user/menu.png';
+            $img =  'menu.png';
         }
 
         try{
