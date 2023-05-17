@@ -25,9 +25,9 @@ class RestauranteSeeder extends Seeder
         $telefonos = [998456763, 986237419, 917543612, 925371864, 932456712, 941235678, 968743219, 956372841, 982364175, 971234568];
         $descripciones = ['La mejor comida mediterránea', 'Ambiente relajado y acogedor', 'Productos de la tierra y vinos selectos', 'Especialidades regionales y tapas', 'Cervezas artesanas y cócteles', 'Cocina tradicional con toques modernos', 'Asados y carnes a la brasa', 'Comida internacional y música en vivo', 'Vistas panorámicas de la ciudad', 'Platos caseros y postres de autor'];
         
-        $images = ['Casa-Paco-2-2.jpg','el-jardin-secreto.jpg','elbodegon.jpg','LA-TABERNA-4.jpeg',
-                    'lacantina.jpeg','elrincondelaabuela.jpg','elasador.jpg','labrasserie.jpg',
-                    'elmiradorrestaurante.jpg','elrincondepepe.jpg'];
+        $images = ['paco.jpg','jardin.jpg','elbodegon.jpg','taberna.jpeg',
+                    'lacantina.jpeg','rincon.jpg','elasador.jpg','labrasserie.jpg',
+                    'mirador.jpg','pepe.jpg'];
 
         // Loop through the arrays and insert the data into the database
         for ($i = 0; $i < 10; $i++) {
@@ -36,10 +36,9 @@ class RestauranteSeeder extends Seeder
                 'direccion' => $direcciones[$i],
                 'telefono' =>  $telefonos[$i],
                 'descripcion' => $descripciones[$i],
-                'img' => $i + "|" + $images[$i],
+                'img' => strval($i+1) . '|' .  $images[$i],
                 'users_id' => 1
             ]);
         }
-
     }
 }

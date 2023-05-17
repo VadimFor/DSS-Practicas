@@ -195,47 +195,58 @@ async function recuperarPlatosMenu(id, nombre, precio) {
 
           @if ($mi_restaurante == true) <!-- Si el restaurante pertenece al usuario logeado-->
 
+            <!--ＭＥＮＳＡＪＥ ＣＯＲＲＥＣＴＯ Ｏ ＮＯ -->             
+            @if (session("correcto"))
+                <div class="alert alert-success">{{session("correcto")}}</div>
+            @endif
+            @if (session("incorrecto"))
+            <div class="alert alert-danger">{{session("incorrecto")}}</div>
+            @endif
+
             <!--ＢＯＴＯＮ ＣＲＥＡＲ ＭＥＮＵ -->
             <button style="width:100%; font-size:25px; border-radius: 5%; border: thick double #32a1ce;" class="btn mt-5" data-bs-toggle="modal" data-bs-target="#modalCrearMenu" >Añadir menú</button>  
         
             <!--
             █▀▄▀█ █▀█ █▀▄ ▄▀█ █░░   █▀▀ █▀█ █▀▀ ▄▀█ █▀█   █▀▄▀█ █▀▀ █▄░█ █░█
             █░▀░█ █▄█ █▄▀ █▀█ █▄▄   █▄▄ █▀▄ ██▄ █▀█ █▀▄   █░▀░█ ██▄ █░▀█ █▄█-->
-            <div class="modal fade" id="modalCrearMenu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div style="font-size:25px; " class="modal fade" id="modalCrearMenu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Crear menu</h5>
+                <div class="modal-content" style="border-radius: 5%;">
+  
+                    <div class="modal-header text-center">
+                    <h2 style="width:100%;text-align: center;" class="modal-title " id="exampleModalLabel">Crear menu</h2>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     </div>
-                    <div class="modal-body">
-                        <form action="{{route("AdminController.crear")}}" method="POST">
+                    <div class="modal-body" style="text-shadow: none; ">
+                        <form action="{{route("RestauranteDetalleController.crear")}}" method="POST">
                             @csrf
-                            <!--Para identificar la tabla -->
-                            <input type="text" name="tabla" value="menu" style="display:none" readonly>
-    
+
                             <div class="form-group">
                                 <label for="exampleInputPassword1">nombre (obligatorio)</label>
                                 <input type="text" name="nombre" class="form-control" id="exampleInputPassword1" placeholder="" required>
                               </div>
+
+                            <div class="form-group">
+                              <label for="exampleInputPassword1">precio (obligatorio)</label>
+                              <input type="number" name="precio" class="form-control" id="exampleInputPassword1" placeholder="" required min="1" max="999" required>
+                            </div>
+
                             <div class="form-group">
                               <label for="exampleInputEmail1">descripcion </label>
                               <input type="text" name="descripcion" class="form-control" id="exampleInputEmail1" placeholder="">
                             </div>
+
+                            <!--ＩＭＡＧＥＮ -->
                             <div class="form-group">
-                              <label for="exampleInputPassword1">precio (obligatorio)</label>
-                              <input type="text" name="precio" class="form-control" id="exampleInputPassword1" placeholder="" required>
+                              <label for="exampleInputPassword1">img</label>
+                              <input type="file" name="img" class="form-control">
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">restaurante_id (obligatorio)</label>
-                                <input type="text" name="restaurante_id" class="form-control" id="exampleInputPassword1" placeholder="" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">img</label>
-                                <input type="text" name="img" class="form-control" id="exampleInputPassword1" placeholder="">
-                            </div>
+
+                            <input type="text" name="restaurante_id" value="{{$restaurante->id}}" style="display:none" readonly>
+
+
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                 <button type="submit" class="btn btn-primary">Guardar</button>
@@ -265,22 +276,32 @@ async function recuperarPlatosMenu(id, nombre, precio) {
             <div class="main card-deck">
             
             @foreach ($menus as $menu)
+
                 <div class="card des button">
+
+                    <!--ＩＭＡＧＥＮ -->
                     <img onclick="recuperarPlatosMenu({{$menu->id}}, '{{$menu->nombre}}', {{$menu->precio}})" src="{{url($menu->img)}}" alt="img" data-toggle="modal" data-target="#menuModal" style="display:block;margin-left: auto;margin-right: auto;object-fit:contain;border-radius: 50%;max-width:90%;padding-bottom: inherit;">
-                    <h4 class="thick">{{$menu->nombre}}</h4>
-                    <p>{{$menu->descripcion}}</p>
-                    <p class="thick"> Precio: {{$menu->precio}}€</p>
                     
+                    <!--ＮＯＭＢＲＥ -->
+                    <h4 class="thick">{{$menu->nombre}}</h4>
+
+                    <!--ＤＥＳＣＲＩＰＣＩＯＮ -->
+                    <p>{{$menu->descripcion}}</p>
+
+                    <!--ＰＲＥＣＩＯ -->
+                    <p class="thick"> Precio: {{$menu->precio}}€</p>    
+
+                    <!--ＥＳＴＲＥＬＬＡＳ  -->
                     <ul class="list-inline text-center m-0">
-                    @foreach ($valoracionesPorMenu[$menu->id] as $valoracion)
-                        @for ($i = 1; $i <= 5; $i++)
-                            @if ($i <= $valoracion->puntuacion)
-                                <li class="list-inline-item"><i class="fas fa-star"></i></li>
-                            @else
-                                <li class="list-inline-item"><i class="far fa-star"></i></li>
-                            @endif
-                        @endfor
-                    @endforeach
+                      @foreach ($valoracionesPorMenu[$menu->id] as $valoracion)
+                          @for ($i = 1; $i <= 5; $i++)
+                              @if ($i <= $valoracion->puntuacion)
+                                  <li class="list-inline-item"><i class="fas fa-star"></i></li>
+                              @else
+                                  <li class="list-inline-item"><i class="far fa-star"></i></li>
+                              @endif
+                          @endfor
+                      @endforeach
                     </ul>                    
                 </div>
             @endforeach

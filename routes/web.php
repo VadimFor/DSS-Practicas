@@ -92,6 +92,7 @@ Route::get('/restaurante-detalle-{id}', [RestauranteDetalleController::class, 'l
 // Route::get('/platos-menu-{id}',function(){return [1, 2, 3];});
 
 Route::get('/platos-menu-{id}', [RestauranteDetalleController::class, 'listaPlatos']);
+Route::post('/restaurante-detalle-crear', [RestauranteDetalleController::class, 'crear'])->name("RestauranteDetalleController.crear");
 
 
 /*

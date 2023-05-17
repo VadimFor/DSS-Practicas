@@ -147,9 +147,7 @@
                     </ul>
                 </div>
             </nav>
-
             
-
 <div class="container rounded bg-white mt-1 mb-1">
 
     <div class="row">

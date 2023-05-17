@@ -45,7 +45,7 @@ class PerfilController extends Controller
 
 
         $request->validate([
-            'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
     
         if ($request->file()) {
