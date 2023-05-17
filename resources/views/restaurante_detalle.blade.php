@@ -38,12 +38,12 @@
             }
 
             h1{
-                font-size: 50px;
+                font-size: 40px;
                 font-weight: bold;
                 padding: 20px;
             }
             h2{
-                font-size: 30px;
+                font-size: 25px;
                 padding: 20px;
             
             }
@@ -66,7 +66,7 @@
             padding:10px;
             }
             button:hover{
-            background-color: black;
+            background-color: rgb(146, 198, 155);
             color: white;
             transition: .5s;
             cursor: pointer;
@@ -190,7 +190,6 @@ async function recuperarPlatosMenu(id, nombre, precio) {
         <img src="{{asset('storage/img/restaurante/'.$restaurante->img)}}" style="width: 30%;height: 400px;margin: 2%;border-radius: 8%;border: 8px solid #75a689;"> 
       @endif    
 
-
       <div style="justify-content: center;padding:1%;font-weight:bold;font-variant:small-caps;text-shadow: 2px 1px green;">
 
         <h1>{{$restaurante->nombre}}</h1>
@@ -202,13 +201,6 @@ async function recuperarPlatosMenu(id, nombre, precio) {
 
           @if ($mi_restaurante == true) <!-- Si el restaurante pertenece al usuario logeado-->
 
-            <!--ＭＥＮＳＡＪＥ ＣＯＲＲＥＣＴＯ Ｏ ＮＯ -->             
-            @if (session("correcto"))
-                <div class="alert alert-success">{{session("correcto")}}</div>
-            @endif
-            @if (session("incorrecto"))
-            <div class="alert alert-danger">{{session("incorrecto")}}</div>
-            @endif
 
             <!--ＢＯＴＯＮ ＣＲＥＡＲ ＭＥＮＵ -->
             <button style="width:100%; font-size:25px; border-radius: 5%; border: thick double #32a1ce;" class="btn mt-5" data-bs-toggle="modal" data-bs-target="#modalCrearMenu" >Añadir menú</button>  
@@ -227,7 +219,7 @@ async function recuperarPlatosMenu(id, nombre, precio) {
                     </button>
                     </div>
                     <div class="modal-body" style="text-shadow: none; ">
-                        <form action="{{route("RestauranteDetalleController.crear")}}" method="POST">
+                        <form action="{{route("RestauranteDetalleController.crear")}}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group">
@@ -241,11 +233,11 @@ async function recuperarPlatosMenu(id, nombre, precio) {
                             </div>
 
                             <div class="form-group">
-                              <label for="exampleInputEmail1">descripcion </label>
-                              <input type="text" name="descripcion" class="form-control" id="exampleInputEmail1" placeholder="">
+                              <label for="exampleInputEmail1">descripcion (obligatorio) </label>
+                              <input type="text" name="descripcion" class="form-control" id="exampleInputEmail1" placeholder="" required>
                             </div>
 
-                            <!--ＩＭＡＧＥＮ -->
+                            <!--ＩＭＡＧＥＮ:  IMPORTANTE NO OLVIDARSE EN EL FORM ESTO -> enctype="multipart/form-data" -->  
                             <div class="form-group">
                               <label for="exampleInputPassword1">img</label>
                               <input type="file" name="img" class="form-control">
@@ -264,16 +256,23 @@ async function recuperarPlatosMenu(id, nombre, precio) {
                 </div>
                 </div>
             </div>
+
+
+            <!--ＭＥＮＳＡＪＥ ＣＯＲＲＥＣＴＯ Ｏ ＮＯ -->             
+            @if (session("correcto"))
+                <div style="text-shadow: none;" class="alert alert-success">{{session("correcto")}}</div>
+            @endif
+            @if (session("incorrecto"))
+            <div style="text-shadow: none;" class="alert alert-danger">{{session("incorrecto")}}</div>
+            @endif
+
           @endif
-          
 
         @endauth
 
       </div>
 
     </div>
-
-
 
   <!--
   █▀▄▀█ █▀▀ █▄░█ █░█ █▀

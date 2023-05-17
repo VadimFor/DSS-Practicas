@@ -11,6 +11,6 @@ class LogoutController extends Controller
     public function logout(){
         Session::flush(); #libera la sesión
         Auth::logout();
-        return redirect()->to('/login');
+        return back();
     }
 }

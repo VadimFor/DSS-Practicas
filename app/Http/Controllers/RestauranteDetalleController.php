@@ -26,7 +26,11 @@ class RestauranteDetalleController extends Controller
 
         //Obtengo si el restaurante es del usuario autenticado
         $restaurante = Restaurante::where('id', '=', $id)->first(); // Retrieve the first matching object
-        $mi_restaurante = $restaurante->users_id == auth()->user()->id ? true : false;
+
+        $mi_restaurante = false;
+        if(auth()->user()){
+            $mi_restaurante = $restaurante->users_id == auth()->user()->id ? true : false;
+        }
 
         $cantidad_menus = count($menus);
    
@@ -41,33 +45,52 @@ class RestauranteDetalleController extends Controller
         return response()->json($platos);
     }
 
-
+    // CREAR MENU
     public function crear(Request $request){
 
-        $img = $request->img;
-
-        if($request->img == NULL){
-            $img =  'menu.png';
-        }
-
         try{
-            $validatedData = $request->validate([
+            error_log("image= ". $request->img);
+
+            $request->validate([
                 'nombre' => 'required|string|max:30',
-                'descripcion' => 'max:500',
+                'descripcion' => 'required|min:10|max:60',
                 'precio' => 'required|numeric',
                 'restaurante_id' => 'required|integer',
-                'img' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048'
+                'img' => 'image|mimes:jpeg,png,jpg,svg|max:2048'
             ]);
 
+            if($request->img == NULL){
+                $img = 'menu.jpg';
+            }else{
+                $img = $request->img;
+            }
 
-            Menu::create($validatedData);
+
+            $menu = Menu::create([
+                'nombre' => $request->nombre,
+                'descripcion' => $request->descripcion,
+                'precio' => $request->precio,
+                'restaurante_id' => $request->restaurante_id,
+                'img' => $img,
+            ]);
+
+            if($request->img != NULL){          
+                $imageoriginalName =  $request->file('img')->getClientOriginalName();
+                $extension = $request->file('img')->getClientOriginalExtension();
+                $imageName =  $menu->id . '|menu.' .  $extension;
+
+                Menu::where('id', $menu->id)->update(['img' => $imageName]);
+                $request->file('img')->storeAs('public/img/menu/', $imageName); //subo a la carpeta la imagen
+            }
 
             return back()->with("correcto","Menu creado correctamente.");
 
-        } catch (Exception $e) {
+        }
+        catch (Exception $e) {
             $errorMessage = $e->getMessage();
             return back()->with("incorrecto",$errorMessage);
         }
+
  
     }
 

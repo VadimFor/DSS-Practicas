@@ -356,8 +356,7 @@
                                         █░▀░█ █▄█ █▄▀ █ █▀░ █ █▄▄ █▀█ █▀▄   █▀▄ ██▄ ▄█ ░█░ █▀█ █▄█ █▀▄ █▀█ █░▀█ ░█░ ██▄ -->
                                         <form action="{{route("MisRestaurantesController.mod")}}" method="POST"  enctype="multipart/form-data">
                                             @csrf
-                                            <!--Para identificar la tabla -->
-                                            <input type="text" name="tabla" value="restaurante" style="display:none" readonly>
+                                            <input type="text" name="users_id" value={{auth()->user()->id}} style="display:none" readonly>
                                             
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">id</label>
@@ -380,7 +379,7 @@
                                             <input type="text" name="descripcion" class="form-control" id="exampleInputPassword1" placeholder="" value="{{$item->descripcion}}" required>
                                             </div>
         
-                                            <!--ＩＭＡＧＥＮ -->
+                                            <!--ＩＭＡＧＥＮ:  IMPORTANTE NO OLVIDARSE EN EL FORMN ESTO -> enctype="multipart/form-data" -->  
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">img</label>
                                                 <input type="file" name="img" class="form-control">

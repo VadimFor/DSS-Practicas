@@ -19,7 +19,7 @@
 
 
 .card{
-    height: 15vw;
+    height: 17vw;
 
 
   transition:0.5s;
@@ -100,8 +100,10 @@
                         <button class="btn btn-outline-success" type="submit">Buscar</button>
                     </div>
                 </form>
-
-
+                
+                <!-- 
+                ▀█▀ ▄▀█ █▄▄ █░░ ▄▀█   █▄▄ █░█ █▀ █▀█ █░█ █▀▀ █▀▄ ▄▀█ █▀
+                ░█░ █▀█ █▄█ █▄▄ █▀█   █▄█ █▄█ ▄█ ▀▀█ █▄█ ██▄ █▄▀ █▀█ ▄█-->
                 @if(session('search-restaurante') && session('search-restaurante') != NULL)
                     <table class="table bg-white rounded shadow-sm table-bordered table-hover table-info ">
 
@@ -129,7 +131,9 @@
                     </table>
                 @endif  
 
-
+                <!-- 
+                ▀█▀ ▄▀█ █▄▄ █░░ ▄▀█   █▄░█ █▀█ █▀█ █▀▄▀█ ▄▀█ █░░
+                ░█░ █▀█ █▄█ █▄▄ █▀█   █░▀█ █▄█ █▀▄ █░▀░█ █▀█ █▄▄ -->
                 @foreach ($restaurantes as $item)
                     <div class="col-md-3 col-sm-6" href="{{route("RestauranteDetalleController.listaMenus",$item->id)}}">
 
@@ -138,7 +142,7 @@
 
                                 <a class="btn btn-info" href="{{route("RestauranteDetalleController.listaMenus",$item->id)}}" >Visitar</a>
 
-                                <img src="https://static.pexels.com/photos/7096/people-woman-coffee-meeting.jpg" alt="Photo of sunset">
+                                <img style="height:150px" src="{{asset('storage/img/restaurante/'.$item->img)}}">
    
                                 <p class="card-title">{{$item->direccion}}</p> 
                                 <p class="card-title text-center">Tel.: {{$item->telefono}}</p> 

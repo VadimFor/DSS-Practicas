@@ -32,26 +32,20 @@ class MisRestaurantesController extends Controller
             error_log("Creando foto restaurante: " . $request->img);
 
             $img = $request->img;
+            $entro = false;
 
             if($request->img){
                 $request->validate([
-                    'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+                    'img' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
                 ]);
 
-                if ($request->file()) {
-                    $imageoriginalName =  $request->file('img')->getClientOriginalName();
-                    $extension = $request->file('img')->getClientOriginalExtension();
-                    $imageName =  $request->id . "|" . "restaurante." . $extension;
-                    $filePath = $request->file('img')->storeAs('public/img/restaurante/', $imageName);
-
-                    $img =  $imageName;
-        
-                    error_log("Modificando foto perfil: " . $imageoriginalName);
-                }
-                
+                if ($request->file('img')) {
+                    $img = "";
+                    $entro = true;
+                }   
             }
-
-            Restaurante::create([
+            
+            $restaurante = Restaurante::create([
                 'nombre' => $request->nombre,
                 'direccion' => $request->direccion,
                 'telefono' => $request->telefono,
@@ -59,6 +53,17 @@ class MisRestaurantesController extends Controller
                 'img' => $img,
                 'users_id' => $request->users_id
             ]);
+
+            if($entro){
+                
+                $imageoriginalName =  $request->file('img')->getClientOriginalName();
+                $extension = $request->file('img')->getClientOriginalExtension();
+                $imageName =  $restaurante->id . '|restaurante.' .  $extension;
+
+                Restaurante::where('id', $restaurante->id)->update(['img' => $imageName]);
+                $request->file('img')->storeAs('public/img/restaurante/', $imageName); //subo a la carpeta la imagen
+
+            }
 
             $sql=1;
 
@@ -72,7 +77,6 @@ class MisRestaurantesController extends Controller
     }
 
     public function mod(Request $request){
-
         try{
 
             $img = $request->img;
@@ -83,17 +87,15 @@ class MisRestaurantesController extends Controller
 
 
                 $request->validate([
-                    'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+                    'img' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
                 ]);
 
                 if ($request->file()) {
-                    $imageoriginalName =  $request->file('img')->getClientOriginalName();
                     $extension = $request->file('img')->getClientOriginalExtension();
                     $imageName =  $request->id . "|" . "restaurante." . $extension;
                     $filePath = $request->file('img')->storeAs('public/img/restaurante/', $imageName);
 
                     $img =  $imageName;
-        
                 }  
             }
 
@@ -103,16 +105,16 @@ class MisRestaurantesController extends Controller
                  'direccion' => $request->direccion,
                  'telefono' => $request->telefono,
                  'descripcion' => $request->descripcion,
-                 'img' => $request->img,
-                 'users_id' => $request->users_id
-             ]);
+                 'img' => $img
+            ]);
 
-             $sql=1;
 
-        }catch(\Illuminate\Database\QueryException $th){error_log("Excepción en modificar restaurante"); $sql = 0;}
+        } catch (Exception $e) {
+            $errorMessage = $e->getMessage();
+            return back()->with("incorrecto",$errorMessage);
+        }
 
-        if($sql == true){ return back()->with("correcto","Restaurante modificado correctamente");}
-        else{ return back()->with("incorrecto","Error, restaurante no modificado");}
+        return back()->with("correcto","Restaurante modificado correctamente");
     }
 
 
@@ -163,8 +165,8 @@ class MisRestaurantesController extends Controller
         if ($request->file()) {
             $imageoriginalName =  $request->file('img')->getClientOriginalName();
             $extension = $request->file('img')->getClientOriginalExtension();
-            $imageName =  $request->email . "|" . "perfil." . $extension;
-            $filePath = $request->file('img')->storeAs('public/img/user/', $imageName);
+            $imageName =  $request->id . "|" . "restaurante." . $extension;
+            $filePath = $request->file('img')->storeAs('public/img/restaurante/', $imageName);
 
             error_log("Modificando foto perfil: " . $imageoriginalName);
 
