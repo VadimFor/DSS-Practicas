@@ -12,16 +12,28 @@ class RestauranteDetalleController extends Controller
 {
     public function listaMenus($id)
     {                
-        $menus = Menu::where('restaurante_id', '=', $id)->get();
+        $menus = Menu::where('restaurante_id', '=', $id)->get(); //SACO LOS MENUS DE ESTE RESTAURANTE
         $valoracionesPorMenu = [];
 
-        // Iterar por cada menú y obtener las valoraciones relacionadas
+        //SACAR VALORACION MEDIA DE CADA MENU DE ESTE RESTAURANTE
+        $i = 0;
         foreach ($menus as $menu) {
             // Obtener las valoraciones relacionadas con el menú actual
             $valoraciones = Valoracion::where('menu_id', '=', $menu->id)->get();
 
+            $totalValoraciones = count($valoraciones);
+            $sumaValoraciones = 0;
+
+            foreach ($valoraciones as $valoracion) {
+                $sumaValoraciones += $valoracion->puntuacion;
+            }
+
+            $valoracionMedia = ($totalValoraciones > 0) ? ($sumaValoraciones / $totalValoraciones) : 0;
+
             // Almacenar las valoraciones en el array con la clave del menú
-            $valoracionesPorMenu[$menu->id] = $valoraciones;
+            $valoracionesPorMenu[$i] = ceil($valoracionMedia);
+
+            $i = $i + 1;
         }
 
         //Obtengo si el restaurante es del usuario autenticado

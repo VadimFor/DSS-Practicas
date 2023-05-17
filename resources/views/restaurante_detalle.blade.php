@@ -208,7 +208,7 @@ async function recuperarPlatosMenu(id, nombre, precio) {
             <!--
             █▀▄▀█ █▀█ █▀▄ ▄▀█ █░░   █▀▀ █▀█ █▀▀ ▄▀█ █▀█   █▀▄▀█ █▀▀ █▄░█ █░█
             █░▀░█ █▄█ █▄▀ █▀█ █▄▄   █▄▄ █▀▄ ██▄ █▀█ █▀▄   █░▀░█ ██▄ █░▀█ █▄█-->
-            <div style="font-size:25px; " class="modal fade" id="modalCrearMenu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div style="font-size:20px; " class="modal fade" id="modalCrearMenu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                 <div class="modal-content" style="border-radius: 5%;">
   
@@ -280,6 +280,10 @@ async function recuperarPlatosMenu(id, nombre, precio) {
     <div>        
         <div>
             <div class="main card-deck">
+
+              @php
+                  $j = 0;
+              @endphp
             
             @foreach ($menus as $menu)
 
@@ -303,31 +307,31 @@ async function recuperarPlatosMenu(id, nombre, precio) {
 
                     <!--ＥＳＴＲＥＬＬＡＳ  -->
                     <ul class="list-inline text-center m-0">
-                      @foreach ($valoracionesPorMenu[$menu->id] as $valoracion)
-                          @for ($i = 1; $i <= 5; $i++)
-                              @if ($i <= $valoracion->puntuacion)
-                                  <li class="list-inline-item"><i class="fas fa-star"></i></li>
-                              @else
-                                  <li class="list-inline-item"><i class="far fa-star"></i></li>
-                              @endif
-                          @endfor
-                      @endforeach
+
+                      @for ($i = 0; $i < 5; $i++)
+                          @if ($i < $valoracionesPorMenu[$j])
+                              <li class="list-inline-item"> <i class="fas fa-star"></i></li>
+                          @else
+                              <li class="list-inline-item"> <i class="far fa-star"></i></li>      
+                          @endif
+                      @endfor
+
                     </ul>                    
                 </div>
+
+                  @php
+                    $j = $j + 1;
+                  @endphp
             @endforeach
 
             </div>
         </div>
     </div>
 
-
-
     <!--
     █▀▀ █▀█ █▀█ ▀█▀ █▀▀ █▀█
     █▀░ █▄█ █▄█ ░█░ ██▄ █▀▄-->
     @include('footer')
-
-
 
     <!--
     █▀▄▀█ █▀█ █▀▄ ▄▀█ █░░   █░█ █▀▀ █▀█   █▀▄▀█ █▀▀ █▄░█ █░█
@@ -353,7 +357,6 @@ async function recuperarPlatosMenu(id, nombre, precio) {
           </div>
         </div>
       </div>
-
 
       <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 
