@@ -194,8 +194,60 @@ async function recuperarPlatosMenu(id, nombre, precio) {
         @auth <!--Solo usuario logueados -->
 
           @if ($mi_restaurante == true) <!-- Si el restaurante pertenece al usuario logeado-->
-            <a style="width:100%; font-size:25px; border-radius: 5%" class="btn btn-info mt-5" href="" >Añadir menú</a>   
+
+            <!--ＢＯＴＯＮ ＣＲＥＡＲ ＭＥＮＵ -->
+            <button style="width:100%; font-size:25px; border-radius: 5%; border: thick double #32a1ce;" class="btn mt-5" data-bs-toggle="modal" data-bs-target="#modalCrearMenu" >Añadir menú</button>  
+        
+            <!--
+            █▀▄▀█ █▀█ █▀▄ ▄▀█ █░░   █▀▀ █▀█ █▀▀ ▄▀█ █▀█   █▀▄▀█ █▀▀ █▄░█ █░█
+            █░▀░█ █▄█ █▄▀ █▀█ █▄▄   █▄▄ █▀▄ ██▄ █▀█ █▀▄   █░▀░█ ██▄ █░▀█ █▄█-->
+            <div class="modal fade" id="modalCrearMenu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear menu</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{route("AdminController.crear")}}" method="POST">
+                            @csrf
+                            <!--Para identificar la tabla -->
+                            <input type="text" name="tabla" value="menu" style="display:none" readonly>
+    
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">nombre (obligatorio)</label>
+                                <input type="text" name="nombre" class="form-control" id="exampleInputPassword1" placeholder="" required>
+                              </div>
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">descripcion </label>
+                              <input type="text" name="descripcion" class="form-control" id="exampleInputEmail1" placeholder="">
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputPassword1">precio (obligatorio)</label>
+                              <input type="text" name="precio" class="form-control" id="exampleInputPassword1" placeholder="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">restaurante_id (obligatorio)</label>
+                                <input type="text" name="restaurante_id" class="form-control" id="exampleInputPassword1" placeholder="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">img</label>
+                                <input type="text" name="img" class="form-control" id="exampleInputPassword1" placeholder="">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                          </form>
+    
+                    </div>
+                </div>
+                </div>
+            </div>
           @endif
+          
 
         @endauth
 
@@ -244,6 +296,11 @@ async function recuperarPlatosMenu(id, nombre, precio) {
     █▀░ █▄█ █▄█ ░█░ ██▄ █▀▄-->
     @include('footer')
 
+
+
+    <!--
+    █▀▄▀█ █▀█ █▀▄ ▄▀█ █░░   █░█ █▀▀ █▀█   █▀▄▀█ █▀▀ █▄░█ █░█
+    █░▀░█ █▄█ █▄▀ █▀█ █▄▄   ▀▄▀ ██▄ █▀▄   █░▀░█ ██▄ █░▀█ █▄█-->
     <div class="container">
         <!-- Modal -->
         <div class="modal fade" id="menuModal" role="dialog">
@@ -265,6 +322,9 @@ async function recuperarPlatosMenu(id, nombre, precio) {
           </div>
         </div>
       </div>
+
+
+      <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 
 </body>
 </html>
