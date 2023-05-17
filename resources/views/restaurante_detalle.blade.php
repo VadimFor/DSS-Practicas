@@ -91,10 +91,21 @@
               align-items: center;
             }
 
+            .centro {
+              height: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+
         </style>
         <title>Detalle Menu</title>
 
     </head>
+
+
+
 <body>
 <script>
     // donde vamos a indicar la redireccion de la página
@@ -160,23 +171,45 @@ async function recuperarPlatosMenu(id, nombre, precio) {
   });
 }
 </script>
+
+  <!--
+    █▄░█ ▄▀█ █░█ █▄▄ ▄▀█ █▀█
+    █░▀█ █▀█ ▀▄▀ █▄█ █▀█ █▀▄-->
     @include('navbar')
-     <div class="header flex-container">
-        <img src="{{url($restaurante->first()->img)}}" alt="resto-img" style="width: 30%;
-  height: 400px;
-  margin: 2%;border-radius: 8%;border: 8px solid #75a689;">
+
+
+    <!--
+    █▀█ █▀▀ █▀ ▀█▀ ▄▀█ █░█ █▀█ ▄▀█ █▄░█ ▀█▀ █▀▀
+    █▀▄ ██▄ ▄█ ░█░ █▀█ █▄█ █▀▄ █▀█ █░▀█ ░█░ ██▄-->
+     <div class="header flex-container centro" > <!--CONTENEDOR VERDE -->
+
+
+        <img src="{{url($restaurante->first()->img)}}" alt="resto-img" style="width: 30%;height: 400px;margin: 2%;border-radius: 8%;border: 8px solid #75a689;">
       <div style="justify-content: center;padding:1%;font-weight:bold;font-variant:small-caps;text-shadow: 2px 1px green;">
         <h1>{{$restaurante->first()->nombre}}</h1>
         <h2>{{$restaurante->first()->descripcion}}</h2>
         <h4 style="padding-left:20px;">Dirección: {{$restaurante->first()->direccion}}</h4>
         <h4 style="padding-left:20px;">Telefono: {{$restaurante->first()->telefono}}</h4>
+
+        @auth <!--Solo usuario logueados -->
+
+          @if ($mi_restaurante == true) <!-- Si el restaurante pertenece al usuario logeado-->
+            <a style="width:100%; font-size:25px; border-radius: 5%" class="btn btn-info mt-5" href="" >Añadir menú</a>   
+          @endif
+
+        @endauth
+
       </div>
+
     </div>
 
+
+
+  <!--
+  █▀▄▀█ █▀▀ █▄░█ █░█ █▀
+  █░▀░█ ██▄ █░▀█ █▄█ ▄█-->
     <div>        
-        
         <div>
-            
             <div class="main card-deck">
             
             @foreach ($menus as $menu)
@@ -203,6 +236,12 @@ async function recuperarPlatosMenu(id, nombre, precio) {
             </div>
         </div>
     </div>
+
+
+
+    <!--
+    █▀▀ █▀█ █▀█ ▀█▀ █▀▀ █▀█
+    █▀░ █▄█ █▄█ ░█░ ██▄ █▀▄-->
     @include('footer')
 
     <div class="container">

@@ -11,7 +11,6 @@ class RestauranteDetalleController extends Controller
 {
     public function listaMenus($id)
     {                
-        $restaurante = Restaurante::where('id','=',$id)->get();
         $menus = Menu::where('restaurante_id', '=', $id)->get();
         $valoracionesPorMenu = [];
 
@@ -24,7 +23,11 @@ class RestauranteDetalleController extends Controller
             $valoracionesPorMenu[$menu->id] = $valoraciones;
         }
 
-        return view('restaurante_detalle')->with('menus', $menus)->with('restaurante', $restaurante)->with('valoracionesPorMenu', $valoracionesPorMenu);
+        //Obtengo si el restaurante es del usuario autenticado
+        $restaurante = Restaurante::where('id', '=', $id)->first(); // Retrieve the first matching object
+        $mi_restaurante = $restaurante->users_id == auth()->user()->id ? true : false;
+   
+        return view('restaurante_detalle')->with('menus', $menus)->with('restaurante', $restaurante)->with('valoracionesPorMenu', $valoracionesPorMenu)->with('mi_restaurante', $mi_restaurante);
     }
 
     public function listaPlatos($id)
