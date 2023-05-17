@@ -34,8 +34,6 @@
   transition:1s;
   cursor:pointer;
   box-shadow: 1px 1px 5px rgb(29, 139, 64);
-
-
 }
 .card-title i{  
     box-shadow: 2px 2px 20px rgb(0, 204, 255);

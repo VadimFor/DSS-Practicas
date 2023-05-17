@@ -1,46 +1,19 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+      <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+      <title>Restaurante</title>
 
         <style>
 
-            .main{
-              margin: 2%;
-            }
-            
-            .card{
-                width: 15%;
-                display: inline-block;
-                box-shadow: 2px 2px 20px black;
-                border-radius: 5px; 
-                margin: 2%;
-                padding: 5%;
-                display: center;
-                
-                }
-
-
-            .image img{
-            width: 100%;
-            border-top-right-radius: 5px;
-            border-top-left-radius: 5px;
-            
-            }
-
-            .title{
-            
-            text-align: center;
-            padding: 10px;
-            
-            }
-
-            h1{
+              h1{
                 font-size: 40px;
                 font-weight: bold;
                 padding: 20px;
@@ -51,24 +24,7 @@
             
             }
 
-            .des{
-              padding: 3px;
-              text-align: center;
-              
-              padding-top: 10px;
-              padding-bottom: 15px;
-              border-bottom-right-radius: 5px;
-              border-bottom-left-radius: 5px;
-            }
-            button{
-              margin-top: 40px;
-              margin-bottom: 10px;
-              background-color: white;
-              border: 1px solid black;
-              border-radius: 5px;
-              padding:10px;
-            }
-            button:hover{
+             button:hover{
               background-color: rgb(146, 198, 155);
               color: white;
               transition: .5s;
@@ -77,10 +33,6 @@
 
             .fa-star, .fa-star-half-alt{
                     color: #ffbf00;
-            }
-
-            .thick{
-                font-weight: bold;
             }
 
             .mostrar-modal{
@@ -100,6 +52,68 @@
               justify-content: center;
               align-items: center;
             }
+
+
+
+.card{
+  height: 430px;
+
+  transition:0.5s;
+  cursor:pointer;
+
+  box-shadow: 2px 2px 20px black;
+    border-radius: 5px; 
+    margin: 2%;
+}
+.card-title{  
+  font-size:18px;
+  transition:1s;
+  cursor:pointer;
+  box-shadow: 1px 1px 5px rgb(0, 0, 0);
+}
+.card-title i{  
+  font-size:23px;
+  transition:1s;
+  cursor:pointer;
+  color:#000000dd
+}
+.card-title i:hover{
+  transform: scale(1.25) rotate(100deg); 
+
+  
+}
+.card:hover{
+  transform: scale(1.05);
+  box-shadow: 10px 10px 15px rgba(0,0,0,0.3);
+}
+.card-text{
+  height:40px;  
+}
+
+.card::before, .card::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: scale3d(0, 0, 1);
+  transition: transform .3s ease-out 0s;
+  background: rgba(255, 255, 255, 0.1);
+  content: '';
+  pointer-events: none;
+}
+.card::before {
+  transform-origin: left top;
+}
+.card::after {
+  transform-origin: right bottom;
+}
+.card:hover::before, .card:hover::after, .card:focus::before, .card:focus::after {
+  transform: scale3d(1, 1, 1);
+}
+.cardimg{
+  height: 200px;
+}
 
         </style>
         <title>Detalle Menu</title>
@@ -277,57 +291,59 @@ async function recuperarPlatosMenu(id, nombre, precio) {
   <!--
   █▀▄▀█ █▀▀ █▄░█ █░█ █▀
   █░▀░█ ██▄ █░▀█ █▄█ ▄█-->
-    <div>        
-        <div>
-            <div  class="main card-deck ">          
 
-              @php
-                  $j = 0;
-              @endphp
-            
-            @foreach ($menus as $menu)
+      <div class="container mt-2">
 
-                <div class="card des " style="min-block-size: 400px" >
+        <div class="row">
 
-                   <!--ＩＭＡＧＥＮ -->
-                    @if ($menu->img == NULL || !$menu->img || $menu->img=="")
-                        <img onclick="recuperarPlatosMenu({{$menu->id}}, '{{$menu->nombre}}', {{$menu->precio}})" src="{{'storage/img/menu/menu.jpg'}}" data-toggle="modal" data-target="#menuModal" style="display:block;margin-left: auto;margin-right: auto;object-fit:contain;border-radius: 50%;max-width:90%;padding-bottom: inherit;">
-                    @else
-                        <img onclick="recuperarPlatosMenu({{$menu->id}}, '{{$menu->nombre}}', {{$menu->precio}})" src="{{asset('storage/img/menu/'.$menu->img)}}" data-toggle="modal" data-target="#menuModal" style="display:block;margin-left: auto;margin-right: auto;object-fit:contain;border-radius: 50%;max-width:90%;padding-bottom: inherit;">
-                    @endif    
-                    
-                    <!--ＮＯＭＢＲＥ -->
-                    <h4 class="thick">{{$menu->nombre}}</h4>
+          @php
+              $j = 0;
+          @endphp
 
-                    <!--ＤＥＳＣＲＩＰＣＩＯＮ -->
-                    <p>{{$menu->descripcion}}</p>
+          @foreach ($menus as $menu)
+          <div class="col-md-3 col-sm-6">
 
-                    <!--ＰＲＥＣＩＯ -->
-                    <p class="thick"> Precio: {{$menu->precio}}€</p>    
+                  <div class="card card-block">
+                      <h1 class="card-title text-center"><i class="material-icons">{{$menu->nombre}}</i></h1>
 
-                    <!--ＥＳＴＲＥＬＬＡＳ  -->
-                    <ul class="list-inline text-center m-0">
+                       <!--ＩＭＡＧＥＮ -->
+                      @if ($menu->img == NULL || !$menu->img || $menu->img=="")
+                          <img class="cardimg" onclick="recuperarPlatosMenu({{$menu->id}}, '{{$menu->nombre}}', {{$menu->precio}})" src="{{'storage/img/menu/menu.jpg'}}" data-toggle="modal" data-target="#menuModal">
+                      @else
+                          <img class="cardimg" onclick="recuperarPlatosMenu({{$menu->id}}, '{{$menu->nombre}}', {{$menu->precio}})" src="{{asset('storage/img/menu/'.$menu->img)}}" data-toggle="modal" data-target="#menuModal" >
+                      @endif    
+    
+                      <p class="card-title text-center">{{$menu->descripcion}}</p> 
+                      <p  class="card-title text-center ">Precio: {{$menu->precio}} Є</p> 
 
-                      @for ($i = 0; $i < 5; $i++)
-                          @if ($i < $valoracionesPorMenu[$j])
-                              <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-                          @else
-                              <li class="list-inline-item"> <i class="far fa-star"></i></li>      
-                          @endif
-                      @endfor
+                        <!--ＥＳＴＲＥＬＬＡＳ  -->
+                      <ul class="list-inline text-center m-0">
 
-                    </ul>                    
-                </div>
+                        @for ($i = 0; $i < 5; $i++)
+                            @if ($i < $valoracionesPorMenu[$j])
+                                <li class="list-inline-item"> <i class="fas fa-star"></i></li>
+                            @else
+                                <li class="list-inline-item"> <i class="far fa-star"></i></li>      
+                            @endif
+                        @endfor
 
-                  @php
-                    $j = $j + 1;
-                  @endphp
-            @endforeach
+                      </ul>  
 
-            </div>
+
+
+                  </div>
+          </div>
+
+          @php
+          $j = $j + 1;
+          @endphp
+
+        @endforeach
+
+          </div>
         </div>
-    </div>
 
+  
     <!--
     █▀▀ █▀█ █▀█ ▀█▀ █▀▀ █▀█
     █▀░ █▄█ █▄█ ░█░ ██▄ █▀▄-->
