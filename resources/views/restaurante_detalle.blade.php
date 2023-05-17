@@ -66,7 +66,7 @@
     margin: 2%;
 }
 .card-title{  
-  font-size:18px;
+  font-size:17px;
   transition:1s;
   cursor:pointer;
   box-shadow: 1px 1px 5px rgb(0, 0, 0);
@@ -121,12 +121,9 @@
     </head>
 
 <body>
+  
+<!--
 <script>
-    // donde vamos a indicar la redireccion de la página
-function myFunction() {
-  document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
-}
-
 async function recuperarPlatosMenu(id, nombre, precio) {
     const request = {
     method: 'GET'
@@ -185,6 +182,7 @@ async function recuperarPlatosMenu(id, nombre, precio) {
   });
 }
 </script>
+-->
 
   <!--
     █▄░█ ▄▀█ █░█ █▄▄ ▄▀█ █▀█
@@ -303,14 +301,14 @@ async function recuperarPlatosMenu(id, nombre, precio) {
           @foreach ($menus as $menu)
           <div class="col-md-3 col-sm-6">
 
-                  <div class="card card-block">
+                  <div class="card card-block" data-bs-toggle="modal" data-bs-target="#modalMenu{{$menu->id}}" >
                       <h1 class="card-title text-center"><i class="material-icons">{{$menu->nombre}}</i></h1>
 
                        <!--ＩＭＡＧＥＮ -->
                       @if ($menu->img == NULL || !$menu->img || $menu->img=="")
-                          <img class="cardimg" onclick="recuperarPlatosMenu({{$menu->id}}, '{{$menu->nombre}}', {{$menu->precio}})" src="{{'storage/img/menu/menu.jpg'}}" data-toggle="modal" data-target="#menuModal">
+                          <img class="cardimg"  src="{{'storage/img/menu/menu.jpg'}}" >
                       @else
-                          <img class="cardimg" onclick="recuperarPlatosMenu({{$menu->id}}, '{{$menu->nombre}}', {{$menu->precio}})" src="{{asset('storage/img/menu/'.$menu->img)}}" data-toggle="modal" data-target="#menuModal" >
+                          <img class="cardimg"  src="{{asset('storage/img/menu/'.$menu->img)}}" >
                       @endif    
     
                       <p class="card-title text-center">{{$menu->descripcion}}</p> 
@@ -329,21 +327,29 @@ async function recuperarPlatosMenu(id, nombre, precio) {
 
                       </ul>  
 
-
+              
 
                   </div>
-          </div>
+                   
+                      <!--
+                  █▀▄▀█ █▀█ █▀▄ ▄▀█ █░░   █▀▄▀█ █▀▀ █▄░█ █░█
+                  █░▀░█ █▄█ █▄▀ █▀█ █▄▄   █░▀░█ ██▄ █░▀█ █▄█-->
+                  @include('modal_menu') 
 
-          @php
-          $j = $j + 1;
-          @endphp
+            </div>
 
-        @endforeach
+            @php
+            $j = $j + 1;
+            @endphp
+
+
+          @endforeach
 
           </div>
         </div>
 
-  
+
+
     <!--
     █▀▀ █▀█ █▀█ ▀█▀ █▀▀ █▀█
     █▀░ █▄█ █▄█ ░█░ ██▄ █▀▄-->
