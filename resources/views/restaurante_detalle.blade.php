@@ -240,7 +240,7 @@ async function recuperarPlatosMenu(id, nombre, precio) {
 
                             <!--ＩＭＡＧＥＮ -->
                             <div class="form-group">
-                              <label for="exampleInputPassword1">img</label>
+                              <label for="exampleInputPassword1">img (solo .jgp)</label>
                               <input type="file" name="img" class="form-control">
                             </div>
 
@@ -279,8 +279,12 @@ async function recuperarPlatosMenu(id, nombre, precio) {
 
                 <div class="card des button">
 
-                    <!--ＩＭＡＧＥＮ -->
-                    <img onclick="recuperarPlatosMenu({{$menu->id}}, '{{$menu->nombre}}', {{$menu->precio}})" src="{{url($menu->img)}}" alt="img" data-toggle="modal" data-target="#menuModal" style="display:block;margin-left: auto;margin-right: auto;object-fit:contain;border-radius: 50%;max-width:90%;padding-bottom: inherit;">
+                   <!--ＩＭＡＧＥＮ -->
+                    @if ($menu->img == NULL || !$menu->img || $menu->img=="")
+                        <img onclick="recuperarPlatosMenu({{$menu->id}}, '{{$menu->nombre}}', {{$menu->precio}})" src="{{'storage/img/menu/menu.jpg'}}" data-toggle="modal" data-target="#menuModal" style="display:block;margin-left: auto;margin-right: auto;object-fit:contain;border-radius: 50%;max-width:90%;padding-bottom: inherit;">
+                    @else
+                        <img onclick="recuperarPlatosMenu({{$menu->id}}, '{{$menu->nombre}}', {{$menu->precio}})" src="{{asset('storage/img/menu/'.$menu->img)}}" data-toggle="modal" data-target="#menuModal" style="display:block;margin-left: auto;margin-right: auto;object-fit:contain;border-radius: 50%;max-width:90%;padding-bottom: inherit;">
+                    @endif    
                     
                     <!--ＮＯＭＢＲＥ -->
                     <h4 class="thick">{{$menu->nombre}}</h4>

@@ -56,7 +56,7 @@ class RestauranteDetalleController extends Controller
                 'descripcion' => 'max:500',
                 'precio' => 'required|numeric',
                 'restaurante_id' => 'required|integer',
-                'img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+                'img' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048'
             ]);
 
 

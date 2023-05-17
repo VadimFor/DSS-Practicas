@@ -157,7 +157,7 @@ class MisRestaurantesController extends Controller
 
 
         $request->validate([
-            'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'img' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
     
         if ($request->file()) {
