@@ -7,15 +7,24 @@
       position: relative;
 
     }
-    
-    .btn_center {
-      margin: 0;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
+
+
+    .v_hov:hover {
+        transition: background-color .5s;
+        background-color: rgb(240, 238, 225);
     }
+
+    .horizontal-list-group {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .horizontal-list-group .list-group-item {
+        flex-grow: 0;
+        text-align: center;
+        white-space: nowrap;
+    }
+
 </style>
 
 
@@ -48,6 +57,7 @@
             </button>
         </div>
 
+
         <!--ＢＯＤＹ -->
         <div class="modal-body" style="text-shadow: none; ">
                
@@ -57,13 +67,13 @@
 
             @else
 
+                <ul class="list-group">
                 @foreach ($matchingMenu_platos as $plato)
 
-                    <div style="text-align:center">{{$plato->nombre}}</div>
-
-
+                    <li style="text-align:center" class="list-group-item v_hov ">{{$plato->nombre}}</li>
 
                 @endforeach
+                </ul>
 
             @endif
 
@@ -72,15 +82,22 @@
 
                 @if ($mi_restaurante == true) <!-- Si el menu pertenece al usuario logeado-->
 
-                    <div class="btn_container">
-                        <div class="btn_center">
-                            <form method="POST" action="{{ route('RestauranteDetalleController.delMenu', ['id' => $matchingMenu->id]) }}">
-                                @method('post')
-                                @csrf
-                                <button type="submit" onclick="return res('{{$matchingMenu->nombre}}')" class="btn btn-danger">Eliminar menu</button>
-                            </form>
-                        </div>
+    
+                <div class="btn_container">
+                    <div class="list-group horizontal-list-group">
+                        
+                        <button style="background-color:rgb(210, 226, 241)" type="submit" class="list-group-item list-group-item-action btn btn-info">Añadir plato</button>
+                        <button style="background-color:rgb(210, 226, 241)" type="submit" class="list-group-item list-group-item-action btn btn-info">Modificar menu</button>
+                        
+                        <form method="POST" action="{{ route('RestauranteDetalleController.delMenu', ['id' => $matchingMenu->id]) }}">
+                            @method('post')
+                            @csrf
+                            <button type="submit" onclick="return res('{{$matchingMenu->nombre}}')" class="btn btn-danger">Eliminar menu</button>
+                        </form>
+
                     </div>
+                </div>
+
 
 
                 @endif
