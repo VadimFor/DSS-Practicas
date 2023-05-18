@@ -120,4 +120,17 @@ class RestauranteDetalleController extends Controller
         }
     }
 
+    public function delPlato($id){
+        error_log("Eliminando al plato " . $id);
+        try{ 
+            $sql=DB::delete("delete from plato where id='$id'");
+            return back()->with("plato_correcto","Plato eliminado correctamente.");
+
+        }
+        catch(Exception $e){ 
+            error_log("error= " . $e->getMessage());
+            return back()->with("plato_incorrecto","Error, ". $e->getMessage());
+        }
+    } 
+
 }

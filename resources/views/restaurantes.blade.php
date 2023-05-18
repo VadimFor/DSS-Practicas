@@ -110,6 +110,7 @@
                                 <th scope="col" width="50">Nombre</th>
                                 <th scope="col">Direccción</th>
                                 <th scope="col">Teléfono</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">

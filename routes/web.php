@@ -75,7 +75,7 @@ Route::get('/panelusuario/admin', [AdminController::class, 'mostrar']);
     //PLATO
     Route::get('/panelusuario-delplato-{id}', [AdminController::class, 'delPlato'])->name("AdminController.delPlato");
 
-    //PLATO
+    //VALORACION
     Route::get('/panelusuario-delvaloracion-{id}', [AdminController::class, 'delValoracion'])->name("AdminController.delValoracion");
 
 Route::post('/panelusuario-buscar', [AdminController::class, 'buscar'])->name("AdminController.buscar");
@@ -94,6 +94,9 @@ Route::get('/restaurante-detalle-{id}', [RestauranteDetalleController::class, 'l
 Route::get('/platos-menu-{id}', [RestauranteDetalleController::class, 'listaPlatos']);
 Route::post('/restaurante-detalle-crear', [RestauranteDetalleController::class, 'crear'])->name("RestauranteDetalleController.crear");
 Route::post('/restaurante-detalle-eliminar-{id}', [RestauranteDetalleController::class, 'delMenu'])->name("RestauranteDetalleController.delMenu");
+Route::post('/restaurante-detalle-delplato-{id}', [RestauranteDetalleController::class, 'delPlato'])->name("RestauranteDetalleController.delPlato");
+
+
 
 /*
 █▀█ █▀▀ █▀ ▀█▀ ▄▀█ █▄░█ ▄▀█   █▀█ █▀▀ █▀ ▀█▀ ▄▀█ █░█ █▀█ ▄▀█ █▄░█ ▀█▀ █▀▀ █▀

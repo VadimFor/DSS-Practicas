@@ -25,6 +25,18 @@
         white-space: nowrap;
     }
 
+    .icon-basura{background-image: url('/icons/icon-basura.svg');}
+    .styleiconos{
+            width: 30px;
+            height: 30px;
+            background-size: 75% 75%;
+            background-repeat: no-repeat;
+            color: white;
+            text-align:center;
+            background-position-x: center;
+            background-position-y: center;
+        }
+
 </style>
 
 
@@ -67,13 +79,74 @@
 
             @else
 
-                <ul class="list-group">
-                @foreach ($matchingMenu_platos as $plato)
+                <table class="table bg-white rounded shadow-sm table-bordered table-hover">
 
-                    <li style="text-align:center" class="list-group-item v_hov ">{{$plato->nombre}}</li>
+                    <thead>
+                        <tr>
+                            <th scope="col"></th><!--Nombre -->
 
-                @endforeach
-                </ul>
+                            @auth <!--Solo usuarioS logueados -->
+                                @if ($mi_restaurante == true) <!-- Si el menu pertenece al usuario logeado-->
+                                    <th scope="col" style="width: 10px"></th><!--Eliminar -->
+                                @endif
+                            @endauth
+    
+
+                        </tr>
+                    </thead>
+
+                    <tbody class="table-group-divider">
+
+                        @foreach ($matchingMenu_platos as $plato)
+
+                        <tr>
+
+                            <td>{{$plato->nombre}}</td>
+
+                            <!--ＥＬＩＭＩＮＡＲ ＰＬＡＴＯ -->
+                            @auth <!--Solo usuarioS logueados -->
+                                @if ($mi_restaurante == true) <!-- Si el menu pertenece al usuario logeado-->
+
+                                    <form method="POST" action="{{ route('RestauranteDetalleController.delPlato', ['id' => $plato->id]) }}">
+                                        @method('post')
+                                        @csrf
+                                        <td>
+                                            <button type="submit"  class="btn btn-danger btn-sm styleiconos icon-basura"></button>
+                                        </td>
+                                    </form>
+
+                                   <!--Para evitar el page refresh -->
+                                    @if(Session::get('plato_correcto') != '' || Session::get('plato_incorrecto') != '')  
+                                    <script>
+                                        var menuId = {{$menu->id}}; // Assign the value to a variable
+                                        //console.log("menuId= " + menuId); 
+                                        $(function() { $('#modalMenu' + menuId).modal('show');});
+                                    </script>
+                                    @endif
+
+                                @endif
+                            @endauth
+
+                        </tr>
+
+                        @endforeach
+
+                        <!--Para mostrar el resultado de borrar plato -->
+                        @if(Session::has('plato_correcto'))
+                            <div class="alert alert-success">
+                                {{ Session::get('plato_correcto') }}
+                            </div>
+                        @endif
+                        <!--Para mostrar el resultado de borrar plato -->
+                        @if(Session::has('plato_incorrecto'))
+                            <div class="alert alert-danger">
+                                {{ Session::get('plato_incorrecto') }}
+                            </div>
+                        @endif
+
+                    </tbody>
+
+                </table> 
 
             @endif
 
@@ -92,13 +165,11 @@
                         <form method="POST" action="{{ route('RestauranteDetalleController.delMenu', ['id' => $matchingMenu->id]) }}">
                             @method('post')
                             @csrf
-                            <button type="submit" onclick="return res('{{$matchingMenu->nombre}}')" class="btn btn-danger">Eliminar menu</button>
+                            <button type="button" onclick="return res('{{$matchingMenu->nombre}}')" class="btn btn-danger">Eliminar menu</button>
                         </form>
 
                     </div>
                 </div>
-
-
 
                 @endif
 
