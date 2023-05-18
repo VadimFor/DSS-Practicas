@@ -21,7 +21,7 @@ return new class extends Migration
                 $table->string('descripcion')->nullable();
                 $table->integer('precio');
                 $table->bigInteger('restaurante_id')->unsigned();
-                $table->foreign('restaurante_id')->references('id')->on('restaurante');
+                $table->foreign('restaurante_id')->references('id')->on('restaurante')->onDelete('cascade');
                 $table->string('img')->nullable();
             });
         }

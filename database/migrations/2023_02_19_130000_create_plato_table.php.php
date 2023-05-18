@@ -18,7 +18,7 @@ return new class extends Migration
             Schema::create('plato', function (Blueprint $table) {
                 $table->id();
                 $table->bigInteger('menu_id')->unsigned();
-                $table->foreign('menu_id')->references('id')->on('menu');
+                $table->foreign('menu_id')->references('id')->on('menu')->onDelete('cascade');
                 $table->string('nombre');
                 $table->string('descripcion');
                 $table->string('img')->nullable();

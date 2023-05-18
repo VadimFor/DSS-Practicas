@@ -93,7 +93,7 @@ Route::get('/restaurante-detalle-{id}', [RestauranteDetalleController::class, 'l
 
 Route::get('/platos-menu-{id}', [RestauranteDetalleController::class, 'listaPlatos']);
 Route::post('/restaurante-detalle-crear', [RestauranteDetalleController::class, 'crear'])->name("RestauranteDetalleController.crear");
-
+Route::post('/restaurante-detalle-eliminar-{id}', [RestauranteDetalleController::class, 'delMenu'])->name("RestauranteDetalleController.delMenu");
 
 /*
 █▀█ █▀▀ █▀ ▀█▀ ▄▀█ █▄░█ ▄▀█   █▀█ █▀▀ █▀ ▀█▀ ▄▀█ █░█ █▀█ ▄▀█ █▄░█ ▀█▀ █▀▀ █▀
@@ -106,7 +106,6 @@ Route::post('/restaurantes_buscar', [RestaurantesController::class, 'buscar'])->
 █▀█ █▀▀ █▀ ▀█▀ ▄▀█ █▄░█ ▄▀█   ▄▀█ █▄▄ █▀█ █░█ ▀█▀   █░█ █▀
 █▀▀ ██▄ ▄█ ░█░ █▀█ █░▀█ █▀█   █▀█ █▄█ █▄█ █▄█ ░█░   █▄█ ▄█*/
 Route::get('/aboutus', function () {return view('about_us');});
-
 
 /*
 ▀█▀ █▀▀ █▀ ▀█▀

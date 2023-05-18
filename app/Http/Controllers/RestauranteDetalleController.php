@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Menu;
 use App\Models\Valoracion;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class RestauranteDetalleController extends Controller
 {
@@ -40,8 +41,8 @@ class RestauranteDetalleController extends Controller
         $restaurante = Restaurante::where('id', '=', $id)->first(); // Retrieve the first matching object
 
         $mi_restaurante = false;
-        if(auth()->user()){
-            $mi_restaurante = $restaurante->users_id == auth()->user()->id ? true : false;
+        if(auth()->check()){
+            $mi_restaurante = $restaurante->users_id == auth()->user()->id;
         }
 
         $cantidad_menus = count($menus);
@@ -102,8 +103,21 @@ class RestauranteDetalleController extends Controller
             $errorMessage = $e->getMessage();
             return back()->with("incorrecto",$errorMessage);
         }
+    }
 
- 
+    public function delMenu($id){
+        error_log("Eliminando a " . $id);
+
+        try{ 
+            DB::table('valoracion')->where('menu_id', $id)->delete();//borro valoraciones
+            DB::table('plato')->where('menu_id', $id)->delete();//borro platos
+            $sql=DB::table('menu')->where('id', $id)->delete();//finalmente borro menu
+            return back()->with("menu_correcto","Menu eliminado correctamente.");
+        }
+        catch(Exception $e){ 
+            error_log("error= " . $e->getMessage());
+            return back()->with("menu_incorrecto","Error, ". $e->getMessage());
+        }
     }
 
 }

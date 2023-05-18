@@ -1,4 +1,32 @@
 
+
+<style>
+    .btn_container {
+        margin-top: 50px;
+      height: 75px;
+      position: relative;
+
+    }
+    
+    .btn_center {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+</style>
+
+
+<script>
+    var res=function($nombre){
+        var not=confirm("¿Eliminar al menú '" + $nombre + "' ?");
+        return not;
+    }
+</script>
+
+
 <!--
 █▀▄▀█ █▀█ █▀▄ ▄▀█ █░░   █▀▄▀█ █▀▀ █▄░█ █░█
 █░▀░█ █▄█ █▄▀ █▀█ █▄▄   █░▀░█ ██▄ █░▀█ █▄█-->
@@ -38,6 +66,27 @@
                 @endforeach
 
             @endif
+
+            <!--ＯＰＣＩＯＮＥＳ ＤＥＬ ＭＥＮＵ -->
+            @auth <!--Solo usuarioS logueados -->
+
+                @if ($mi_restaurante == true) <!-- Si el menu pertenece al usuario logeado-->
+
+                    <div class="btn_container">
+                        <div class="btn_center">
+                            <form method="POST" action="{{ route('RestauranteDetalleController.delMenu', ['id' => $matchingMenu->id]) }}">
+                                @method('post')
+                                @csrf
+                                <button type="submit" onclick="return res('{{$matchingMenu->nombre}}')" class="btn btn-danger">Eliminar menu</button>
+                            </form>
+                        </div>
+                    </div>
+
+
+                @endif
+
+            @endauth
+  
 
         </div>
 

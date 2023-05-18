@@ -36,7 +36,7 @@
   box-shadow: 1px 1px 5px rgb(29, 139, 64);
 }
 .card-title i{  
-    box-shadow: 2px 2px 20px rgb(0, 204, 255);
+    box-shadow: 2px 2px 20px rgb(30, 80, 92);
   font-size:25px;
   transition:1s;
   cursor:pointer;
@@ -141,9 +141,8 @@
                                 <a class="btn btn-info" href="{{route("RestauranteDetalleController.listaMenus",$item->id)}}" >Visitar</a>
 
                                 <img style="height:150px" src="{{asset('storage/img/restaurante/'.$item->img)}}">
-   
-                                <p class="card-title">{{$item->direccion}}</p> 
                                 <p class="card-title text-center">Tel.: {{$item->telefono}}</p> 
+                                <p class="card-title">{{$item->direccion}}</p> 
 
 
                             </div>

@@ -69,7 +69,7 @@
   font-size:17px;
   transition:1s;
   cursor:pointer;
-  box-shadow: 1px 1px 5px rgb(0, 0, 0);
+  box-shadow: 1px 1px 1px rgb(195, 193, 193);
 }
 .card-title i{  
   font-size:23px;
@@ -79,8 +79,7 @@
 }
 .card-title i:hover{
   transform: scale(1.25) rotate(100deg); 
-
-  
+ 
 }
 .card:hover{
   transform: scale(1.05);
@@ -286,11 +285,22 @@ async function recuperarPlatosMenu(id, nombre, precio) {
 
     </div>
 
+
+
   <!--
   █▀▄▀█ █▀▀ █▄░█ █░█ █▀
   █░▀░█ ██▄ █░▀█ █▄█ ▄█-->
 
       <div class="container mt-2">
+
+            <!--ＭＥＮＳＡＪＥ ＣＯＲＲＥＣＴＯ Ｏ ＮＯ -->             
+        @if (session("menu_correcto"))
+            <div style="text-shadow: none; text-align:center" class="alert alert-success">{{session("menu_correcto")}}</div>
+        @endif
+        
+        @if (session("menu_incorrecto"))
+          <div style="text-shadow: none; text-align:center" class="alert alert-danger">{{session("menu_incorrecto")}}</div>
+        @endif
 
         <div class="row">
 
@@ -310,11 +320,9 @@ async function recuperarPlatosMenu(id, nombre, precio) {
                       @else
                           <img class="cardimg"  src="{{asset('storage/img/menu/'.$menu->img)}}" >
                       @endif    
-    
-                      <p class="card-title text-center">{{$menu->descripcion}}</p> 
                       <p  class="card-title text-center ">Precio: {{$menu->precio}} Є</p> 
 
-                        <!--ＥＳＴＲＥＬＬＡＳ  -->
+                      <!--ＥＳＴＲＥＬＬＡＳ  -->
                       <ul class="list-inline text-center m-0">
 
                         @for ($i = 0; $i < 5; $i++)
@@ -326,6 +334,10 @@ async function recuperarPlatosMenu(id, nombre, precio) {
                         @endfor
 
                       </ul>  
+
+                      <p class="card-title text-center">{{$menu->descripcion}}</p> 
+
+
 
               
 

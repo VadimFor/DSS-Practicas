@@ -23,7 +23,7 @@ return new class extends Migration
                 $table->string('descripcion');
                 $table->string('img')->nullable();
                 $table->bigInteger('users_id')->unsigned();
-                $table->foreign('users_id')->references('id')->on('users');
+                $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
             });
         }
     }
