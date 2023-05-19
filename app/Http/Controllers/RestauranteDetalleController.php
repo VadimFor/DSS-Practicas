@@ -190,14 +190,39 @@ class RestauranteDetalleController extends Controller
 
             return back()->with("plato_correcto","Menu modificado correctamente.");
 
-
         }catch(Exception $e){ 
 
             error_log("error= " . $e->getMessage());
             return back()->with("plato_incorrecto","Error, ". $e->getMessage());
        
         }
+    }
 
+    public function delValoracion($id){
+        error_log("Eliminando a " . $id);
+
+        try{ 
+            $sql=DB::table('valoracion')->where('id', $id)->delete();
+            return back()->with("valoracion_correcto","Valoracion eliminada correctamente.");
+        }
+        catch(Exception $e){ 
+            error_log("error= " . $e->getMessage());
+            return back()->with("valoracion_incorrecto","Error, ". $e->getMessage());
+        }
+    }
+
+
+    public function crearValoracion(Request $request){
+        error_log("Creando valoracion");
+
+        try{ 
+            $sql=DB::table('valoracion')->where('id', $id)->delete();
+            return back()->with("valoracion_correcto","Valoracion eliminada correctamente.");
+        }
+        catch(Exception $e){ 
+            error_log("error= " . $e->getMessage());
+            return back()->with("valoracion_incorrecto","Error, ". $e->getMessage());
+        }
     }
 
 }

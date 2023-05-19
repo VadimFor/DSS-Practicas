@@ -251,7 +251,6 @@
                                                     <input type="text" name="img" class="form-control" placeholder="" value="{{$matchingMenu->img}}" style="display:none" autocomplete="off" readonly>
                                                 </td>
                                                 
-
                                                 <input type="text" name="restaurante_id"  value="{{$matchingMenu->restaurante_id}}" style="display:none" readonly>
                                                 <input type="text" name="id"  value="{{$matchingMenu->id}}" style="display:none" readonly>
 

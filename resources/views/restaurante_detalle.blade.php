@@ -115,10 +115,14 @@
   height: 200px;
 }
 
-        </style>
-        <title>Detalle Menu</title>
+.btn_hov:hover{
+  background-color: rgb(190, 223, 232) !important;
+}
 
-    </head>
+</style>
+<title>Detalle Menu</title>
+
+</head>
 
 <body>
   
@@ -315,8 +319,10 @@ async function recuperarPlatosMenu(id, nombre, precio) {
           @endphp
 
           @foreach ($menus as $menu)
-          <div class="col-md-3 col-sm-6">
+            <div class="col-md-3 col-sm-6">
 
+                <div>
+                  <!--ＡＢＲＩＲ ＭＯＤＡＬ ＭＥＮＵ -->
                   <div class="card card-block" data-bs-toggle="modal" data-bs-target="#modalMenu{{$menu->id}}" >
                       <h1 class="card-title text-center"><i class="material-icons">{{$menu->nombre}}</i></h1>
 
@@ -342,14 +348,24 @@ async function recuperarPlatosMenu(id, nombre, precio) {
                       </ul>  
 
                       <p class="card-title text-center">{{$menu->descripcion}}</p> 
-
-
                   </div>
-                   
-                      <!--
-                  █▀▄▀█ █▀█ █▀▄ ▄▀█ █░░   █▀▄▀█ █▀▀ █▄░█ █░█
-                  █░▀░█ █▄█ █▄▀ █▀█ █▄▄   █░▀░█ ██▄ █░▀█ █▄█-->
-                  @include('modal_menu') 
+
+                  <!--ＡＢＲＩＲ ＭＯＤＡＬ ＣＯＭＥＮＴＡＲＩＯＳ -->
+                  <div style="text-align:center" class="alert alert-info">
+                    <button  class="btn btn_hov"  data-bs-toggle="modal" data-bs-target="#modalComentariosMenu{{$menu->id}}" >Ver comentarios</button>
+                  </div>
+
+                </div>
+
+              <!--
+              █▀▄▀█ █▀█ █▀▄ ▄▀█ █░░   █▀▀ █▀█ █▀▄▀█ █▀▀ █▄░█ ▀█▀ ▄▀█ █▀█ █ █▀█ █▀
+              █░▀░█ █▄█ █▄▀ █▀█ █▄▄   █▄▄ █▄█ █░▀░█ ██▄ █░▀█ ░█░ █▀█ █▀▄ █ █▄█ ▄█  -->
+              @include('modal_comentariosMenu') 
+
+                  <!--
+              █▀▄▀█ █▀█ █▀▄ ▄▀█ █░░   █▀▄▀█ █▀▀ █▄░█ █░█
+              █░▀░█ █▄█ █▄▀ █▀█ █▄▄   █░▀░█ ██▄ █░▀█ █▄█-->
+              @include('modal_menu') 
 
             </div>
 
@@ -369,14 +385,12 @@ async function recuperarPlatosMenu(id, nombre, precio) {
     @include('footer')
 
     <!--
-    █▀▄▀█ █▀█ █▀▄ ▄▀█ █░░   █░█ █▀▀ █▀█   █▀▄▀█ █▀▀ █▄░█ █░█
-    █░▀░█ █▄█ █▄▀ █▀█ █▄▄   ▀▄▀ ██▄ █▀▄   █░▀░█ ██▄ █░▀█ █▄█-->
     <div class="container">
-        <!-- Modal -->
+        Modal 
         <div class="modal fade" id="menuModal" role="dialog">
           <div class="modal-dialog" style="top:150px;max-width:700px">
           
-            <!-- Modal content-->
+            Modal content
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" style="margin-top:0px">&times;</button>
@@ -391,7 +405,7 @@ async function recuperarPlatosMenu(id, nombre, precio) {
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 
