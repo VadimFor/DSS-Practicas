@@ -60,7 +60,7 @@
     @endphp 
     
     <div class="modal-dialog" role="document">
-    <div class="modal-content" style="border-radius: 5%;">
+    <div class="modal-content" style="border-radius: 5%; width=1000px">
 
         <!--▀█▀ █ ▀█▀ █░█ █░░ █▀█
             ░█░ █ ░█░ █▄█ █▄▄ █▄█ -->
@@ -85,7 +85,9 @@
                     <thead>
                         <tr>
                             <th style="text-align:center" scope="col">Puntos</th>
-                            <th style="text-align:center" scope="col">Comentario</th>
+                            <th style="text-align:center; " scope="col">Comentario</th>
+                            <th style="text-align:center" scope="col">Usuario</th>
+
 
                             @auth <!--Solo usuarioS logueados -->
                                 <th scope="col" style="width: 10px"></th><!--Eliminar -->
@@ -98,45 +100,51 @@
 
                         @foreach ($matchingMenu_valoraciones as $valoracion)
 
-                        <tr>
+                            @php
+                                $usuario_de_la_valoracion =  \App\Models\Users::where('id', $valoracion->users_id)->first();
+                            @endphp
 
-                            <td style="text-align: center">{{$valoracion->puntuacion}}</td>
-                            <td style="text-align: center">{{$valoracion->comentario}}</td>
+                            <tr>
 
-                            <!--█▀▀ █░░ █ █▀▄▀█ █ █▄░█ ▄▀█ █▀█   █░█ ▄▀█ █░░ █▀█ █▀█ ▄▀█ █▀▀ █ █▀█ █▄░█
-                                ██▄ █▄▄ █ █░▀░█ █ █░▀█ █▀█ █▀▄   ▀▄▀ █▀█ █▄▄ █▄█ █▀▄ █▀█ █▄▄ █ █▄█ █░▀█-->
-                            @auth <!--Solo usuarioS logueados -->
-
-                                <!--Para evitar el page refresh -->
-                                @if(Session::get('valoracion_correcto') != '' || Session::get('valoracion_incorrecto') != '')  
-                                <script>
-                                    var menuId = {{$menu->id}}; // Assign the value to a variable
-                                    //console.log("menuId= " + menuId); 
-                                    $(function() { $('#modalComentariosMenu' + menuId).modal('show');});
-                                </script>
-                                @endif
+                                <td style="text-align: center">{{$valoracion->puntuacion}}</td>
+                                <td style="font-size:18px; ">{{$valoracion->comentario}}</td>
+                                <td style="text-align: center">{{$usuario_de_la_valoracion->email  }}</td>
 
 
-                                @php 
-                                    $mi_valoracion = $valoracion->users_id == auth()->user()->id;
-                                @endphp
+                                <!--█▀▀ █░░ █ █▀▄▀█ █ █▄░█ ▄▀█ █▀█   █░█ ▄▀█ █░░ █▀█ █▀█ ▄▀█ █▀▀ █ █▀█ █▄░█
+                                    ██▄ █▄▄ █ █░▀░█ █ █░▀█ █▀█ █▀▄   ▀▄▀ █▀█ █▄▄ █▄█ █▀▄ █▀█ █▄▄ █ █▄█ █░▀█-->
+                                @auth <!--Solo usuarioS logueados -->
 
-                                @if ($mi_valoracion == true)  <!--Solo si la valoración la he escrito yo-->
-
-                                    <form method="POST" action="{{ route('RestauranteDetalleController.delValoracion', ['id' => $valoracion->id]) }}">
-                                        @method('post')
-                                        @csrf
-                                        <td>
-                                            <button type="submit"  class="btn btn-danger btn-sm styleiconos icon-basura"></button>
-                                        </td>
-                                    </form>
-
+                                    <!--Para evitar el page refresh -->
+                                    @if(Session::get('valoracion_correcto') != '' || Session::get('valoracion_incorrecto') != '')  
+                                    <script>
+                                        var menuId = {{$menu->id}}; // Assign the value to a variable
+                                        //console.log("menuId= " + menuId); 
+                                        $(function() { $('#modalComentariosMenu' + menuId).modal('show');});
+                                    </script>
+                                    @endif
 
 
-                                @endif
-                            @endauth
+                                    @php 
+                                        $mi_valoracion = $valoracion->users_id == auth()->user()->id;
+                                    @endphp
 
-                        </tr>
+                                    @if ($mi_valoracion == true)  <!--Solo si la valoración la he escrito yo-->
+
+                                        <form method="POST" action="{{ route('RestauranteDetalleController.delValoracion', ['id' => $valoracion->id]) }}">
+                                            @method('post')
+                                            @csrf
+                                            <td>
+                                                <button type="submit"  class="btn btn-danger btn-sm styleiconos icon-basura"></button>
+                                            </td>
+                                        </form>
+
+
+
+                                    @endif
+                                @endauth
+
+                            </tr>
 
                         @endforeach
 
