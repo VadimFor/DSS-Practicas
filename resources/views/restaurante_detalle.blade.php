@@ -294,6 +294,11 @@ async function recuperarPlatosMenu(id, nombre, precio) {
 
       <div class="container mt-2">
 
+
+        @if (count($menus) == 0)
+          <div style="text-shadow: none; text-align:center" class="alert alert-success">Este restaurante no tiene menuś</div>  
+        @endif
+
             <!--ＭＥＮＳＡＪＥ ＣＯＲＲＥＣＴＯ Ｏ ＮＯ -->             
         @if (session("menu_correcto"))
             <div style="text-shadow: none; text-align:center" class="alert alert-success">{{session("menu_correcto")}}</div>

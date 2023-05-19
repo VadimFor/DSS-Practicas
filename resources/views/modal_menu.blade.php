@@ -229,7 +229,7 @@
                         <form method="POST" action="{{ route('RestauranteDetalleController.delMenu', ['id' => $matchingMenu->id]) }}">
                             @method('post')
                             @csrf
-                            <button type="button" onclick="return res('{{$matchingMenu->nombre}}')" class="btn btn-danger">Eliminar menu</button>
+                            <button type="input" onclick="return res('{{$matchingMenu->nombre}}')" class="btn btn-danger">Eliminar menu</button>
                         </form>
 
                     </div>
