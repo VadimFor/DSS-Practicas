@@ -137,7 +137,7 @@ class RestauranteDetalleController extends Controller
     public function crearPlato(Request $request){
 
         //error_log(json_encode($request->all())); //PARA VER EL ARRAY DEL REQUEST
-        
+
         $max_platos = 5;
         $platos = Plato::where('menu_id', $request->menu_id)->get();
 
@@ -164,6 +164,38 @@ class RestauranteDetalleController extends Controller
         catch(Exception $e){ 
             error_log("error= " . $e->getMessage());
             return back()->with("plato_incorrecto","Error, ". $e->getMessage());
+        }
+
+    }
+
+    public function modMenu(Request $request){
+
+        try{ 
+
+            $request->validate([
+                'nombre' => 'required|string|max:30',
+                'descripcion' => 'string|max:500',
+                'precio' => 'required|numeric',
+                'restaurante_id' => 'required|integer|exists:restaurante,id',
+                'img' => 'nullable|image',
+            ]);
+            Menu::where('id', $request->id)
+                ->update([
+                    'nombre' => $request->nombre,
+                    'descripcion' => $request->descripcion,
+                    'precio' => $request->precio,
+                    'restaurante_id' => $request->restaurante_id,
+                    'img' => $request->img
+                ]);
+
+            return back()->with("plato_correcto","Menu modificado correctamente.");
+
+
+        }catch(Exception $e){ 
+
+            error_log("error= " . $e->getMessage());
+            return back()->with("plato_incorrecto","Error, ". $e->getMessage());
+       
         }
 
     }

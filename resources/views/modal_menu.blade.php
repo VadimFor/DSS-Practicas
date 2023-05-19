@@ -2,10 +2,16 @@
 
 <style>
     .btn_container {
-        margin-top: 50px;
+      margin-top: 20px;
       height: 75px;
       position: relative;
 
+    }
+
+    .btn_div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
 
@@ -56,7 +62,7 @@
     
     @php
         $matchingMenu = \App\Models\Menu::where('id', $menu->id)->first(); //Obtengo toda la columna
-        $matchingMenu_platos = \App\Models\Plato::where('menu_id', $menu->id)->get(); //Obtengo todos los platos de este menu.
+        $matchingMenu_platos = \App\Models\Plato::where('menu_id', $menu->id)->get(); //Obtengo todos los platos de este menu. 
     @endphp 
     
     <div class="modal-dialog" role="document">
@@ -151,10 +157,12 @@
 
             @endif
 
-            <!--▄▀█ █▄░█ ▄▀█ █▀▄ █ █▀█   █▀█ █░░ ▄▀█ ▀█▀ █▀█
-                █▀█ █░▀█ █▀█ █▄▀ █ █▀▄   █▀▀ █▄▄ █▀█ ░█░ █▄█-->
+
             @auth <!--Solo usuarioS logueados -->
                 @if ($mi_restaurante == true) <!-- Si el menu pertenece al usuario logeado-->
+                    <!--
+                    ▀█▀ ▄▀█ █▄▄ █░░ ▄▀█   ▄▀█ █▄░█ ▄▀█ █▀▄ █ █▀█   █▀█ █░░ ▄▀█ ▀█▀ █▀█
+                    ░█░ █▀█ █▄█ █▄▄ █▀█   █▀█ █░▀█ █▀█ █▄▀ █ █▀▄   █▀▀ █▄▄ █▀█ ░█░ █▄█-->
                     <table class="table bg-white rounded shadow-sm table-bordered table-hover">
 
                         <thead>
@@ -163,6 +171,7 @@
                                 <th style="text-align: center; background-color:rgb(252, 251, 248)" scope="col">Añadir plato</th>
                                 <th style="text-align: center; background-color:rgb(252, 251, 248)" scope="col"></th>
                             </tr>
+                            
                         
                         </thead>
                         
@@ -174,9 +183,7 @@
                                     @csrf
 
                                     <td style="background-color:rgb(252, 251, 248)"> 
-                            
                                         <input type="text" name="nombre" class="form-control" placeholder="" required>
-
                                     </td>
                                     
                                     <input type="text" name="menu_id" value={{$menu->id}} style="display: none;">
@@ -194,18 +201,89 @@
                         </tbody>
                             
                     </table> 
+
+                    <!--
+                    ▀█▀ ▄▀█ █▄▄ █░░ ▄▀█   █▀▄▀█ █▀█ █▀▄ █ █▀▀ █ █▀▀ ▄▀█ █▀█   █▀▄▀█ █▀▀ █▄░█ █░█
+                    ░█░ █▀█ █▄█ █▄▄ █▀█   █░▀░█ █▄█ █▄▀ █ █▀░ █ █▄▄ █▀█ █▀▄   █░▀░█ ██▄ █░▀█ █▄█ -->
+
+                    <div style="border: 2px solid #000; display:none" id="modmenu">
+
+                        <form method="POST" action="{{route('RestauranteDetalleController.modMenu')}}">
+                            @method('post')
+                            @csrf
+
+                            <table class="table bg-white rounded shadow-sm table-bordered table-hover">
+
+
+                                <div style="text-align:center" class="alert alert-info">
+                                MODIFICAR MENU
+                                </div>
+
+                                
+                                <thead>
+                                
+                                    <tr>
+                                        <th style="text-align: center; background-color:rgb(252, 251, 248)" scope="col">Nombre</th>
+                                        <th style="text-align: center; background-color:rgb(252, 251, 248)" scope="col">Descripción</th>
+                                        <th style="text-align: center; background-color:rgb(252, 251, 248)" scope="col">Precio</th>
+                                        <th style="text-align: center; background-color:rgb(252, 251, 248)" scope="col">Img</th>
+
+                                    </tr>
+                                
+                                </thead>
+                                
+                                    <tbody class="table-group-divider">
+                                    
+                                        <tr>      
+                                                <td style="background-color:rgb(252, 251, 248)"> 
+                                                    <input type="text" name="nombre" class="form-control" placeholder="" value="{{$matchingMenu->nombre}}" autocomplete="off" required>
+                                                </td>
+                                
+                                                <td style="background-color:rgb(252, 251, 248)"> 
+                                                    <input type="text" name="descripcion" class="form-control" placeholder="" value="{{$matchingMenu->descripcion}}" autocomplete="off" required>
+                                                </td>
+
+                                                <td style="background-color:rgb(252, 251, 248)"> 
+                                                    <input type="number" name="precio" class="form-control" placeholder="" value="{{$matchingMenu->precio}}" autocomplete="off"  required>
+                                                </td>
+                                                
+                                                <td style="background-color:rgb(252, 251, 248)"> 
+                                                    <input type="text" name="img" class="form-control" placeholder="" value="{{$matchingMenu->img}}" style="display:none" autocomplete="off" readonly>
+                                                </td>
+                                                
+
+                                                <input type="text" name="restaurante_id"  value="{{$matchingMenu->restaurante_id}}" style="display:none" readonly>
+                                                <input type="text" name="id"  value="{{$matchingMenu->id}}" style="display:none" readonly>
+
+                                        </tr>
+                                        
+                                    </tbody>
+    
+                            </table> 
+
+                            <div class="btn_container"> 
+                                <div class="btn_div">
+                                    <button type="submit" style="text-align: center; width: 150px;" class="btn btn-success ">Guardar</button>
+                                </div>
+                            </div>
+
+
+                        </form>
+
+                    </div>
+
                 @endif
             @endauth
             
-            <!-- NOTA: falta añadir el div en la table (si lo descomento)
+            
             <script>
                 document.addEventListener("DOMContentLoaded", function() {
-                    document.getElementById('btnaddplato').addEventListener('click', function() {
-                        document.getElementById('addplato').style.display = 'block';
+                    document.getElementById('btnmodmenu').addEventListener('click', function() {
+                        document.getElementById('modmenu').style.display = 'block';
                     });
                 });
             </script>
-            -->
+            
 
 
             <!--█▄▄ █▀█ ▀█▀ █▀█ █▄░█ █▀▀ █▀
@@ -221,7 +299,7 @@
                         <!--█▀▄▀█ █▀█ █▀▄ █ █▀▀ █ █▀▀ ▄▀█ █▀█   █▀▄▀█ █▀▀ █▄░█ █░█
                             █░▀░█ █▄█ █▄▀ █ █▀░ █ █▄▄ █▀█ █▀▄   █░▀░█ ██▄ █░▀█ █▄█ -->
                         <!--<button id="btnaddplato" style="background-color:rgb(210, 226, 241)" type="submit" class="list-group-item list-group-item-action btn btn-info">Añadir plato</button>-->
-                        <button style="background-color:rgb(210, 226, 241)" type="submit" class="list-group-item list-group-item-action btn btn-info">Modificar menu</button>
+                        <button id="btnmodmenu" style="background-color:rgb(210, 226, 241)" type="submit" class="list-group-item list-group-item-action btn btn-info">Modificar menu</button>
                         
 
                         <!--█▀▀ █░░ █ █▀▄▀█ █ █▄░█ ▄▀█ █▀█   █▀▄▀█ █▀▀ █▄░█ █░█

@@ -363,8 +363,6 @@ async function recuperarPlatosMenu(id, nombre, precio) {
           </div>
         </div>
 
-
-
     <!--
     █▀▀ █▀█ █▀█ ▀█▀ █▀▀ █▀█
     █▀░ █▄█ █▄█ ░█░ ██▄ █▀▄-->
