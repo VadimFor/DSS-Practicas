@@ -199,7 +199,7 @@ class RestauranteDetalleController extends Controller
     }
 
     public function delValoracion($id){
-        error_log("Eliminando a " . $id);
+      //  error_log("Eliminando a " . $id);
 
         try{ 
             $sql=DB::table('valoracion')->where('id', $id)->delete();
@@ -213,11 +213,32 @@ class RestauranteDetalleController extends Controller
 
 
     public function crearValoracion(Request $request){
-        error_log("Creando valoracion");
+       // error_log("Creando valoracion");
+       // error_log(json_encode($request->all())); //PARA VER EL ARRAY DEL REQUEST
+
+
+        $max_valoraciones = 1;
+        $valoraciones = Valoracion::where('menu_id', $request->id)
+        ->where('users_id', auth()->user()->id)
+        ->get();   
+
+        if(count($valoraciones) >=  $max_valoraciones){
+            return back()->with("valoracion_incorrecto","Error, solo puedes tener ". str($max_valoraciones) . " valoraciones por menú.");
+        }
 
         try{ 
-            $sql=DB::table('valoracion')->where('id', $id)->delete();
-            return back()->with("valoracion_correcto","Valoracion eliminada correctamente.");
+                    
+            $validated = $request->validate([
+                'comentario' => 'required|string|max:50',
+                'puntuacion' => 'required|numeric|min:0|max:5',
+                'users_id' => 'required',
+                'menu_id' => 'required'
+            ]); 
+
+            Valoracion::create($validated);
+
+            return back()->with("valoracion_correcto","Valoración creada correctamente.");
+
         }
         catch(Exception $e){ 
             error_log("error= " . $e->getMessage());

@@ -107,6 +107,16 @@
                                 ██▄ █▄▄ █ █░▀░█ █ █░▀█ █▀█ █▀▄   ▀▄▀ █▀█ █▄▄ █▄█ █▀▄ █▀█ █▄▄ █ █▄█ █░▀█-->
                             @auth <!--Solo usuarioS logueados -->
 
+                                <!--Para evitar el page refresh -->
+                                @if(Session::get('valoracion_correcto') != '' || Session::get('valoracion_incorrecto') != '')  
+                                <script>
+                                    var menuId = {{$menu->id}}; // Assign the value to a variable
+                                    //console.log("menuId= " + menuId); 
+                                    $(function() { $('#modalComentariosMenu' + menuId).modal('show');});
+                                </script>
+                                @endif
+
+
                                 @php 
                                     $mi_valoracion = $valoracion->users_id == auth()->user()->id;
                                 @endphp
@@ -121,14 +131,7 @@
                                         </td>
                                     </form>
 
-                                   <!--Para evitar el page refresh -->
-                                    @if(Session::get('valoracion_correcto') != '' || Session::get('valoracion_incorrecto') != '')  
-                                    <script>
-                                        var menuId = {{$menu->id}}; // Assign the value to a variable
-                                        //console.log("menuId= " + menuId); 
-                                        $(function() { $('#modalComentariosMenu' + menuId).modal('show');});
-                                    </script>
-                                    @endif
+
 
                                 @endif
                             @endauth
@@ -162,6 +165,9 @@
                     $mis_valoraciones = \App\Models\Valoracion::where('menu_id', $matchingMenu->id)
                                  ->where('users_id', auth()->user()->id)
                                  ->get();   
+
+                    error_log(json_encode($mis_valoraciones->toArray()));
+
                 @endphp
 
 
@@ -176,6 +182,7 @@
                             <tr>
                                 <th style="text-align: center; background-color:rgb(252, 251, 248); width:50px;" scope="col">Puntos</th>
                                 <th style="text-align: center; background-color:rgb(252, 251, 248)" scope="col">Comentario</th>
+
                             </tr>                    
                         
                         </thead>
@@ -191,12 +198,11 @@
                                         <input type="number" name="puntuacion" class="form-control" placeholder="" min="0" max="5" required>
                                     </td>
                                     <td style="background-color:rgb(252, 251, 248)"> 
-                                        <input type="text" name="comentario" class="form-control" placeholder="" min="0" max="50" required>
+                                        <input type="text" name="comentario" class="form-control" placeholder="" min="1" max="50" required>
                                     </td>
 
                                     <input type="text" name="users_id" style="display: none;" value="{{auth()->user()->id}}">
                                     <input type="text" name="menu_id" style="display: none;" value="{{$matchingMenu->id}}">
-
 
                                     <td style="width: 10px; background-color:rgb(252, 251, 248)">
                                         <button type="submit"  class="btn btn-sm styleiconos icon-crear"></button>
