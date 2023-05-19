@@ -134,20 +134,22 @@
                 ▀█▀ ▄▀█ █▄▄ █░░ ▄▀█   █▄░█ █▀█ █▀█ █▀▄▀█ ▄▀█ █░░
                 ░█░ █▀█ █▄█ █▄▄ █▀█   █░▀█ █▄█ █▀▄ █░▀░█ █▀█ █▄▄ -->
                 @foreach ($restaurantes as $item)
+                
                     <div class="col-md-3 col-sm-6" href="{{route("RestauranteDetalleController.listaMenus",$item->id)}}">
 
-                            <div class="card card-block">
-                                <h1 class="card-title text-center"><i class="material-icons">{{$item->nombre}}</i></h1>
+                        <div class="card card-block">
+                            <h1 class="card-title text-center"><i class="material-icons">{{$item->nombre}}</i></h1>
 
-                                <a class="btn btn-info" href="{{route("RestauranteDetalleController.listaMenus",$item->id)}}" >Visitar</a>
+                            <a class="btn btn-info" href="{{route("RestauranteDetalleController.listaMenus",$item->id)}}" >Visitar</a>
 
-                                <img style="height:150px" src="{{asset('storage/img/restaurante/'.$item->img)}}">
-                                <p class="card-title text-center">Tel.: {{$item->telefono}}</p> 
-                                <p class="card-title">{{$item->direccion}}</p> 
+                            <img style="height:150px" src="{{asset('storage/img/restaurante/'.$item->img)}}">
+                            <p class="card-title text-center">Tel.: {{$item->telefono}}</p> 
+                            <p class="card-title">{{$item->direccion}}</p> 
 
+                        </div>
 
-                            </div>
                     </div>
+
                 @endforeach
    
             </div>

@@ -95,6 +95,7 @@ Route::get('/platos-menu-{id}', [RestauranteDetalleController::class, 'listaPlat
 Route::post('/restaurante-detalle-crear', [RestauranteDetalleController::class, 'crear'])->name("RestauranteDetalleController.crear");
 Route::post('/restaurante-detalle-eliminar-{id}', [RestauranteDetalleController::class, 'delMenu'])->name("RestauranteDetalleController.delMenu");
 Route::post('/restaurante-detalle-delplato-{id}', [RestauranteDetalleController::class, 'delPlato'])->name("RestauranteDetalleController.delPlato");
+Route::post('/restaurante-detalle-crearPlato', [RestauranteDetalleController::class, 'crearPlato'])->name("RestauranteDetalleController.crearPlato");
 
 
 

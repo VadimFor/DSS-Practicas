@@ -26,6 +26,7 @@
     }
 
     .icon-basura{background-image: url('/icons/icon-basura.svg');}
+    .icon-crear{background-image: url('/icons/icon-crear.svg');}
     .styleiconos{
             width: 30px;
             height: 30px;
@@ -61,7 +62,8 @@
     <div class="modal-dialog" role="document">
     <div class="modal-content" style="border-radius: 5%;">
 
-        <!--ＨＥＡＤ -->
+        <!--▀█▀ █ ▀█▀ █░█ █░░ █▀█
+            ░█░ █ ░█░ █▄█ █▄▄ █▄█ -->
         <div class="modal-header text-center">
             <h2 style="width:100%;text-align: center;" class="modal-title " id="exampleModalLabel">{{$matchingMenu->nombre}}</h2>
             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -70,20 +72,19 @@
         </div>
 
 
-        <!--ＢＯＤＹ -->
+        <!--█░░ █ █▀ ▀█▀ ▄▀█   █▀▄ █▀▀   █▀█ █░░ ▄▀█ ▀█▀ █▀█ █▀
+            █▄▄ █ ▄█ ░█░ █▀█   █▄▀ ██▄   █▀▀ █▄▄ █▀█ ░█░ █▄█ ▄█ -->
         <div class="modal-body" style="text-shadow: none; ">
                
             @if (count($matchingMenu_platos) == 0)
-                <div style="text-align:center">Este menú no tiene platos.</div>
-                
-
+                <div style="text-align:center; margin-bottom:50px; margin-top:25px;">Este menú no tiene platos.</div>
             @else
 
                 <table class="table bg-white rounded shadow-sm table-bordered table-hover">
 
                     <thead>
                         <tr>
-                            <th scope="col"></th><!--Nombre -->
+                            <th style="text-align:center" scope="col">Lista de platos</th>
 
                             @auth <!--Solo usuarioS logueados -->
                                 @if ($mi_restaurante == true) <!-- Si el menu pertenece al usuario logeado-->
@@ -91,7 +92,6 @@
                                 @endif
                             @endauth
     
-
                         </tr>
                     </thead>
 
@@ -101,9 +101,10 @@
 
                         <tr>
 
-                            <td>{{$plato->nombre}}</td>
+                            <td style="text-align: center">{{$plato->nombre}}</td>
 
-                            <!--ＥＬＩＭＩＮＡＲ ＰＬＡＴＯ -->
+                            <!--█▀▀ █░░ █ █▀▄▀█ █ █▄░█ ▄▀█ █▀█   █▀█ █░░ ▄▀█ ▀█▀ █▀█
+                                ██▄ █▄▄ █ █░▀░█ █ █░▀█ █▀█ █▀▄   █▀▀ █▄▄ █▀█ ░█░ █▄█ -->
                             @auth <!--Solo usuarioS logueados -->
                                 @if ($mi_restaurante == true) <!-- Si el menu pertenece al usuario logeado-->
 
@@ -133,13 +134,13 @@
 
                         <!--Para mostrar el resultado de borrar plato -->
                         @if(Session::has('plato_correcto'))
-                            <div class="alert alert-success">
+                            <div style="text-align:center" class="alert alert-success">
                                 {{ Session::get('plato_correcto') }}
                             </div>
                         @endif
                         <!--Para mostrar el resultado de borrar plato -->
                         @if(Session::has('plato_incorrecto'))
-                            <div class="alert alert-danger">
+                            <div style="text-align:center" class="alert alert-danger">
                                 {{ Session::get('plato_incorrecto') }}
                             </div>
                         @endif
@@ -150,7 +151,65 @@
 
             @endif
 
-            <!--ＯＰＣＩＯＮＥＳ ＤＥＬ ＭＥＮＵ -->
+            <!--▄▀█ █▄░█ ▄▀█ █▀▄ █ █▀█   █▀█ █░░ ▄▀█ ▀█▀ █▀█
+                █▀█ █░▀█ █▀█ █▄▀ █ █▀▄   █▀▀ █▄▄ █▀█ ░█░ █▄█-->
+            @auth <!--Solo usuarioS logueados -->
+                @if ($mi_restaurante == true) <!-- Si el menu pertenece al usuario logeado-->
+                    <table class="table bg-white rounded shadow-sm table-bordered table-hover">
+
+                        <thead>
+                        
+                            <tr>
+                                <th style="text-align: center; background-color:rgb(252, 251, 248)" scope="col">Añadir plato</th>
+                                <th style="text-align: center; background-color:rgb(252, 251, 248)" scope="col"></th>
+                            </tr>
+                        
+                        </thead>
+                        
+                        <tbody class="table-group-divider">
+                        
+                            <tr>      
+                                <form method="POST" action="{{route('RestauranteDetalleController.crearPlato')}}">
+                                    @method('post')
+                                    @csrf
+
+                                    <td style="background-color:rgb(252, 251, 248)"> 
+                            
+                                        <input type="text" name="nombre" class="form-control" placeholder="" required>
+
+                                    </td>
+                                    
+                                    <input type="text" name="menu_id" value={{$menu->id}} style="display: none;">
+                                    <input type="text" name="descripcion" style="display: none;" value="Sin descripción">
+                                    <input type="text" name="img" style="display: none;">
+
+                                    <td style="width: 10px; background-color:rgb(252, 251, 248)">
+                                        <button type="submit"  class="btn btn-sm styleiconos icon-crear"></button>
+                                    </td>
+                                    
+                                </form>
+        
+                            </tr>
+                            
+                        </tbody>
+                            
+                    </table> 
+                @endif
+            @endauth
+            
+            <!-- NOTA: falta añadir el div en la table (si lo descomento)
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    document.getElementById('btnaddplato').addEventListener('click', function() {
+                        document.getElementById('addplato').style.display = 'block';
+                    });
+                });
+            </script>
+            -->
+
+
+            <!--█▄▄ █▀█ ▀█▀ █▀█ █▄░█ █▀▀ █▀
+                █▄█ █▄█ ░█░ █▄█ █░▀█ ██▄ ▄█-->
             @auth <!--Solo usuarioS logueados -->
 
                 @if ($mi_restaurante == true) <!-- Si el menu pertenece al usuario logeado-->
@@ -159,9 +218,14 @@
                 <div class="btn_container">
                     <div class="list-group horizontal-list-group">
                         
-                        <button style="background-color:rgb(210, 226, 241)" type="submit" class="list-group-item list-group-item-action btn btn-info">Añadir plato</button>
+                        <!--█▀▄▀█ █▀█ █▀▄ █ █▀▀ █ █▀▀ ▄▀█ █▀█   █▀▄▀█ █▀▀ █▄░█ █░█
+                            █░▀░█ █▄█ █▄▀ █ █▀░ █ █▄▄ █▀█ █▀▄   █░▀░█ ██▄ █░▀█ █▄█ -->
+                        <!--<button id="btnaddplato" style="background-color:rgb(210, 226, 241)" type="submit" class="list-group-item list-group-item-action btn btn-info">Añadir plato</button>-->
                         <button style="background-color:rgb(210, 226, 241)" type="submit" class="list-group-item list-group-item-action btn btn-info">Modificar menu</button>
                         
+
+                        <!--█▀▀ █░░ █ █▀▄▀█ █ █▄░█ ▄▀█ █▀█   █▀▄▀█ █▀▀ █▄░█ █░█
+                            ██▄ █▄▄ █ █░▀░█ █ █░▀█ █▀█ █▀▄   █░▀░█ ██▄ █░▀█ █▄█ -->
                         <form method="POST" action="{{ route('RestauranteDetalleController.delMenu', ['id' => $matchingMenu->id]) }}">
                             @method('post')
                             @csrf
@@ -181,3 +245,4 @@
     </div>
     </div>
 </div>
+

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Restaurante;
 use Illuminate\Http\Request;
 use App\Models\Menu;
+use App\Models\Plato;
 use App\Models\Valoracion;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -132,5 +133,39 @@ class RestauranteDetalleController extends Controller
             return back()->with("plato_incorrecto","Error, ". $e->getMessage());
         }
     } 
+
+    public function crearPlato(Request $request){
+
+        //error_log(json_encode($request->all())); //PARA VER EL ARRAY DEL REQUEST
+        
+        $max_platos = 5;
+        $platos = Plato::where('menu_id', $request->menu_id)->get();
+
+        if(count($platos) >= $max_platos){
+            return back()->with("plato_incorrecto","Error, solo puedes tener ". str($max_platos) . " platos por menú.");
+        }
+
+
+        try{ 
+                    
+            $validated = $request->validate([
+                'nombre' => 'required|string|max:20',
+                'descripcion' => 'nullable|string|max:20',
+                'img' => 'nullable|string|max:20',
+                'menu_id' => 'required|integer',
+
+            ]); 
+
+            $sql= Plato::create($validated);
+
+            return back()->with("plato_correcto","Plato creado correctamente.");
+
+        }
+        catch(Exception $e){ 
+            error_log("error= " . $e->getMessage());
+            return back()->with("plato_incorrecto","Error, ". $e->getMessage());
+        }
+
+    }
 
 }
