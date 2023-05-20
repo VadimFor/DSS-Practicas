@@ -300,7 +300,7 @@ async function recuperarPlatosMenu(id, nombre, precio) {
 
 
         @if (count($menus) == 0)
-          <div style="text-shadow: none; text-align:center" class="alert alert-success">Este restaurante no tiene menuś</div>  
+          <div style="text-shadow: none; text-align:center" class="alert alert-success">Este restaurante no tiene menús</div>  
         @endif
 
             <!--ＭＥＮＳＡＪＥ ＣＯＲＲＥＣＴＯ Ｏ ＮＯ -->             
