@@ -5,12 +5,13 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\DB;
 use App\Models\Restaurante;
-class CheckRestaurantExists
+use App\Models\Menu;
+class CheckExists
 {
     public function handle($request, Closure $next)
     {
-        $errorMessage = 'No hay restaurantes creados.';
-        if (!Restaurante::exists()) {
+        $errorMessage = 'No hay elementos creados aun.';
+        if (!Restaurante::exists() || !Menu::exists()) {
             // No hay restaurantes creados, mostrar mensaje de error
             return redirect()->back()->withErrors(['No hay restaurantes creados.'])
                                   ->withInput()

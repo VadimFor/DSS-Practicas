@@ -19,7 +19,7 @@
     <body>
 
         @include('navbar')
-    @if (session('error-message'))
+        @if (session('error-message'))
             <div class="alert alert-danger">
                 <ul>                
                     <li>{{ session('error-message') }}</li>
