@@ -105,7 +105,7 @@ Route::post('/restaurante-detalle-crearValoracion', [RestauranteDetalleControlle
 /*
 █▀█ █▀▀ █▀ ▀█▀ ▄▀█ █▄░█ ▄▀█   █▀█ █▀▀ █▀ ▀█▀ ▄▀█ █░█ █▀█ ▄▀█ █▄░█ ▀█▀ █▀▀ █▀
 █▀▀ ██▄ ▄█ ░█░ █▀█ █░▀█ █▀█   █▀▄ ██▄ ▄█ ░█░ █▀█ █▄█ █▀▄ █▀█ █░▀█ ░█░ ██▄ ▄█*/
-Route::get('/restaurantes', [RestaurantesController::class, 'mostrar']);
+Route::get('/restaurantes', [RestaurantesController::class, 'mostrar'])->middleware('verificar.restaurantes');
 Route::post('/restaurantes_buscar', [RestaurantesController::class, 'buscar'])->name("RestaurantesController.buscar");
 
 

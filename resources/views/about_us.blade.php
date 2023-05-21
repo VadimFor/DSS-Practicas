@@ -37,7 +37,14 @@
     <body>
         @include('navbar')
 
-        
+        <!-- Muestra mensaje de error durante 30 seg en el caso de que se haga click en el botón de restaurantes y no haya restaurantes -->
+        @if (session('error-message'))
+            <div class="alert alert-danger">
+                <ul>                
+                    <li>{{ session('error-message') }}</li>
+                </ul>
+            </div>
+        @endif
 
         <div class="container mt-5 mb-5">
           <div class="row">
