@@ -99,6 +99,7 @@ Route::post('/restaurante-detalle-delplato-{id}', [RestauranteDetalleController:
 Route::post('/restaurante-detalle-crearPlato', [RestauranteDetalleController::class, 'crearPlato'])->name("RestauranteDetalleController.crearPlato");
 Route::post('/restaurante-detalle-delValoracion-{id}', [RestauranteDetalleController::class, 'delValoracion'])->name("RestauranteDetalleController.delValoracion");
 Route::post('/restaurante-detalle-crearValoracion', [RestauranteDetalleController::class, 'crearValoracion'])->name("RestauranteDetalleController.crearValoracion");
+Route::post('/restaurante-detalle-actualizarValoracion', [RestauranteDetalleController::class, 'actualizarValoracion'])->name("RestauranteDetalleController.actualizarValoracion");
 
 
 

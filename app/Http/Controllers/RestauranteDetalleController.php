@@ -211,6 +211,16 @@ class RestauranteDetalleController extends Controller
         }
     }
 
+    public function actualizarValoracion(Request $request){
+        $valor = intval($request->valoracion);
+        $valor++;
+        try{
+            Valoracion::where('menu_id', $request->menuId)->update(['puntuacion' => $valor]);
+            return response()->json("Status: Success");
+        } catch(Exception $e) {
+            return response()->json("Status: Error");
+        }
+    }
 
     public function crearValoracion(Request $request){
        // error_log("Creando valoracion");
