@@ -50,7 +50,7 @@
 <!--
 █▀▄▀█ █▀█ █▀▄ ▄▀█ █░░   █▀▀ █▀█ █▀▄▀█ █▀▀ █▄░█ ▀█▀ ▄▀█ █▀█ █ █▀█ █▀
 █░▀░█ █▄█ █▄▀ █▀█ █▄▄   █▄▄ █▄█ █░▀░█ ██▄ █░▀█ ░█░ █▀█ █▀▄ █ █▄█ ▄█  -->
-<div style="font-size:20px; " class="modal fade" id="modalComentariosMenu{{$menu->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div style="font-size:20px;" class="modal fade" id="modalComentariosMenu{{$menu->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     
     @php
         $matchingMenu = \App\Models\Menu::where('id', $menu->id)->first(); //Obtengo toda la columna
@@ -59,8 +59,8 @@
 
     @endphp 
     
-    <div class="modal-dialog" role="document">
-    <div class="modal-content" style="border-radius: 5%; width=1000px">
+    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content" style="border-radius: 5%; width=2000px">
 
         <!--▀█▀ █ ▀█▀ █░█ █░░ █▀█
             ░█░ █ ░█░ █▄█ █▄▄ █▄█ -->
@@ -106,9 +106,15 @@
 
                             <tr>
 
-                                <td style="text-align: center">{{$valoracion->puntuacion}}</td>
+                                <td style="text-align: center">
+                                    @for ($i = 0; $i < $valoracion->puntuacion; $i++)
+                                        <i class="fas fa-star"></i>
+                                    @endfor
+                                </td>
                                 <td style="font-size:18px; ">{{$valoracion->comentario}}</td>
-                                <td style="text-align: center">{{$usuario_de_la_valoracion->email  }}</td>
+                                <td style="text-align: center">
+                                    <img src="storage/img/user/{{$usuario_de_la_valoracion->email}}|perfil.jpg" style="border-radius:50%; max-height:100px" title="{{$usuario_de_la_valoracion->email}}">
+                                </td>
 
 
                                 <!--█▀▀ █░░ █ █▀▄▀█ █ █▄░█ ▄▀█ █▀█   █░█ ▄▀█ █░░ █▀█ █▀█ ▄▀█ █▀▀ █ █▀█ █▄░█

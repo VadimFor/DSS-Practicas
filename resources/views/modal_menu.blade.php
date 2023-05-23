@@ -65,14 +65,15 @@
         $matchingMenu_platos = \App\Models\Plato::where('menu_id', $menu->id)->get(); //Obtengo todos los platos de este menu. 
     @endphp 
     
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content" style="border-radius: 5%;">
 
         <!--▀█▀ █ ▀█▀ █░█ █░░ █▀█
             ░█░ █ ░█░ █▄█ █▄▄ █▄█ -->
         <div class="modal-header text-center">
-            <h2 style="width:100%;text-align: center;" class="modal-title " id="exampleModalLabel">{{$matchingMenu->nombre}}</h2>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <p id="menuPriceModal" style="font-size: xx-large; margin-top:25px">{{$matchingMenu->precio}}€</p>
+            <h2 style="width:100%;text-align: center;font-weight: bold;font-size: xx-large" class="modal-title " id="exampleModalLabel">{{$matchingMenu->nombre}}</h2>
+            <button type="button" class="btn btn-default" data-bs-dismiss="modal" aria-label="Close" style="font-size:x-large">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -80,17 +81,17 @@
 
         <!--█░░ █ █▀ ▀█▀ ▄▀█   █▀▄ █▀▀   █▀█ █░░ ▄▀█ ▀█▀ █▀█ █▀
             █▄▄ █ ▄█ ░█░ █▀█   █▄▀ ██▄   █▀▀ █▄▄ █▀█ ░█░ █▄█ ▄█ -->
-        <div class="modal-body" style="text-shadow: none; ">
+        <div id="listaPlatosModal" class="modal-body" style="text-shadow: none; ">
                
             @if (count($matchingMenu_platos) == 0)
                 <div style="text-align:center; margin-bottom:50px; margin-top:25px;">Este menú no tiene platos.</div>
             @else
 
-                <table class="table bg-white rounded shadow-sm table-bordered table-hover">
+                <table class="table bg-white rounded shadow-sm table-bordered" style="table-layout: fixed; border:0px solid #0000;">
 
                     <thead>
                         <tr>
-                            <th style="text-align:center" scope="col">Lista de platos</th>
+                            <th style="text-align:center" colspan="2">Lista de platos</th>
 
                             @auth <!--Solo usuarioS logueados -->
                                 @if ($mi_restaurante == true) <!-- Si el menu pertenece al usuario logeado-->
@@ -102,17 +103,42 @@
                     </thead>
 
                     <tbody class="table-group-divider">
-
+                        @php $toggle = true @endphp
                         @foreach ($matchingMenu_platos as $plato)
 
                         <tr>
+                            <div style="display: inline-flex">
+                                @if ($toggle)
+                                    <td style="text-align: center">
+                                        <img src="/storage/img/plato/{{$plato->img}}" style="max-height: 200px; border-radius: 50%">
+                                    </td>
+                                    <td style="text-align: center">
+                                        <span style="font-size: xxx-large;padding-top: 40px; display:inline-block">{{$plato->nombre}}</span>
+                                        <br>
+                                        <span style="font-size: large; display:inline-block">{{$plato->descripcion}}</span>
+                                    </td>
+                                @else
+                                    <td style="text-align: center;">
+                                        <span style="font-size: xxx-large;padding-top: 40px; display:inline-block">{{$plato->nombre}}</span>
+                                        <br>
+                                        <span style="font-size: large; display:inline-block">{{$plato->descripcion}}</span>
+                                    </td>
+                                    <td style="text-align: center">
+                                        <img src="/storage/img/plato/{{$plato->img}}" style="max-height: 200px; border-radius: 50%">
+                                    </td>
+                                @endif
+                            </div>
 
-                            <td style="text-align: center">{{$plato->nombre}}</td>
+                            @php $toggle = !$toggle @endphp
 
                             <!--█▀▀ █░░ █ █▀▄▀█ █ █▄░█ ▄▀█ █▀█   █▀█ █░░ ▄▀█ ▀█▀ █▀█
                                 ██▄ █▄▄ █ █░▀░█ █ █░▀█ █▀█ █▀▄   █▀▀ █▄▄ █▀█ ░█░ █▄█ -->
                             @auth <!--Solo usuarioS logueados -->
                                 @if ($mi_restaurante == true) <!-- Si el menu pertenece al usuario logeado-->
+
+                                    <script>
+                                        document.getElementById("listaPlatosModal").setAttribute("style","padding-right: 30px;");
+                                    </script>
 
                                     <form method="POST" action="{{ route('RestauranteDetalleController.delPlato', ['id' => $plato->id]) }}">
                                         @method('post')

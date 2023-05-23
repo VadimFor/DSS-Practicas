@@ -420,29 +420,6 @@ async function vaciarEstrellaTemporal(event) {
     █▀░ █▄█ █▄█ ░█░ ██▄ █▀▄-->
     @include('footer')
 
-    <!--
-    <div class="container">
-        Modal 
-        <div class="modal fade" id="menuModal" role="dialog">
-          <div class="modal-dialog" style="top:150px;max-width:700px">
-          
-            Modal content
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" style="margin-top:0px">&times;</button>
-                <h4 class="modal-title" id="menuNameModal" style="font-size:xxx-large;font-weight:bold"></h4>
-                <p id="menuPriceModal" style="font-size: xx-large; margin-top:25px"></p>
-              </div>
-              <div class="modal-body" id="bodyModal">
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
       <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 
 </body>
