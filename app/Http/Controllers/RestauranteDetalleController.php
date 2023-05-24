@@ -61,9 +61,11 @@ class RestauranteDetalleController extends Controller
 
     // CREAR MENU
     public function crear(Request $request){
+        $img = '';
 
         try{
             error_log("image= ". $request->img);
+            error_log("hola");
 
             $request->validate([
                 'nombre' => 'required|string|max:30',
@@ -79,7 +81,6 @@ class RestauranteDetalleController extends Controller
                 $img = $request->img;
             }
 
-
             $menu = Menu::create([
                 'nombre' => $request->nombre,
                 'descripcion' => $request->descripcion,
@@ -88,7 +89,7 @@ class RestauranteDetalleController extends Controller
                 'img' => $img,
             ]);
 
-            if($request->img != NULL){          
+            if($img != NULL){          
                 $imageoriginalName =  $request->file('img')->getClientOriginalName();
                 $extension = $request->file('img')->getClientOriginalExtension();
                 $imageName =  $menu->id . '|menu.' .  $extension;
