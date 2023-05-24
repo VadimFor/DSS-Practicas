@@ -202,7 +202,7 @@
                         
                         <tbody class="table-group-divider">
 
-                            <form method="POST" action="{{route('RestauranteDetalleController.crearPlato')}}">
+                            <form method="POST" action="{{route('RestauranteDetalleController.crearPlato')}}" enctype="multipart/form-data">
                                     @method('post')
                                     @csrf
                                     <tr>      
