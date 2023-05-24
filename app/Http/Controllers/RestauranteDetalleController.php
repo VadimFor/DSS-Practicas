@@ -154,7 +154,6 @@ class RestauranteDetalleController extends Controller
                 'descripcion' => 'nullable|string|max:20',
                 'img' => 'nullable|string|max:20',
                 'menu_id' => 'required|integer',
-
             ]); 
 
             $sql= Plato::create($validated);

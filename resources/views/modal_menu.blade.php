@@ -195,35 +195,31 @@
                         
                             <tr>
                                 <th style="text-align: center; background-color:rgb(252, 251, 248)" scope="col">Añadir plato</th>
-                                <th style="text-align: center; background-color:rgb(252, 251, 248)" scope="col"></th>
                             </tr>
                             
                         
                         </thead>
                         
                         <tbody class="table-group-divider">
-                        
-                            <tr>      
-                                <form method="POST" action="{{route('RestauranteDetalleController.crearPlato')}}">
+
+                            <form method="POST" action="{{route('RestauranteDetalleController.crearPlato')}}">
                                     @method('post')
                                     @csrf
-
-                                    <td style="background-color:rgb(252, 251, 248)"> 
-                                        <input type="text" name="nombre" class="form-control" placeholder="" required>
-                                    </td>
-                                    
-                                    <input type="text" name="menu_id" value={{$menu->id}} style="display: none;">
-                                    <input type="text" name="descripcion" style="display: none;" value="Sin descripción">
-                                    <input type="text" name="img" style="display: none;">
-
-                                    <td style="width: 10px; background-color:rgb(252, 251, 248)">
-                                        <button type="submit"  class="btn btn-sm styleiconos icon-crear"></button>
-                                    </td>
-                                    
-                                </form>
-        
-                            </tr>
-                            
+                                    <tr>      
+                                        <td style="background-color:rgb(252, 251, 248)"> 
+                                            <input type="text" name="nombre" class="form-control" placeholder="Nombre del plato..." required>
+                                            <input type="text" name="descripcion" style="background-color:rgb(252, 251, 248)" class="form-control" value="" placeholder="Descripción del plato...">
+                                        </td>
+                                        
+                                        <input type="text" name="menu_id" value={{$menu->id}} style="display: none;">
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 10px; background-color:rgb(252, 251, 248)">
+                                            <input type="file" placeholder="Seleccionar imágen..." name="img" style="background-color:rgb(252, 251, 248)">
+                                            <button type="submit"  class="btn btn-sm styleiconos icon-crear" style="text-align: right;float:right"></button>
+                                        </td>
+                                    </tr>
+                            </form>
                         </tbody>
                             
                     </table> 
