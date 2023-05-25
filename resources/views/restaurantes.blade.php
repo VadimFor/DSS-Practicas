@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-        <title>Home</title>
+        <title>Restaurantes</title>
 
     </head>
 
@@ -133,6 +133,7 @@
                 <!-- 
                 ▀█▀ ▄▀█ █▄▄ █░░ ▄▀█   █▄░█ █▀█ █▀█ █▀▄▀█ ▄▀█ █░░
                 ░█░ █▀█ █▄█ █▄▄ █▀█   █░▀█ █▄█ █▀▄ █░▀░█ █▀█ █▄▄ -->
+                
                 @foreach ($restaurantes as $item)
                 
                     <div class="col-md-3 col-sm-6" href="{{route("RestauranteDetalleController.listaMenus",$item->id)}}">
@@ -151,7 +152,11 @@
                     </div>
 
                 @endforeach
-   
+
+                
+            </div>
+            <div style= "display: flex; justify-content: center; padding-top: 10px">
+              {{ $restaurantes->links() }} <!-- Para mostrar el tab con las paginas del PAGINATION -->
             </div>
           </div>
 

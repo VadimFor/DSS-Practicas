@@ -26,7 +26,6 @@
                 </ul>
             </div>
         @endif
-        TOP MENUS
 
         @include('welcome_contenido')
 

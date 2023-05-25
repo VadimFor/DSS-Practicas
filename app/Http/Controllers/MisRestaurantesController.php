@@ -7,18 +7,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Exception;
 
+
 use Illuminate\Http\Request;
 
 class MisRestaurantesController extends Controller
 { 
     public function mostrar($users_id){
 
-        if(Auth::check()){
-            
+        if(Auth::check()){            
             //saco los restaurantes SOLO del usuario logeado
-            $restaurantes = Restaurante::where('users_id', '=', $users_id)->paginate(5, ['*'], 'restaurantes');
+            $restaurantes = Restaurante::where('users_id', '=', $users_id)->paginate(5, ['*'],'restaurantes');
             $restaurantes_cont = Restaurante::where('users_id', '=', $users_id)->get()->count();
-
+                        
             return view('panel_usuario/panel_mis_restaurantes')->with('restaurantes',$restaurantes)->with('restaurantes_cont', $restaurantes_cont);
         }else{
             return redirect('/login');

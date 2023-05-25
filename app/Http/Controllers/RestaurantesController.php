@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Restaurante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class RestaurantesController extends Controller
 {
 
     public function mostrar(){
-        $restaurantes = Restaurante::all();
+        $restaurantes = Restaurante::select('*')->paginate(4, ['*'],'restaurantes');
 
         return view('restaurantes')->with("restaurantes",$restaurantes);
 
