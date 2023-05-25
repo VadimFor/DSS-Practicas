@@ -396,10 +396,10 @@
                         @endforeach
                     
                     </div>
-
                     <div style="display: flex; justify-content: center;">
                         {{ $mis_resenyas->links() }} <!-- Para mostrar el tab con las paginas del PAGINATION -->
                     </div>
+
 
                 </div>
 
