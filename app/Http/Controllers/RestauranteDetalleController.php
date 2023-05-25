@@ -190,7 +190,7 @@ class RestauranteDetalleController extends Controller
                 'descripcion' => 'string|max:500',
                 'precio' => 'required|numeric',
                 'restaurante_id' => 'required|integer|exists:restaurante,id',
-                'img' => 'nullable|image',
+                'img' => 'nullable',
             ]);
             Menu::where('id', $request->id)
                 ->update([
