@@ -135,7 +135,30 @@ button:hover{
    transform: scale(1.05);
 }
 
+.imagen {
+  position: relative;
+}
 
+.imagen-fondo {
+  width: 100%;
+
+}
+
+.icono {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 70px; /* Ajusta el tamaño del icono según tus necesidades */
+  height: auto;
+  
+
+}
+
+.icono:hover{
+   transition: all 0.5s ease-in-out;
+   transform: scale(1.4);
+   cursor: pointer;
+}
 
 </style>
 
@@ -149,8 +172,9 @@ button:hover{
          
          <div class="top2 mb-0">
 
-            <div class="image">
-               <img src="{{asset('storage/img/menu/'.$menus[0]->img)}}" width="240" height="240">         
+            <div class="imagen">
+               <img src="{{asset('storage/img/menu/'.$menus[0]->img)}}" width="240" height="280" class="imagen-fondo">    
+               <img src="storage/img/icon/2.png"  class="icono" >     
             </div>
 
             <div class="title">
@@ -174,12 +198,12 @@ button:hover{
          
          <div class="top1 mt-0">
          
-            <div class="image">
-            <img src="{{asset('storage/img/menu/'.$menus[1]->img)}}" width="240" height="240"/>  
+            <div class="imagen">
+            <img src="{{asset('storage/img/menu/'.$menus[1]->img)}}"  width="240" height="280" class="imagen-fondo"/>  
+            <img src="storage/img/icon/1.png"  class="icono" >
             </div>
             <div class="title">
-               <h1>{{$menus[1]->nombre}}</h1>
-              
+               <h1>{{$menus[1]->nombre}}</h1>             
             </div>
             <ul class="list-inline text-center m-0">
             @for($i=0; $i < $menus[1]->promedio; $i++)
@@ -200,8 +224,9 @@ button:hover{
          
          <div class="top3 mb-0">
          
-            <div class="image">
-            <img src="{{asset('storage/img/menu/'.$menus[2]->img)}}" width="240" height="240"/>  
+            <div class="imagen">
+            <img src="{{asset('storage/img/menu/'.$menus[2]->img)}}" width="240" height="280" class="imagen-fondo"/>  
+            <img src="storage/img/icon/3.png"  class="icono" >
             </div>
             <div class="title">
                <h1>{{$menus[2]->nombre}}</h1>
