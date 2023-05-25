@@ -5,6 +5,8 @@
  padding: 0px;
 }
 body{
+   /*gradient blue background color*/
+   background: linear-gradient(120deg, #2980b9, #8e44ad);
  font-family: arial;
 }
 .main{
@@ -73,6 +75,8 @@ button:hover{
    margin-top: 0%;
    margin: 2%;
    transition: all 0.5s ease-in-out;
+   background-color: white;
+
 
 }
 
@@ -89,12 +93,13 @@ button:hover{
    border-radius: 5px; 
    margin: 2%;
    transition: all 0.5s ease-in-out;
+   background-color: white;
 
 }
 .top2:hover {
 
       transition: all 0.5s ease-in-out;
-      box-shadow: 0 0 10px #838996,  0 0 40px  #838996, 0 0 80px #838996 ;
+      box-shadow: 0 0 10px #D3D3D3,  0 0 40px  #D3D3D3, 0 0 80px #D3D3D3 ;
       transform: scale(1.1);
 
 }
@@ -104,6 +109,8 @@ button:hover{
    border-radius: 5px; 
    margin: 2%;
    transition: all 0.5s ease-in-out;
+   background-color: white;
+
 
 }
 .top3:hover {
@@ -118,6 +125,8 @@ button:hover{
    border-radius: 5px; 
    margin: 2%;
    transition: all 0.5s ease-in-out;
+   background-color: white;
+
 
 }
 
@@ -132,7 +141,7 @@ button:hover{
 
 
 
-<div class="main card-deck">
+<div class="main card-deck" >
 
 
    <div class="d-flex flex-row justify-content-evenly">
