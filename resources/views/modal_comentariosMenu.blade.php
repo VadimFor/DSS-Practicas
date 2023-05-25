@@ -85,7 +85,7 @@
                     <thead>
                         <tr>
                             <th style="text-align:center" scope="col">Puntos</th>
-                            <th style="text-align:center; " scope="col">Comentario</th>
+                            <th scope="col" style="text-align:center; " >Comentario</th>
                             <th style="text-align:center" scope="col">Usuario</th>
 
 
@@ -106,9 +106,9 @@
 
                             <tr>
 
-                                <td style="text-align: center">{{$valoracion->puntuacion}}</td>
-                                <td style="font-size:18px; ">{{$valoracion->comentario}}</td>
-                                <td style="text-align: center">{{$usuario_de_la_valoracion->email  }}</td>
+                                <td  style="text-align: center">{{$valoracion->puntuacion}}</td>
+                                <td  style="font-size:18px; ">{{$valoracion->comentario}}</td>
+                                <td  style="text-align: center">{{$usuario_de_la_valoracion->email  }}</td>
 
 
                                 <!--█▀▀ █░░ █ █▀▄▀█ █ █▄░█ ▄▀█ █▀█   █░█ ▄▀█ █░░ █▀█ █▀█ ▄▀█ █▀▀ █ █▀█ █▄░█

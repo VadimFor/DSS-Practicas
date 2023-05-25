@@ -17,13 +17,12 @@ class ResenyasController extends Controller
         if(Auth::check()){
 
             $mis_resenyas = Valoracion::select('valoracion.*', 'menu.nombre AS menu_nombre' , 'menu.precio', 'menu.img', 'restaurante.direccion AS dir')
+            ->where('valoracion.users_id', '=', $users_id)
             ->join('menu', 'valoracion.menu_id', '=', 'menu.id')
             ->join('restaurante', 'menu.restaurante_id', '=', 'restaurante.id')
             ->paginate(6,['*']);
-            //error_log($mis_resenyas);
-
-            //$mis_resenyas = Valoracion::where('usuario_id', '=', $usuario_id)->paginate(5, ['*'], 'resenyas');
-            $mis_resenyas_cont = Valoracion::where('users_id', '=', $users_id)->get()->count();
+        
+        $mis_resenyas_cont = Valoracion::where('valoracion.users_id', '=', $users_id)->get()->count();
 
             return view('panel_usuario/panel_resenyas')->with('mis_resenyas',$mis_resenyas)->with('mis_resenyas_cont', $mis_resenyas_cont);
 
