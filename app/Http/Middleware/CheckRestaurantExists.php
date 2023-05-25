@@ -13,7 +13,7 @@ class CheckExists
         $errorMessage = 'No hay elementos creados aun.';
         if (!Restaurante::exists() || !Menu::exists()) {
             // No hay restaurantes creados, mostrar mensaje de error
-            return redirect()->back()->withErrors(['No hay restaurantes creados.'])
+            return redirect()->back()->withErrors(['No hay elementos creados aun.'])
                                   ->withInput()
                                   ->with('error-message', $errorMessage)
                                   ->with('error-timeout', true);
