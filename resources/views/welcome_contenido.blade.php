@@ -66,208 +66,174 @@ button:hover{
     }
 
 
+.top1 {     
+   width: 20%;
+   box-shadow: 2px 2px 20px black;
+   border-radius: 5px; 
+   margin-top: 0%;
+   margin: 2%;
+   transition: all 0.5s ease-in-out;
+
+}
+
+.top1:hover {
+ 
+   transition: all 0.5s ease-in-out;
+   box-shadow: 0 0 10px #d4af37, 0 0 40px #d4af37, 0 0 80px #d4af37;
+   transform: scale(1.1);
+}
+
+.top2 {
+   width: 20%;
+   box-shadow: 2px 2px 20px black;
+   border-radius: 5px; 
+   margin: 2%;
+   transition: all 0.5s ease-in-out;
+
+}
+.top2:hover {
+
+      transition: all 0.5s ease-in-out;
+      box-shadow: 0 0 10px #838996,  0 0 40px  #838996, 0 0 80px #838996 ;
+      transform: scale(1.1);
+
+}
+.top3 {
+   width: 20%;
+   box-shadow: 2px 2px 20px black;  
+   border-radius: 5px; 
+   margin: 2%;
+   transition: all 0.5s ease-in-out;
+
+}
+.top3:hover {
+ 
+   transition: all 0.5s ease-in-out;
+   box-shadow: 0 0 10px #d99058, 0 0 40px #d99058, 0 0 80px #d99058;
+   transform: scale(1.1);
+}
+.resto {
+   width: 20%;
+   box-shadow: 2px 2px 20px black;
+   border-radius: 5px; 
+   margin: 2%;
+   transition: all 0.5s ease-in-out;
+
+}
+
+.resto:hover {
+   transition: all 0.5s ease-in-out;
+   transform: scale(1.05);
+}
+
+
+
 </style>
 
 
 
 <div class="main card-deck">
 
-    <!--cards -->
-   
-   <div class="card">
-   
-      <div class="image">
-         <img src="https://cdn.pixabay.com/photo/2017/09/16/19/21/salad-2756467_1280.jpg"width="240" height="240">
-      </div>
-      <div class="title">
-         <h1> Menu 1</h1>
-      </div>
-      <ul class="list-inline text-center m-0">
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-     </ul>
 
-      <div class="des">
-      <p>You can Add Desccription Here...</p>
-      <button>Read More...</button>
-      </div>
-   </div>
-   <!--cards -->
-   
-   
-   <div class="card">
-   
-      <div class="image">
-         <img src="https://cdn.pixabay.com/photo/2010/12/13/10/05/berries-2277_1280.jpg"width="240" height="240">
-      </div>
-      <div class="title">
-         <h1> Menu 2</h1>
-      </div>
-      <ul class="list-inline text-center m-0">
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-     </ul>
+   <div class="d-flex flex-row justify-content-evenly">
+         <!--TOP2-->
+         
+         <div class="top2 mb-0">
 
+            <div class="image">
+               <img src="{{asset('storage/img/menu/'.$menus[0]->img)}}" width="240" height="240">         
+            </div>
 
-      <div class="des">
-      <p>You can Add Desccription Here...</p>
-      <button>Read More...</button>
-      </div>
-   </div>
-   <!--cards -->
-   
-   
-   <div class="card">
-   
-      <div class="image">
-         <img src="https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_1280.jpg" width="240" height="240">
-      </div>
-      <div class="title">
-         <h1>Menu 3</h1>
-      </div>
-      <ul class="list-inline text-center m-0">
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-     </ul>
+            <div class="title">
+               <h1>{{$menus[0]->nombre}}</h1>
+            </div>
+            <ul class="list-inline text-center m-0">
+               @for($i=0; $i < $menus[0]->promedio; $i++)
+               <li class="list-inline-item"> <i class="fas fa-star"></i></li>
+               @endfor
+            </ul>
 
+         
+            <div class="des">
+            <p>{{$menus[0]->descripcion}}</p>
+            <a href="{{ url('/restaurante-detalle-' . $menus[0]->restaurante_id . '/') }}" class="btn btn-xs btn-info pull-right mb-2">Ir al restaurante</a>
+            </div>
+         </div>
+         
 
-      <div class="des">
-      <p>You can Add Desccription Here...</p>
-      <button>Read More...</button>
-      </div>
-    </div>
-    <!--cards -->
-   
-   <div class="card">
-   
-      <div class="image">
-         <img src="https://cdn.pixabay.com/photo/2017/01/16/17/45/pancake-1984716_640.jpg"width="240" height="240">
-      </div>
-      <div class="title">
-         <h1>Menu 4</h1>
-      </div>
-      <ul class="list-inline text-center m-0">
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-     </ul>
+         <!--TOP1-->
+         
+         <div class="top1 mt-0">
+         
+            <div class="image">
+            <img src="{{asset('storage/img/menu/'.$menus[1]->img)}}" width="240" height="240"/>  
+            </div>
+            <div class="title">
+               <h1>{{$menus[1]->nombre}}</h1>
+              
+            </div>
+            <ul class="list-inline text-center m-0">
+            @for($i=0; $i < $menus[1]->promedio; $i++)
+               <li class="list-inline-item"> <i class="fas fa-star"></i></li>
+            @endfor
+            </ul>
 
-
-      <div class="des">
-      <p>You can Add Desccription Here...</p>
-      <button>Read More...</button>
-      </div>
-   </div>
-   <!--cards -->
-   
-   
-   <div class="card">
-   
-      <div class="image">
-         <img src="https://cdn.pixabay.com/photo/2017/01/16/17/45/pancake-1984716_640.jpg"width="240" height="240">
-      </div>
-      <div class="title">
-         <h1>Menu 5</h1>
-      </div>
-      <ul class="list-inline text-center m-0">
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-     </ul>
-
-
-      <div class="des">
-      <p>You can Add Desccription Here...</p>
-      <button>Read More...</button>
-      </div>
-   </div>
-   <!--cards -->
-   
-   <div class="card">
-   
-      <div class="image">
-         <img src="https://cdn.pixabay.com/photo/2017/01/26/02/06/platter-2009590_1280.jpg"width="240" height="240">
-      </div>
-      <div class="title">
-         <h1>Menu 6</h1>
-      </div>
-      <ul class="list-inline text-center m-0">
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-     </ul>
-
-
-      <div class="des">
-      <p>You can Add Desccription Here...</p>
-      <button>Read More...</button>
-      </div>
-   </div>
-   <!--cards -->
-   
-   <div class="card">
-   
-      <div class="image">
-         <img src="https://cdn.pixabay.com/photo/2014/10/19/20/59/hamburger-494706_1280.jpg"width="240" height="240">
-      </div>
-      <div class="title">
-         <h1>Menu 7</h1>
-      </div>
-      <ul class="list-inline text-center m-0">
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-     </ul>
-
-
-      <div class="des">
-      <p>You can Add Desccription Here...</p>
-      <button>Read More...</button>
-      
-      </div>
-   </div>
-   <!--cards -->
-   
-   
-   <div class="card">
-   
-      <div class="image">
-         <img src="https://cdn.pixabay.com/photo/2017/12/10/14/47/pizza-3010062_1280.jpg"width="240" height="240">
-      </div>
-      <div class="title">
-         <h1>Menu 8</h1>
-      </div>
-      <ul class="list-inline text-center m-0">
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-         <li class="list-inline-item"> <i class="fas fa-star"></i></li>
-     </ul>
-
+         
+            <div class="des">
+            <p>{{$menus[1]->descripcion}}</p>
+            <a href="{{ url('/restaurante-detalle-' . $menus[1]->restaurante_id . '/') }}" class="btn btn-xs btn-info pull-right">Ir al restaurante</a>
+            </div>
+         </div>
+        
      
-      <div class="des">
-      <p>You can Add Desccription Here...</p>
-      <button>Read More...</button>
-      </div>
-   </div>
 
+         <!--TOP3-->
+         
+         <div class="top3 mb-0">
+         
+            <div class="image">
+            <img src="{{asset('storage/img/menu/'.$menus[2]->img)}}" width="240" height="240"/>  
+            </div>
+            <div class="title">
+               <h1>{{$menus[2]->nombre}}</h1>
+            </div>
+            <ul class="list-inline text-center m-0">
+            @for($i=0; $i < $menus[2]->promedio; $i++)
+               <li class="list-inline-item"> <i class="fas fa-star"></i></li>
+               @endfor
+            </ul>
+
+            <div class="des">
+            <p>{{$menus[2]->descripcion}}</p>
+            <a href="{{ url('/restaurante-detalle-' . $menus[2]->restaurante_id . '/') }}" class="btn btn-xs btn-info pull-right">Ir al restaurante</a>
+         </div>
+      
+         </div>
+
+   </div>
+   <div class="d-flex flex-row flex-wrap">
+  <!--RESTO-->
+  @for ($i=3 ; $i < $menus_cont ; $i++)
+      <div class="resto">
+         
+         <div class="image">
+         <img src="{{asset('storage/img/menu/'.$menus[$i]->img)}}" width="240" height="240"/>  
+         </div>
+         <div class="title">
+            <h1>{{$menus[$i]->nombre}}</h1>
+         </div>
+         <ul class="list-inline text-center m-0">
+         @for($j=0; $j < $menus[$i]->promedio; $j++)
+               <li class="list-inline-item"> <i class="fas fa-star"></i></li>
+               @endfor
+         </ul>
+      
+         <div class="des">
+         <p>{{$menus[$i]->descripcion}}</p>
+         <a href="{{ url('/restaurante-detalle-' . $menus[$i]->restaurante_id . '/') }}" class="btn btn-xs btn-info pull-right mb-2">Ir al restaurante</a>
+         </div>
+      </div>
+   @endfor
+   </div>
 
    </div>
