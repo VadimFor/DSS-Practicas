@@ -103,6 +103,22 @@ button:hover{
       transform: scale(1.1);
 
 }
+
+.top2:hover .icono{
+   transform:rotatey(360deg) ;
+
+}
+
+.top1:hover .icono{
+   transform:rotatey(360deg) ;
+
+}
+
+.top3:hover .icono{
+   transform:rotatey(360deg) ;
+
+}
+
 .top3 {
    width: 20%;
    box-shadow: 2px 2px 20px black;  
@@ -150,15 +166,12 @@ button:hover{
   right: 10px;
   width: 70px; /* Ajusta el tamaño del icono según tus necesidades */
   height: auto;
+  transition: transform 0.7s ease-in-out;
   
 
 }
 
-.icono:hover{
-   transition: all 0.5s ease-in-out;
-   transform: scale(1.4);
-   cursor: pointer;
-}
+
 
 </style>
 

@@ -20,7 +20,7 @@ class HomeController extends Controller
         
         $menus_cont = $menus->count();
 
-        if($menus_cont > 2){
+        if($menus_cont > 1){
             $menu1 = $menus[0];
             $menu2 = $menus[1];
     
