@@ -28,9 +28,6 @@ class HomeController extends Controller
             $menus[1] = $menu1;
         }
 
-    
-
-
         return view('welcome')->with("menus", $menus)->with("menus_cont", $menus_cont);
     }
 }

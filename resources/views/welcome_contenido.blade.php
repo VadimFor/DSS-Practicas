@@ -212,7 +212,7 @@ button:hover{
          <div class="top1 mt-0">
          
             <div class="imagen">
-            <img src="{{asset('storage/img/menu/'.$menus[1]->img)}}"  width="240" height="280" class="imagen-fondo"/>  
+            <img src="{{asset('storage/img/menu/' . $menus[1]->img)}}"  width="240" height="280" class="imagen-fondo"/>  
             <img src="storage/img/icon/1.png"  class="icono" >
             </div>
             <div class="title">
