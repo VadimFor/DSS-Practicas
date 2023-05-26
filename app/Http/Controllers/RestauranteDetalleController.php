@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\Menu;
 use App\Models\Plato;
 use App\Models\Valoracion;
+use ErrorException;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class RestauranteDetalleController extends Controller
 {
@@ -125,9 +127,9 @@ class RestauranteDetalleController extends Controller
     public function delPlato($id){
         error_log("Eliminando al plato " . $id);
         try{ 
+            
             $sql=DB::delete("delete from plato where id='$id'");
             return back()->with("plato_correcto","Plato eliminado correctamente.");
-
         }
         catch(Exception $e){ 
             error_log("error= " . $e->getMessage());
@@ -158,11 +160,12 @@ class RestauranteDetalleController extends Controller
             
             if($request->img == NULL){
                 $img = 'plato.jpg';
+                Plato::where('id', $sql)->update(['img' => $img]);
             }else{
                 $img = $request->img;
             }
 
-            if($img != NULL){          
+            if($img != 'plato.jpg'){          
                 $imageoriginalName =  $request->file('img')->getClientOriginalName();
                 $extension = $request->file('img')->getClientOriginalExtension();
                 $imageName =  $sql . '|plato.' .  $extension;
@@ -200,6 +203,15 @@ class RestauranteDetalleController extends Controller
                     'restaurante_id' => $request->restaurante_id,
                     'img' => $request->img
                 ]);
+
+            if($request->img != NULL){          
+                $imageoriginalName =  $request->file('img')->getClientOriginalName();
+                $extension = $request->file('img')->getClientOriginalExtension();
+                $imageName =  $request->id . '|menu.' .  $extension;
+
+                Menu::where('id', $request->id)->update(['img' => $imageName]);
+                $request->file('img')->storeAs('public/img/menu/', $imageName); //subo a la carpeta la imagen
+            }
 
             return back()->with("plato_correcto","Menu modificado correctamente.");
 

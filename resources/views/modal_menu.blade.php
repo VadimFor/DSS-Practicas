@@ -52,6 +52,11 @@
         var not=confirm("¿Eliminar al menú '" + $nombre + "' ?");
         return not;
     }
+
+    function mostrarModificarMenu(id){
+        document.querySelector(`#modmenu-${id}`).style.display = 'block';
+    }
+
 </script>
 
 
@@ -228,9 +233,9 @@
                     ▀█▀ ▄▀█ █▄▄ █░░ ▄▀█   █▀▄▀█ █▀█ █▀▄ █ █▀▀ █ █▀▀ ▄▀█ █▀█   █▀▄▀█ █▀▀ █▄░█ █░█
                     ░█░ █▀█ █▄█ █▄▄ █▀█   █░▀░█ █▄█ █▄▀ █ █▀░ █ █▄▄ █▀█ █▀▄   █░▀░█ ██▄ █░▀█ █▄█ -->
 
-                    <div style="border: 2px solid #000; display:none" id="modmenu">
+                    <div style="border: 2px solid #000; display:none" id="modmenu-{{$menu->id}}">
 
-                        <form method="POST" action="{{route('RestauranteDetalleController.modMenu')}}">
+                        <form method="POST" action="{{route('RestauranteDetalleController.modMenu')}}" enctype="multipart/form-data">
                             @method('post')
                             @csrf
 
@@ -270,7 +275,7 @@
                                                 </td>
                                                 
                                                 <td style="background-color:rgb(252, 251, 248)"> 
-                                                    <input type="text" name="img" class="form-control" placeholder="" value="{{$matchingMenu->img}}" style="display:none" autocomplete="off" readonly>
+                                                    <input type="file" name="img" class="form-control" placeholder="" value="{{$matchingMenu->img}}" autocomplete="off" readonly>
                                                 </td>
                                                 
                                                 <input type="text" name="restaurante_id"  value="{{$matchingMenu->restaurante_id}}" style="display:none" readonly>
@@ -296,16 +301,6 @@
                 @endif
             @endauth
             
-            
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    document.getElementById('btnmodmenu').addEventListener('click', function() {
-                        document.getElementById('modmenu').style.display = 'block';
-                    });
-                });
-            </script>
-            
-
 
             <!--█▄▄ █▀█ ▀█▀ █▀█ █▄░█ █▀▀ █▀
                 █▄█ █▄█ ░█░ █▄█ █░▀█ ██▄ ▄█-->
@@ -319,8 +314,8 @@
                         
                         <!--█▀▄▀█ █▀█ █▀▄ █ █▀▀ █ █▀▀ ▄▀█ █▀█   █▀▄▀█ █▀▀ █▄░█ █░█
                             █░▀░█ █▄█ █▄▀ █ █▀░ █ █▄▄ █▀█ █▀▄   █░▀░█ ██▄ █░▀█ █▄█ -->
-                        <!--<button id="btnaddplato" style="background-color:rgb(210, 226, 241)" type="submit" class="list-group-item list-group-item-action btn btn-info">Añadir plato</button>-->
-                        <button id="btnmodmenu" style="background-color:rgb(210, 226, 241)" type="submit" class="list-group-item list-group-item-action btn btn-info">Modificar menu</button>
+                     
+                        <button id="btnmodmenu" onclick="mostrarModificarMenu({{$menu->id}})" style="background-color:rgb(210, 226, 241)" type="submit" class="list-group-item list-group-item-action btn btn-info">Modificar menu</button>
                         
 
                         <!--█▀▀ █░░ █ █▀▄▀█ █ █▄░█ ▄▀█ █▀█   █▀▄▀█ █▀▀ █▄░█ █░█
