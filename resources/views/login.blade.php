@@ -17,17 +17,31 @@
             align-items: center;
             justify-content: center;
         }
-        .form-container{
+        .form-container {
             width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
+
+.text-center {
+    text-align: center;
+}
+
+  
     </style>
 
 </head>
 <body>
 
-    <main class="form-container">
-        <a href="/" class="navbar-brand fs-3 ms-3 text-success bx bx-bowl-hot" style="text-align:center; widrh:100%;">FudRating</a>
 
+
+    <main class="form-container" >
+
+        <a href="/" class="navbar-brand fs-2  text-success bx bx-bowl-hot" style="padding-bottom: 50px">FudRater</a>
+
+
+        
         <form action="/login" method="POST">
             @csrf
             <h1>Login</h1>

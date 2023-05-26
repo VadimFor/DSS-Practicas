@@ -106,11 +106,6 @@
 
                             <tr>
 
-<<<<<<< HEAD
-                                <td  style="text-align: center">{{$valoracion->puntuacion}}</td>
-                                <td  style="font-size:18px; ">{{$valoracion->comentario}}</td>
-                                <td  style="text-align: center">{{$usuario_de_la_valoracion->email  }}</td>
-=======
                                 <td style="text-align: center">
                                     @for ($i = 0; $i < $valoracion->puntuacion; $i++)
                                         <i class="fas fa-star"></i>
@@ -120,7 +115,6 @@
                                 <td style="text-align: center">
                                     <img src="storage/img/user/{{$usuario_de_la_valoracion->email}}|perfil.jpg" style="border-radius:50%; max-height:100px" title="{{$usuario_de_la_valoracion->email}}">
                                 </td>
->>>>>>> e60d03d64628e24087cdfcee6f80ba2d2ec9b15e
 
 
                                 <!--█▀▀ █░░ █ █▀▄▀█ █ █▄░█ ▄▀█ █▀█   █░█ ▄▀█ █░░ █▀█ █▀█ ▄▀█ █▀▀ █ █▀█ █▄░█
