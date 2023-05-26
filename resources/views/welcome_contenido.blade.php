@@ -186,8 +186,13 @@ button:hover{
          <div class="top2 mb-0">
 
             <div class="imagen">
+            @if ($menus[0]->img == NULL || !$menus[0]->img || $menus[0]->img=="")
+               <img src="{{'storage/img/menu/menu.jpg'}}" width="240" height="280" class="imagen-fondo">    
+               <img src="storage/img/icon/2.png"  class="icono" > 
+            @else
                <img src="{{asset('storage/img/menu/'.$menus[0]->img)}}" width="240" height="280" class="imagen-fondo">    
-               <img src="storage/img/icon/2.png"  class="icono" >     
+               <img src="storage/img/icon/2.png"  class="icono" >   
+            @endif  
             </div>
 
             <div class="title">
@@ -212,9 +217,15 @@ button:hover{
          <div class="top1 mt-0">
          
             <div class="imagen">
+            @if ($menus[1]->img == NULL || !$menus[1]->img || $menus[1]->img=="")
+               <img src="{{'storage/img/menu/menu.jpg'}}" width="240" height="280" class="imagen-fondo">    
+               <img src="storage/img/icon/1.png"  class="icono" > 
+            @else
             <img src="{{asset('storage/img/menu/' . $menus[1]->img)}}"  width="240" height="280" class="imagen-fondo"/>  
-            <img src="storage/img/icon/1.png"  class="icono" >
+            <img src="storage/img/icon/1.png"  class="icono" >  
+            @endif 
             </div>
+
             <div class="title">
                <h1>{{$menus[1]->nombre}}</h1>             
             </div>
@@ -238,8 +249,14 @@ button:hover{
          <div class="top3 mb-0">
          
             <div class="imagen">
+            @if ($menus[2]->img == NULL || !$menus[2]->img || $menus[2]->img=="")
+               <img src="{{'storage/img/menu/menu.jpg'}}" width="240" height="280" class="imagen-fondo">    
+               <img src="storage/img/icon/3.png"  class="icono" > 
+            @else
             <img src="{{asset('storage/img/menu/'.$menus[2]->img)}}" width="240" height="280" class="imagen-fondo"/>  
             <img src="storage/img/icon/3.png"  class="icono" >
+            @endif 
+
             </div>
             <div class="title">
                <h1>{{$menus[2]->nombre}}</h1>
@@ -264,7 +281,14 @@ button:hover{
       <div class="resto">
          
          <div class="image">
-         <img src="{{asset('storage/img/menu/'.$menus[$i]->img)}}" width="240" height="240"/>  
+         @if ($menus[$i]->img == NULL || !$menus[$i]->img || $menus[$i]->img=="")
+               <img src="{{'storage/img/menu/menu.jpg'}}" width="240" height="280" class="imagen-fondo">    
+              
+            @else
+            <img src="{{asset('storage/img/menu/'.$menus[$i]->img)}}" width="240" height="240"/> 
+            
+            @endif 
+         
          </div>
          <div class="title">
             <h1>{{$menus[$i]->nombre}}</h1>
