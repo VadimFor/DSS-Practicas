@@ -20,7 +20,7 @@ return new class extends Migration
                 $table->bigInteger('menu_id')->unsigned();
                 $table->foreign('menu_id')->references('id')->on('menu')->onDelete('cascade');
                 $table->string('nombre');
-                $table->string('descripcion');
+                $table->string('descripcion')->nullable();
                 $table->string('img')->nullable();
             });
         }
