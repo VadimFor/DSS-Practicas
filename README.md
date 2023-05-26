@@ -2,7 +2,7 @@
 
 1. Iniciar contenedor de BD:
   - sudo docker compose up
-2. Refrescar enlace simbólico con los siguientes comandos:
+2. Refrescar enlace simbólico con los siguientes comandos (para que se vean las imagenes):
   - rm -R public/storage
   - php artisan optimize:clear
   - php artisan storage:link
