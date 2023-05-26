@@ -69,13 +69,25 @@ class RestauranteDetalleController extends Controller
             error_log("image= ". $request->img);
             error_log("hola");
 
-            $request->validate([
-                'nombre' => 'required|string|max:30',
-                'descripcion' => 'required|min:10|max:60',
-                'precio' => 'required|numeric',
-                'restaurante_id' => 'required|integer',
-                'img' => 'image|mimes:jpeg,png,jpg,svg|max:2048'
-            ]);
+            if($request->img != NULL){
+
+                $request->validate([
+                    'nombre' => 'required|string|max:30',
+                    'descripcion' => 'required|min:10|max:60',
+                    'precio' => 'required|numeric',
+                    'restaurante_id' => 'required|integer',
+                    'img' => 'image|mimes:jpeg,png,jpg,svg|max:2048'
+                ]);
+            }else{
+                $request->validate([
+                    'nombre' => 'required|string|max:30',
+                    'descripcion' => 'required|min:10|max:60',
+                    'precio' => 'required|numeric',
+                    'restaurante_id' => 'required|integer',
+                ]);
+
+            }
+
 
             if($request->img == NULL){
                 $img = 'menu.jpg';
@@ -91,7 +103,7 @@ class RestauranteDetalleController extends Controller
                 'img' => $img,
             ]);
 
-            if($img != NULL){          
+            if($request->img != NULL){          
                 $imageoriginalName =  $request->file('img')->getClientOriginalName();
                 $extension = $request->file('img')->getClientOriginalExtension();
                 $imageName =  $menu->id . '|menu.' .  $extension;
