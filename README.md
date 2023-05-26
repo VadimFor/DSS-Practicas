@@ -11,5 +11,7 @@
 4. Iniciar servidor de la página web con el comando:
   - php artisan serve
 
-
+Página principal:
 ![Screenshot](fudrater_principal.jpg)
+Panel de usuario:
+![Screenshot](fudrater_usuario.jpg)
