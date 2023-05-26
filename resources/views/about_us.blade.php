@@ -28,8 +28,20 @@
 
 }
 
+.texto > div{
+  width: 40%;
+  margin-bottom: 40px;
+
+}
+
    a{
-    font-size: 25px;
+    font-size: 30px;
+
+   }
+
+   p{
+    font-size: 20px;
+ 
    }
     </style>
 
@@ -46,42 +58,45 @@
             </div>
         @endif
 
-        <div class="container mt-5 mb-5">
-          <div class="row">
-            <div class="col-md-6 offset-md-3">
-              <h2>Sobre nosotros</h2>
-              <ul class="timeline" style="font-size:20px">
+      <div class="container-fluid mt-5 mb-5">
+          
+              <h2 class="text-center mb-5"> Sobre nosotros</h2>
 
-                <li>
-                  <a  href="#">Nuestra Historia</a>
-                  <p>Fundado en 2023, Fudrater nació con la visión de conectar a los amantes de la comida con los mejores restaurantes, menús y platos de la ciudad. Nuestro fundador, un apasionado de la gastronomía, se dio cuenta de la necesidad de tener una plataforma donde los usuarios pudieran explorar y descubrir las joyas culinarias de su localidad.</p>
-                </li>
+        <div class="texto d-flex flex-row justify-content-around flex-wrap mx-5 ">
 
-                <li>
-                  <a  href="#">Nuestra Misión</a>
-                  <p>Creemos en la magia de la buena comida y cómo puede unir a las personas. En Fudrater, nos esforzamos por ser la plataforma de referencia para los entusiastas de la comida, ofreciendo reseñas auténticas, menús actualizados y la posibilidad de descubrir nuevos sabores. Nuestra misión es simple: facilitar el encuentro entre los amantes de la comida y los restaurantes que crean experiencias culinarias inolvidables.</p>
+              <div> 
+                <a  href="#">Nuestra Historia</a>
+                <p>Fundado en 2023, Fudrater nació con la visión de conectar a los amantes de la comida con los mejores restaurantes, menús y platos de la ciudad. Nuestro fundador, un apasionado de la gastronomía, se dio cuenta de la necesidad de tener una plataforma donde los usuarios pudieran explorar y descubrir las joyas culinarias de su localidad.           
+                </p>
+              </div>
 
-                <li>
-                  <a  href="#">Nuestro Equipo</a>
-                  <p>Nuestro equipo está compuesto por profesionales apasionados de la industria gastronómica. Desde críticos culinarios experimentados, hasta diseñadores web y fotógrafos, todos compartimos una pasión común: la comida. Trabajamos en conjunto para proporcionarte las reseñas más precisas y atractivas, imágenes de los platos y menús que te hagan salivar, y la información más actualizada sobre los restaurantes que te interesa visitar.</p>
-                </li>
+              <div>
+                <a  href="#">Nuestra Misión</a>
+                <p>Creemos en la magia de la buena comida y cómo puede unir a las personas. En Fudrater, nos esforzamos por ser la plataforma de referencia para los entusiastas de la comida, ofreciendo reseñas auténticas, menús actualizados y la posibilidad de descubrir nuevos sabores. Nuestra misión es simple: facilitar el encuentro entre los amantes de la comida y los restaurantes que crean experiencias culinarias inolvidables.
+                </p>
+              </div>
 
-                <li>
-                  <a  href="#">Nuestros Valores</a>
-                  <p>En Fudrater, valoramos la autenticidad, la integridad y la pasión por la comida. Nos comprometemos a proporcionar contenido honesto y transparente, siempre respetando a los restaurantes y a nuestros usuarios. Creemos en fomentar una comunidad de amantes de la comida que apoye a los restaurantes locales y celebre la diversidad de la gastronomía.</p>
-                </li>
+              <div>
+                <a  href="#">Nuestro Equipo</a>
+                <p>Nuestro equipo está compuesto por profesionales apasionados de la industria gastronómica. Desde críticos culinarios experimentados, hasta diseñadores web y fotógrafos, todos compartimos una pasión común: la comida. Trabajamos en conjunto para proporcionarte las reseñas más precisas y atractivas, imágenes de los platos y menús que te hagan salivar, y la información más actualizada sobre los restaurantes que te interesa visitar.</p>     
+              </div>
 
-                <li>
-                  <a  href="#">Contáctanos</a>
-                  <p>Nos encantaría escuchar tus sugerencias, comentarios o preguntas. Si eres un restaurante que quisiera unirse a nuestra plataforma, o simplemente un amante de la comida buscando recomendaciones, no dudes en ponerte en contacto con nosotros a través de [correo electrónico] o [número de teléfono].</p>
-                </li>
+              <div>           
+                <a  href="#">Nuestros Valores</a>
+                <p>En Fudrater, valoramos la autenticidad, la integridad y la pasión por la comida. Nos comprometemos a proporcionar contenido honesto y transparente, siempre respetando a los restaurantes y a nuestros usuarios. Creemos en fomentar una comunidad de amantes de la comida que apoye a los restaurantes locales y celebre la diversidad de la gastronomía.</p>            
+              </div>
 
-              </ul>
-            </div>
-          </div>
+              <div>         
+                <a  href="#">Contáctanos</a>
+                <p>Nos encantaría escuchar tus sugerencias, comentarios o preguntas. Si eres un restaurante que quisiera unirse a nuestra plataforma, o simplemente un amante de la comida buscando recomendaciones, no dudes en ponerte en contacto con nosotros a través de [correo electrónico] o [número de teléfono].</p>       
+              </div>
+
         </div>
+
+          
+      </div>
         
-        <div class="text-muted mt-5 mb-5 text-center small">by : <a class="text-muted" target="_blank" href="http://127.0.0.1:8000/">FudRater.com</a></div>
+        <div class="text-muted mt-5 mb-5 text-center small">by : <a class="text-muted  " target="_blank" href="http://127.0.0.1:8000/">FudRater.com</a></div>
 
 
 
