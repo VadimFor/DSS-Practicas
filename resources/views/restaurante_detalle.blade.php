@@ -57,7 +57,7 @@
 
 
 .card{
-  height: 430px;
+  height: 470px;
 
   transition:0.5s;
   cursor:pointer;
