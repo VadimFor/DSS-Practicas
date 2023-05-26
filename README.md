@@ -10,3 +10,6 @@
   - php artisan migrate:refresh --seed
 4. Iniciar servidor de la página web con el comando:
   - php artisan serve
+
+
+![Screenshot](fudrater_principal.jpg)
