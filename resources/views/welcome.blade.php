@@ -19,12 +19,19 @@
     <body>
 
         @include('navbar')
-
+        @if (session('error-message'))
+            <div class="alert alert-danger">
+                <ul>                
+                    <li>{{ session('error-message') }}</li>
+                </ul>
+            </div>
+        @endif
         TOP MENUS
 
         @include('welcome_contenido')
 
         @include('footer')
+
 
 
         <script src="{{ url('/assets/js/bootstrap.bundle.min.js')}}"></script>

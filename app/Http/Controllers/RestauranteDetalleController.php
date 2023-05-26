@@ -61,9 +61,11 @@ class RestauranteDetalleController extends Controller
 
     // CREAR MENU
     public function crear(Request $request){
+        $img = '';
 
         try{
             error_log("image= ". $request->img);
+            error_log("hola");
 
             $request->validate([
                 'nombre' => 'required|string|max:30',
@@ -79,7 +81,6 @@ class RestauranteDetalleController extends Controller
                 $img = $request->img;
             }
 
-
             $menu = Menu::create([
                 'nombre' => $request->nombre,
                 'descripcion' => $request->descripcion,
@@ -88,7 +89,7 @@ class RestauranteDetalleController extends Controller
                 'img' => $img,
             ]);
 
-            if($request->img != NULL){          
+            if($img != NULL){          
                 $imageoriginalName =  $request->file('img')->getClientOriginalName();
                 $extension = $request->file('img')->getClientOriginalExtension();
                 $imageName =  $menu->id . '|menu.' .  $extension;
@@ -136,7 +137,7 @@ class RestauranteDetalleController extends Controller
 
     public function crearPlato(Request $request){
 
-        //error_log(json_encode($request->all())); //PARA VER EL ARRAY DEL REQUEST
+        // error_log(json_encode($request->all())); //PARA VER EL ARRAY DEL REQUEST
 
         $max_platos = 5;
         $platos = Plato::where('menu_id', $request->menu_id)->get();
@@ -144,19 +145,31 @@ class RestauranteDetalleController extends Controller
         if(count($platos) >= $max_platos){
             return back()->with("plato_incorrecto","Error, solo puedes tener ". str($max_platos) . " platos por menú.");
         }
-
-
         try{ 
                     
             $validated = $request->validate([
                 'nombre' => 'required|string|max:20',
-                'descripcion' => 'nullable|string|max:20',
-                'img' => 'nullable|string|max:20',
+                'descripcion' => 'nullable|string|max:60',
+                'img' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
                 'menu_id' => 'required|integer',
-
             ]); 
 
-            $sql= Plato::create($validated);
+            $sql= Plato::insertGetId($validated);
+            
+            if($request->img == NULL){
+                $img = 'plato.jpg';
+            }else{
+                $img = $request->img;
+            }
+
+            if($img != NULL){          
+                $imageoriginalName =  $request->file('img')->getClientOriginalName();
+                $extension = $request->file('img')->getClientOriginalExtension();
+                $imageName =  $sql . '|plato.' .  $extension;
+
+                Plato::where('id', $sql)->update(['img' => $imageName]);
+                $request->file('img')->storeAs('public/img/plato/', $imageName); //subo a la carpeta la imagen
+            }
 
             return back()->with("plato_correcto","Plato creado correctamente.");
 
@@ -211,6 +224,16 @@ class RestauranteDetalleController extends Controller
         }
     }
 
+    public function actualizarValoracion(Request $request){
+        $valor = intval($request->valoracion);
+        $valor++;
+        try{
+            Valoracion::where('menu_id', $request->menuId)->update(['puntuacion' => $valor]);
+            return response()->json("Status: Success");
+        } catch(Exception $e) {
+            return response()->json("Status: Error");
+        }
+    }
 
     public function crearValoracion(Request $request){
        // error_log("Creando valoracion");

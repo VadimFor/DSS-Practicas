@@ -125,68 +125,104 @@
 </head>
 
 <body>
-  
-<!--
+
 <script>
-async function recuperarPlatosMenu(id, nombre, precio) {
-    const request = {
-    method: 'GET'
+async function rellenarEstrellaTemporal(event) {
+  let nodeArray = event.parentNode.parentNode.querySelectorAll('i');
+  let list;
+  let tope = false;
+  for(let j = 0; j < nodeArray.length; j++) {
+    if(nodeArray[j] === event) {
+      list = nodeArray[j].classList;
+      list.remove("far");
+      list.add("fas");
+      tope = true;
+    } else if (tope) {
+      list = nodeArray[j].classList;
+      list.remove("fas");
+      list.add("far");
+    } else {
+      list = nodeArray[j].classList;
+      list.remove("far");
+      list.add("fas");
+    }
+  }
+}
+
+async function actualizarValoracion(id, event) {
+
+  window.CSRF_TOKEN = '{{ csrf_token() }}';
+
+  let starName = event.getAttribute('name');
+  let valor = starName.substring(starName.indexOf("-") + 1); // NB: La valoracion real es este valor + 1
+
+  const request = {
+    method: 'POST',
+    body: JSON.stringify({
+      menuId: id,
+      valoracion: valor
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+      'X-CSRF-TOKEN': window.CSRF_TOKEN
+    }
   };
-  console.log(id);
-    let resultado = await fetch(`http://127.0.0.1:8000/platos-menu-${id}`, request)
+    let resultado = await fetch(`http://127.0.0.1:8000/restaurante-detalle-actualizarValoracion`, request)
   .then(function(response) {
     if (!response.ok) {
       throw Error(response.statusText);
     }
+    actualizarEstrellas(valor, event);
     return response.json();
   })
-  .then(function(responseAsObject) {
-
-    document.querySelector("#bodyModal").innerHTML = '';
-    document.querySelector("#menuModal").classList.add("mostrar-modal");
-    document.querySelector("#menuModal").style.opacity = 1;
-    document.querySelector("#menuNameModal").innerHTML = nombre;
-    document.querySelector("#menuPriceModal").innerHTML = precio + '€';
-
-    var i = 0;
-
-    for (const objeto of responseAsObject){
-        console.log(objeto);
-        // Se alterna el posicionamiento de los elementos
-        if(i % 2 == 0){
-          document.querySelector("#bodyModal").innerHTML += `
-              <p>
-                  <div style="display: inline-flex">
-                      <div style="max-width:65%">
-                          <h2 style="padding-left:50px;font-size:40px;max-width: 80%">${objeto['nombre']}</h2>
-                          <p style="padding-left:50px;font-size:30px;max-width: 80%">${objeto['descripcion']}</p>
-                      </div>
-                      <img src="${objeto.img}" style="display:block;width:60%;height:60%;border-radius:50%;object-fit: cover">
-                  </div>
-              </p>
-              `;
-        }else{
-          document.querySelector("#bodyModal").innerHTML += `
-              <p>
-                  <div style="display: inline-flex">
-                      <img src="${objeto.img}" style="display:block;width:60%;height:60%;border-radius:50%;object-fit: cover">
-                      <div>
-                          <h2 style="font-size:40px;padding-left:80px;max-width: 100%">${objeto['nombre']}</h2>
-                          <p style="font-size:30px;padding-left:80px;max-width: 100%">${objeto['descripcion']}</p>
-                      </div>
-                  </div>
-              </p>
-              `;
-        }
-        i++;
-    }
-  })
-  .catch(function(error) {
-    console.log(error);
-  });
 }
-</script>
--->
+
+async function actualizarEstrellas(valor, event) {
+  valor++;
+  let nodeArray = event.parentNode.parentNode.querySelectorAll('i');
+  let list;
+  let tope = false;
+  for(let j = 0; j < nodeArray.length; j++) {
+    if(nodeArray[j] === event) {
+      nodeArray[j].setAttribute('default', 1);
+      list = nodeArray[j].classList;
+      list.remove("far");
+      list.remove("fas");
+      list.add("fas");
+      tope = true;
+    } else if (tope) {
+      nodeArray[j].setAttribute('default', 0);
+      list = nodeArray[j].classList;
+      list.remove("far");
+      list.remove("fas");
+      list.add("far");
+    } else {
+      nodeArray[j].setAttribute('default', 1);
+      list = nodeArray[j].classList;
+      list.remove("far");
+      list.remove("fas");
+      list.add("fas");
+    }
+  }
+}
+
+async function vaciarEstrellaTemporal(event) {
+  let nodeArray = event.parentNode.parentNode.querySelectorAll('i');
+  let list;
+  let tope = false;
+  for(let j = 0; j < nodeArray.length; j++) {
+    if(nodeArray[j].getAttribute('default') == 1) {
+      list = nodeArray[j].classList;
+      list.remove("far");
+      list.add("fas");
+    } else {
+      list = nodeArray[j].classList;
+      list.remove("fas");
+      list.add("far");
+    }
+  }
+}
+</script> 
 
   <!--
     █▄░█ ▄▀█ █░█ █▄▄ ▄▀█ █▀█
@@ -300,7 +336,7 @@ async function recuperarPlatosMenu(id, nombre, precio) {
 
 
         @if (count($menus) == 0)
-          <div style="text-shadow: none; text-align:center" class="alert alert-success">Este restaurante no tiene menuś</div>  
+          <div style="text-shadow: none; text-align:center" class="alert alert-success">Este restaurante no tiene menús</div>  
         @endif
 
             <!--ＭＥＮＳＡＪＥ ＣＯＲＲＥＣＴＯ Ｏ ＮＯ -->             
@@ -323,14 +359,14 @@ async function recuperarPlatosMenu(id, nombre, precio) {
 
                 <div>
                   <!--ＡＢＲＩＲ ＭＯＤＡＬ ＭＥＮＵ -->
-                  <div class="card card-block" data-bs-toggle="modal" data-bs-target="#modalMenu{{$menu->id}}" >
+                  <div class="card card-block" >
                       <h1 class="card-title text-center"><i class="material-icons">{{$menu->nombre}}</i></h1>
 
                        <!--ＩＭＡＧＥＮ -->
                       @if ($menu->img == NULL || !$menu->img || $menu->img=="")
-                          <img class="cardimg"  src="{{'storage/img/menu/menu.jpg'}}" >
+                          <img class="cardimg" data-bs-toggle="modal" data-bs-target="#modalMenu{{$menu->id}}" src="{{'storage/img/menu/menu.jpg'}}" >
                       @else
-                          <img class="cardimg"  src="{{asset('storage/img/menu/'.$menu->img)}}" >
+                          <img class="cardimg" data-bs-toggle="modal" data-bs-target="#modalMenu{{$menu->id}}" src="{{asset('storage/img/menu/'.$menu->img)}}" >
                       @endif    
                       <p  class="card-title text-center ">Precio: {{$menu->precio}} Є</p> 
 
@@ -339,9 +375,9 @@ async function recuperarPlatosMenu(id, nombre, precio) {
 
                         @for ($i = 0; $i < 5; $i++)
                             @if ($i < $valoracionesPorMenu[$j])
-                                <li class="list-inline-item"> <i class="fas fa-star"></i></li>
+                                <li class="list-inline-item"> <i name="star-{{$i}}" class="fas fa-star" default="1" onmouseover="rellenarEstrellaTemporal(this)" onmouseout="vaciarEstrellaTemporal(this)" onclick="actualizarValoracion({{$menu->id}}, this)"></i></li>
                             @else
-                                <li class="list-inline-item"> <i class="far fa-star"></i></li>      
+                                <li class="list-inline-item"> <i name="star-{{$i}}" class="far fa-star" default="0" onmouseover="rellenarEstrellaTemporal(this)" onmouseout="vaciarEstrellaTemporal(this)" onclick="actualizarValoracion({{$menu->id}}, this)"></i></li>      
                             @endif
                         @endfor
 
@@ -383,29 +419,6 @@ async function recuperarPlatosMenu(id, nombre, precio) {
     █▀▀ █▀█ █▀█ ▀█▀ █▀▀ █▀█
     █▀░ █▄█ █▄█ ░█░ ██▄ █▀▄-->
     @include('footer')
-
-    <!--
-    <div class="container">
-        Modal 
-        <div class="modal fade" id="menuModal" role="dialog">
-          <div class="modal-dialog" style="top:150px;max-width:700px">
-          
-            Modal content
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" style="margin-top:0px">&times;</button>
-                <h4 class="modal-title" id="menuNameModal" style="font-size:xxx-large;font-weight:bold"></h4>
-                <p id="menuPriceModal" style="font-size: xx-large; margin-top:25px"></p>
-              </div>
-              <div class="modal-body" id="bodyModal">
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
 
       <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 
